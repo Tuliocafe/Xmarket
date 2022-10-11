@@ -25,7 +25,8 @@ public class MarcaController {
 
     @PostMapping("/marca")
     public Marca incluirNovo(@RequestBody Marca novo){
-       return service.criaNovo(novo);
+        Marca res = service.criaNovo(novo);
+        return res;
     }
 
 

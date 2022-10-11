@@ -1,7 +1,7 @@
 package br.com.araujo.xmarket.model;
 
 import javax.persistence.*;
-
+//Feito Por Luccas
 @Entity
 @Table(name="categoria_produto")
 public class Categoria {

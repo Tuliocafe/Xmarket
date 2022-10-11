@@ -22,7 +22,7 @@ public class MarcaServiceImpl implements IMarcaService {
     }
 
     @Override
-    public Marca AtualizarDados(Marca dados) {
+    public Marca atualizarDados(Marca dados) {
         if(dados.getId_marca() != null && dados.getNome_marca() != null){
             return dao.save(dados);
         }
@@ -41,6 +41,6 @@ public class MarcaServiceImpl implements IMarcaService {
 
     @Override
     public void excluirMarca(Integer id) {
-
+    dao.deleteById(id);
     }
 }

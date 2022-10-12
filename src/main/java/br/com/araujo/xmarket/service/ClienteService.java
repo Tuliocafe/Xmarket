@@ -47,7 +47,7 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void excluirCliente(Integer id) {
-
+        clienteDao.deleteById(id);
     }
 
 

@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario_login")
@@ -32,6 +33,8 @@ public class ClienteLogin {
     @OneToOne(mappedBy = "clienteLogin")
     @JsonIgnoreProperties("clienteLogin")
     private Cliente cliente;
+
+
 
 
     public Cliente getCliente() {

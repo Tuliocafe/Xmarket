@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity()
 @Table(name = "usuario_cadastro")
@@ -44,6 +45,17 @@ public class Cliente {
     @JsonIgnoreProperties("cliente")
     private ClienteLogin clienteLogin;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("cliente")
+    List<Endereco> listaEnderecos;
+
+    public List<Endereco> getListaEnderecos() {
+        return listaEnderecos;
+    }
+
+    public void setListaEnderecos(List<Endereco> listaEnderecos) {
+        this.listaEnderecos = listaEnderecos;
+    }
 
     public Integer getId() {
         return id;

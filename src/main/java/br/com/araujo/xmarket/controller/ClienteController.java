@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.model.Cliente;
+import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,9 +40,23 @@ public class ClienteController {
         return ResponseEntity.badRequest().build();
     }
 
+    @PutMapping("/clientes")
+    public ResponseEntity<Cliente> alterarVenda(@RequestBody Cliente cliente){
+        Cliente res = clienteService.atualizarDados(cliente);
+        if(res != null){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.badRequest().build();
+
+    }
+
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
         return clienteService.buscaPorNome(palavra);
-
+    }
+    @DeleteMapping("/clientes/{id}")
+    public ResponseEntity<Cliente> excluirCliente( @PathVariable Integer id){
+        clienteService.excluirCliente(id);
+        return ResponseEntity.ok(null);
     }
 }

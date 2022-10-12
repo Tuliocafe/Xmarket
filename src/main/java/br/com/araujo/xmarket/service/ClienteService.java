@@ -41,9 +41,16 @@ public class ClienteService implements IClienteService {
     }
 
     @Override
+    public ArrayList<Cliente> buscaPorNome(String nome) {
+       return clienteDao.findByNomeContaining(nome);
+    }
+
+    @Override
     public void excluirCliente(Integer id) {
 
     }
+
+
 
 
 }

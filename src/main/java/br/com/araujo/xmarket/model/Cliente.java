@@ -24,7 +24,8 @@ public class Cliente {
     @Column(name = "CPF_usuario")
     private String cpf;
 
-    @Column(name = "dataNascimento_usuario")
+    @Column(name = "dataNascimento_usuario", columnDefinition="DATE")
+    @Temporal(TemporalType.DATE)
     private Date dataNascimento;
 
     @Column(name = "telefone_usuario")

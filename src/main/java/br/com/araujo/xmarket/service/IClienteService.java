@@ -12,6 +12,8 @@ public interface IClienteService {
     public ArrayList<Cliente> buscarTodos();
     public Cliente buscarPeloId(Integer id);
 
+    public ArrayList<Cliente> buscaPorNome(String nome);
+
     public void excluirCliente(Integer id);
 
 }

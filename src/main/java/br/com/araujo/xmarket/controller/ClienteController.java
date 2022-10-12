@@ -4,10 +4,7 @@ import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -31,5 +28,20 @@ public class ClienteController {
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.status(404).build();
+    }
+
+    @PostMapping("/clientes")
+    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente produto){
+        Cliente res = clienteService.criaNovo(produto);
+        if (res != null){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/clientes/busca")
+    public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
+        return clienteService.buscaPorNome(palavra);
+
     }
 }

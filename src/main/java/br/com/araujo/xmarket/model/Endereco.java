@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "Endereco")
@@ -36,6 +37,22 @@ public class Endereco {
     @JoinColumn(name = "id_usuario")
     @JsonIgnoreProperties("listaEnderecos")
     private Cliente cliente;
+
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_cidade")
+    private Cidade cidade;
+
+
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
     public Integer getId() {
         return id;

@@ -34,9 +34,6 @@ public class ClienteLogin {
     @JsonIgnoreProperties("clienteLogin")
     private Cliente cliente;
 
-
-
-
     public Cliente getCliente() {
         return cliente;
     }

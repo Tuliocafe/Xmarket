@@ -1,7 +1,7 @@
 package br.com.araujo.xmarket.dto;
 
 
-public class EnderecoDTO {
+public class EnderecoDTO  implements IEnderecoDTO{
 
     private String logradouro;
     private String cep;

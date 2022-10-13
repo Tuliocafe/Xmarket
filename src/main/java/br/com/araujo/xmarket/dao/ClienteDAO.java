@@ -1,6 +1,5 @@
 package br.com.araujo.xmarket.dao;
 
-import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import org.springframework.data.jpa.repository.Query;

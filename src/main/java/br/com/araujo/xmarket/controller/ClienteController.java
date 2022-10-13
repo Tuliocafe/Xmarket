@@ -1,9 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,12 +42,22 @@ public class ClienteController {
 
     @PutMapping("/clientes")
     public ResponseEntity<Cliente> alterarVenda(@RequestBody Cliente cliente){
-        Cliente res = clienteService.atualizarDados(cliente);
-        if(res != null){
-            return ResponseEntity.ok(res);
+        Cliente response = clienteService.atualizarDados(cliente);
+        if(response != null){
+            return ResponseEntity.ok(response);
         }
         return ResponseEntity.badRequest().build();
+    }
 
+    @PutMapping("/clientes/{id}")
+    public ResponseEntity<Cliente> AtualizaCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {
+        Cliente response =  clienteService.atualizarCliente(cliente, id);
+
+        if(response != null){
+            return ResponseEntity.ok(response);
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @GetMapping("/clientes/busca")

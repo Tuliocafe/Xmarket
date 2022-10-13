@@ -40,7 +40,7 @@ public class StatusVendasController {
     }
 
 
-    @PutMapping("/status")
+    @PutMapping("/status/{id}")
     public ResponseEntity<StatusVendas> alteraStatus(@RequestBody StatusVendas dados){
         StatusVendas res = service.atualizarDados(dados);
         if(res != null){

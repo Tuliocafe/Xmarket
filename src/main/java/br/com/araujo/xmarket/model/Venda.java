@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ public class Venda {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_venda")
+    @Column(name = "id_venda", nullable = false)
     private Integer id;
 
     @Column(name = "data_venda", columnDefinition="DATETIME")
@@ -26,14 +27,30 @@ public class Venda {
     @Column(name = "descricao_venda")
     private String descricao;
 
-    //cadastrar relação com a tabela status
     @ManyToOne
     @JoinColumn(name = "id_status_vendas")
     @JsonIgnoreProperties("listaVendas")
     private StatusVendas statusVendas;
 
-    //cadastrar id_usuario
+    @ManyToOne
+    @JoinColumn(name = "id_usuario")
+    private Cliente cliente;
 
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public StatusVendas getStatusVendas() {
+        return statusVendas;
+    }
+
+    public void setStatusVendas(StatusVendas statusVendas) {
+        this.statusVendas = statusVendas;
+    }
 
     public Integer getId() {
         return id;

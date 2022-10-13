@@ -1,5 +1,7 @@
 package br.com.araujo.xmarket.service;
 
+import br.com.araujo.xmarket.dto.EnderecoDTO;
+import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Marca;
 
@@ -15,5 +17,7 @@ public interface IClienteService {
     public ArrayList<Cliente> buscaPorNome(String nome);
 
     public void excluirCliente(Integer id);
+
+    public ArrayList<IEnderecoDTO> buscaEnderecoPeloIdCliente(Integer id);
 
 }

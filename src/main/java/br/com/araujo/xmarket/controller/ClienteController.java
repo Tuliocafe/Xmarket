@@ -1,5 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.EnderecoDTO;
+import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.ClienteService;
@@ -59,4 +61,10 @@ public class ClienteController {
         clienteService.excluirCliente(id);
         return ResponseEntity.ok(null);
     }
+
+    @GetMapping("/clientes/{id}/enderecos")
+    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
+        return clienteService.buscaEnderecoPeloIdCliente(id);
+    }
+
 }

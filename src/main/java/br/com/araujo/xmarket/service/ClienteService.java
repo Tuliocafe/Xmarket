@@ -1,6 +1,8 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.ClienteDAO;
+import br.com.araujo.xmarket.dto.EnderecoDTO;
+import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Marca;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +52,10 @@ public class ClienteService implements IClienteService {
         clienteDao.deleteById(id);
     }
 
-
+    @Override
+    public ArrayList<IEnderecoDTO> buscaEnderecoPeloIdCliente(Integer id) {
+        return clienteDao.buscaEnderecoPeloIdCliente(id);
+    }
 
 
 }

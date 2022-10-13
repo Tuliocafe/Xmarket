@@ -16,6 +16,8 @@ public class ProdutoServiceImpl implements IProdutoService {
     @Override
     public ArrayList<Produto> recuperarTodos() {
         return (ArrayList<Produto>) dao.findAll();
+//    return dao.findByNomeContaining("Politico");
+//    return dao.findByOrderByPreco();
     }
 
     @Override
@@ -27,4 +29,9 @@ public class ProdutoServiceImpl implements IProdutoService {
     public Produto cadastrarNovo(Produto novo) {
         return dao.save(novo);
     }
+
+    public ArrayList<Produto> recuperaTodosPorNome(String nome){
+        return dao.findByNomeContaining(nome);
+    }
+
 }

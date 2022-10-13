@@ -9,4 +9,6 @@ public interface IProdutoService {
     public ArrayList<Produto> recuperarTodos();
     public Produto recuperarProdutoId(Integer id);
     public Produto cadastrarNovo(Produto novo);
+
+    public ArrayList<Produto> recuperaTodosPorNome(String nome);
 }

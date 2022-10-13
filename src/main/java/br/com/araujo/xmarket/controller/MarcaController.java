@@ -16,12 +16,12 @@ public class MarcaController {
     @Autowired
     private IMarcaService service;
 
-    @GetMapping("/marca")
+    @GetMapping("/marcas")
     public ArrayList<Marca> recuperaTodos(){
         return service.buscarTodos();
     }
 
-    @PostMapping("/marca")
+    @PostMapping("/marcas")
     public ResponseEntity<Marca> incluirNovo(@RequestBody Marca novo){
         Marca res = service.criaNovo(novo);
         if (res != null){
@@ -31,7 +31,7 @@ public class MarcaController {
     }
 
 
-    @PutMapping("/marca")
+    @PutMapping("/marcas")
     public ResponseEntity<Marca> alterarMarca(@RequestBody Marca dados){
         Marca res = service.atualizarDados(dados);
         if(res != null){
@@ -40,14 +40,14 @@ public class MarcaController {
         return ResponseEntity.badRequest().build();
     }
 
-    @DeleteMapping("/marca/{id_marca}")
+    @DeleteMapping("/marcas/{id_marca}")
     public  ResponseEntity<Marca> excluirMarca(@PathVariable Integer id_marca){
         service.excluirMarca(id_marca);
         return ResponseEntity.ok(null);
     }
 
 
-    @GetMapping("/marca/{id_marca}")
+    @GetMapping("/marcas/{id_marca}")
     public ResponseEntity<Marca> buscarPeloId(@PathVariable Integer id_marca){
         Marca res = service.buscarPeloId(id_marca);
         if(res != null ){

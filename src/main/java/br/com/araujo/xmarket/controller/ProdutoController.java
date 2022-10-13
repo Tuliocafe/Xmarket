@@ -14,12 +14,14 @@ public class ProdutoController {
     @Autowired
     private IProdutoService service;
 
-    @GetMapping("/produto")
-    public ArrayList<Produto> recuperarTodos(){
-        return service.recuperarTodos();
+    @GetMapping("/produtos")
+    public ResponseEntity<ArrayList<Produto>> recuperarTodos(){
+        ArrayList<Produto> listaProduto = service.recuperarTodos();
+        if(listaProduto.isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(listaProduto);
     }
 
-    @GetMapping("/produto/{id_produto}")
+    @GetMapping("/produtos/{id_produto}")
     public ResponseEntity<Produto> recuperarPeloId(@PathVariable Integer id_produto){
         Produto res = service.recuperarProdutoId(id_produto);
         if (res != null) {
@@ -29,7 +31,7 @@ public class ProdutoController {
         return ResponseEntity.status(404).build();
     }
 
-    @PostMapping("/produto")
+    @PostMapping("/produtos")
     public ResponseEntity<Produto> cadastrarNovo(@RequestBody Produto novo){
         Produto res = service.cadastrarNovo(novo);
         if (res != null){
@@ -38,4 +40,10 @@ public class ProdutoController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/produtos/busca/{nome_produto}")
+    public ResponseEntity<ArrayList<Produto>>  pesquisaPeloNometeste(@PathVariable String nome_produto){
+        ArrayList<Produto>  listProduto = service.recuperaTodosPorNome(nome_produto);
+        if(listProduto.isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(listProduto);
+    }
 }

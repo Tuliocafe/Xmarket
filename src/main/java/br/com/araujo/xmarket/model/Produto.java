@@ -12,10 +12,9 @@ public class Produto {
     @Column (name = "quantidade_produto")
     private Integer quantidade_produto;
     @Column (name = "nome_produto", length = 45, nullable = false)
-    private String nome_produto;
-
+    private String nome;
     @Column(name = "preco_produto", nullable = false)
-    private Double preco_produto;
+    private Double preco;
     @Column(name = "tamanho", length = 4)
     private String tamanho;
     @Column(name = "cor", length = 45)
@@ -27,10 +26,20 @@ public class Produto {
     @JoinColumn(name = "id_marca")
     private Marca marca;
 
-    @Column(name = "id_categoria_produto")
-    private Integer id_categoria_produto;
+    @ManyToOne
+    @JoinColumn(name = "id_categoria_produto")
+    private Categoria categoria;
 
 
+
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     public Marca getMarca() {
         return marca;
@@ -40,13 +49,7 @@ public class Produto {
         this.marca = marca;
     }
 
-    public Integer getId_categoria_produto() {
-        return id_categoria_produto;
-    }
 
-    public void setId_categoria_produto(Integer id_categoria_produto) {
-        this.id_categoria_produto = id_categoria_produto;
-    }
 
     public String getImagem_path() {
         return imagem_path;
@@ -73,19 +76,19 @@ public class Produto {
     }
 
     public String getNome_produto() {
-        return nome_produto;
+        return nome;
     }
 
     public void setNome_produto(String nome_produto) {
-        this.nome_produto = nome_produto;
+        this.nome = nome_produto;
     }
 
     public Double getPreco_produto() {
-        return preco_produto;
+        return preco;
     }
 
     public void setPreco_produto(Double preco_produto) {
-        this.preco_produto = preco_produto;
+        this.preco = preco_produto;
     }
 
     public String getTamanho() {

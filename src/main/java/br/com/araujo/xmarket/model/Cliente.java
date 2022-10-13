@@ -3,7 +3,6 @@ package br.com.araujo.xmarket.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.util.Date;
 
 @Entity()

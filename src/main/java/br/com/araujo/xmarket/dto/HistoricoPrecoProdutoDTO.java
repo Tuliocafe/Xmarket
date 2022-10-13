@@ -1,26 +1,22 @@
-package br.com.araujo.xmarket.model;
+package br.com.araujo.xmarket.dto;
 
-import javax.persistence.*;
+
+import br.com.araujo.xmarket.model.Produto;
+
 import java.time.LocalDateTime;
 
-public class HistoricoPrecoProduto {
+public class HistoricoPrecoProdutoDTO implements IHistoricoPrecoProdutoDTO {
 
-    @Id
-    @Column
     private Integer id_historico_preco;
-
-    @Column
     private Double preco_antigo;
-    @Column
     private Double preco_novo;
-    //@Temporal(TemporalType.TIMESTAMP)
-    @Column
     private LocalDateTime data_alteracao;
-    @ManyToOne
-    @JoinColumn (name = "id_produto")
-    private Produto produto;
+
+    private Integer Produto_id_produto;
+    private String produto;
 
 
+    @Override
     public Integer getId_historico_preco() {
         return id_historico_preco;
     }
@@ -29,14 +25,7 @@ public class HistoricoPrecoProduto {
         this.id_historico_preco = id_historico_preco;
     }
 
-    public LocalDateTime getData_alteracao() {
-        return data_alteracao;
-    }
-
-    public void setData_alteracao(LocalDateTime data_alteracao) {
-        this.data_alteracao = data_alteracao;
-    }
-
+    @Override
     public Double getPreco_antigo() {
         return preco_antigo;
     }
@@ -45,6 +34,7 @@ public class HistoricoPrecoProduto {
         this.preco_antigo = preco_antigo;
     }
 
+    @Override
     public Double getPreco_novo() {
         return preco_novo;
     }
@@ -53,11 +43,30 @@ public class HistoricoPrecoProduto {
         this.preco_novo = preco_novo;
     }
 
-    public Produto getProduto() {
+    @Override
+    public LocalDateTime getData_alteracao() {
+        return data_alteracao;
+    }
+
+    public void setData_alteracao(LocalDateTime data_alteracao) {
+        this.data_alteracao = data_alteracao;
+    }
+
+    @Override
+    public String getProduto() {
         return produto;
     }
 
-    public void setProduto(Produto produto) {
+    @Override
+    public Integer getProduto_id_produto() {
+        return Produto_id_produto;
+    }
+
+    public void setProduto_id_produto(Integer produto_id_produto) {
+        Produto_id_produto = produto_id_produto;
+    }
+
+    public void setProduto(String produto) {
         this.produto = produto;
     }
 }

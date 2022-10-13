@@ -22,7 +22,8 @@ public class MarcaServiceImpl implements IMarcaService {
     }
 
     @Override
-    public Marca atualizarDados(Marca dados) {
+    public Marca atualizarDados(Marca dados, Integer id) {
+        dados.setId_marca(id);
         if(dados.getId_marca() != null && dados.getNome_marca() != null){
             return dao.save(dados);
         }

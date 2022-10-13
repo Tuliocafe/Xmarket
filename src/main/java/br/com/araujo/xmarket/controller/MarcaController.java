@@ -21,6 +21,15 @@ public class MarcaController {
         return service.buscarTodos();
     }
 
+    @GetMapping("/marcas/{id_marca}")
+    public ResponseEntity<Marca> buscarPeloId(@PathVariable Integer id_marca){
+        Marca res = service.buscarPeloId(id_marca);
+        if(res != null ){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/marcas")
     public ResponseEntity<Marca> incluirNovo(@RequestBody Marca novo){
         Marca res = service.criaNovo(novo);
@@ -31,29 +40,24 @@ public class MarcaController {
     }
 
 
-    @PutMapping("/marcas")
-    public ResponseEntity<Marca> alterarMarca(@RequestBody Marca dados){
-        Marca res = service.atualizarDados(dados);
-        if(res != null){
-            return ResponseEntity.ok(res);
+    @PutMapping("/marcas/{id_marca}")
+        public ResponseEntity<Marca> alterarMarca(@PathVariable Integer id_marca, @RequestBody Marca dados){
+//        Marca antiga = service.buscarPeloId(id_marca);
+        Marca nova = service.atualizarDados(dados, id_marca);
+
+        if(nova != null){
+            return ResponseEntity.ok(dados);
         }
         return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping("/marcas/{id_marca}")
     public  ResponseEntity<Marca> excluirMarca(@PathVariable Integer id_marca){
+
         service.excluirMarca(id_marca);
         return ResponseEntity.ok(null);
     }
 
 
-    @GetMapping("/marcas/{id_marca}")
-    public ResponseEntity<Marca> buscarPeloId(@PathVariable Integer id_marca){
-        Marca res = service.buscarPeloId(id_marca);
-        if(res != null ){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.notFound().build();
-    }
 
 }

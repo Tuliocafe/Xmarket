@@ -18,37 +18,37 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 ">
                 <div class="formulario-cadastro">
-                    <form action="" class="mt-5 border p-5 bg-light shadow">
+                    <form method="post" action="/clientes" class="mt-5 border p-5 bg-light shadow">
                         <h3 class="mb-4 text-secondary">Faça seu cadastro</h3>
                         <div class="row">
                         
                             <div class="mb-3 col-md-6">
                                 <label>Nome</label>
-                                <input type="text" name="primeiroNome" class="form-control" placeholder="Insira seu Primeiro Nome">
+                                <input type="text" name="nome" class="form-control" placeholder="Insira seu Primeiro Nome" required>
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label>Sobrenome</label>
-                                <input type="text" name="sobrenome" class="form-control" placeholder="Insira seu Sobrenome">
-                            </div>
-                            <div class="mb-3 col-md-12" >
-                                <label>E-mail</label>
-                                <input type="email" name="email" class="form-control" placeholder="Insira seu E-mail no formato email@email.com">
+                                <input type="text" name="sobrenome" class="form-control" placeholder="Insira seu Sobrenome" required>
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Telefone</label>
-                                <input type="text" name="telefone" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
+                                <input type="text" name="telefoneUm" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
+                            </div>
+                            <div class="mb-3 col-md-12" >
+                                <label>Telefone</label>
+                                <input type="text" name="telefoneDois" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone Adicional">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>CPF</label>
-                                <input type="text" name="cpf" class="form-control" onkeypress="$(this).mask('000.000.000-00')" placeholder="Insira seu CPF">
+                                <input type="text" name="cpf" class="form-control" onkeypress="$(this).mask('00000000000')" placeholder="Insira seu CPF" required>
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Registro Geral (RG)</label>
-                                <input type="text" name="registroGeral" class="form-control" placeholder="Insira seu Registro Geral (RG)">
+                                <input type="text" name="rg" class="form-control" placeholder="Insira seu Registro Geral (RG)" required>
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Data de nascimento teste</label>
-                                <input type="datetime" name="dataNascimento" class="form-control" onkeypress="$(this).mask('00/00/0000')" placeholder="Insira sua Data de Nascimento dd/mm/aaaa">
+                                <input type="datetime" name="dataNascimento" class="form-control" onkeypress="$(this).mask('0000-00-00')" placeholder="Insira sua Data de Nascimento dd/mm/aaaa" required>
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>CEP</label>
@@ -67,12 +67,16 @@
                                 <input type="text" name="complementoEnd" class="form-control" placeholder="Insira o complemento, se houver">
                             </div>
                             <div class="mb-3 col-md-12" >
+                                <label>E-mail</label>
+                                <input type="email" name="email" class="form-control" placeholder="Insira seu E-mail no formato email@email.com" >
+                            </div>
+                            <div class="mb-3 col-md-12" >
                                 <label>Senha</label>
-                                <input type="password" name="senha" class="form-control" placeholder="Insira uma senha">
+                                <input type="password" name="senha" class="form-control" placeholder="Insira uma senha" >
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Repita a senha</label>
-                                <input type="password" name="senhaRepetida" class="form-control" placeholder="Repita sua senha">
+                                <input type="password" name="senhaRepetida" class="form-control" placeholder="Repita sua senha" >
                             </div>
 
                             <div class="col-md-12" >

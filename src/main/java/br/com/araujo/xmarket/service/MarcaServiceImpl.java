@@ -13,13 +13,23 @@ public class MarcaServiceImpl implements IMarcaService {
     @Autowired
     public MarcaDao dao;
 
+
     @Override
     public Marca criaNovo(Marca novo) {
-        if(novo.getNome_marca() != null) {
-            return dao.save(novo);
-        }
+//        try {Marca obj = new Marca();
+//            obj.setNome_marca(novo.getNome_marca());
+//            obj.setDescricao(novo.getDescricao());
+            if(novo.getNome_marca() != null) {
+                return dao.save(novo);
+            }
+//        }catch (Exception e){
+//
+//        }
+
         return null;
     }
+
+
 
     @Override
     public Marca atualizarDados(Marca dados, Integer id) {

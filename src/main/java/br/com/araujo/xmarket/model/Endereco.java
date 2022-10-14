@@ -44,8 +44,6 @@ public class Endereco {
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
 
-
-
     public Cidade getCidade() {
         return cidade;
     }

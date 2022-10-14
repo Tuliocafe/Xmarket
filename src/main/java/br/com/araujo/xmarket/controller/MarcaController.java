@@ -6,7 +6,9 @@ import br.com.araujo.xmarket.service.IMarcaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.ArrayList;
 
 @RestController
@@ -15,6 +17,7 @@ public class MarcaController {
 
     @Autowired
     private IMarcaService service;
+
 
     @GetMapping("/marcas")
     public ArrayList<Marca> recuperaTodos(){
@@ -31,13 +34,17 @@ public class MarcaController {
     }
 
     @PostMapping("/marcas")
-    public ResponseEntity<Marca> incluirNovo(Marca novo){
+    public ResponseEntity<Void> incluirNovo(Marca novo){
         Marca res = service.criaNovo(novo);
+//        return ResponseEntity.status(202).header("Custom-Header", "foo").
+//                .body("Custom header set");
         if (res != null){
-            return ResponseEntity.ok(res);
+            return ResponseEntity.status(202).build();
+//                    return ResponseEntity.status(202).location(URI.create("http://localhost:8080/index")).build();
         }
         return  ResponseEntity.badRequest().build();
     }
+
 
 
     @PutMapping("/marcas/{id_marca}")

@@ -2,6 +2,7 @@ package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
+import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,9 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo(Cliente produto){
-        Cliente res = clienteService.criaNovo(produto);
+    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente cliente){
+
+        Cliente res = clienteService.criaNovo(cliente);
         if (res != null){
             return ResponseEntity.ok(res);
         }
@@ -60,6 +62,40 @@ public class ClienteController {
         return ResponseEntity.badRequest().build();
     }
 
+    @GetMapping("/clientes/{id}/enderecos")
+    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
+
+        return clienteService.buscaEnderecoPeloIdCliente(id);
+
+    }
+
+    @GetMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
+    public IEnderecoDTO recuperaPorId(@PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
+
+        return clienteService.buscaEnderecoPeloId(idUsuario, idEndereco);
+
+    }
+    @PutMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
+    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
+
+        Endereco response =  clienteService.atualizarEnderecoDoCliente(endereco, idUsuario, idEndereco);
+
+        if(response != null){
+            return ResponseEntity.ok(response);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
+    @PostMapping("/clientes/{id_usuario}/enderecos")
+    public ResponseEntity<Endereco> cadastrarNovo(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario){
+
+//        return clienteService.salvaEndereco(endereco);
+        return null;
+
+    }
+
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
         return clienteService.buscaPorNome(palavra);
@@ -70,9 +106,6 @@ public class ClienteController {
         return ResponseEntity.ok(null);
     }
 
-    @GetMapping("/clientes/{id}/enderecos")
-    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
-        return clienteService.buscaEnderecoPeloIdCliente(id);
-    }
+
 
 }

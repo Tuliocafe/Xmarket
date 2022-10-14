@@ -19,16 +19,9 @@ public class TaskController {
         return "paginas/login";
     }
 
-    @GetMapping("/cadastro")
-    public String cadastro(){
-       return "paginas/cadastro";
-    }
-
     @GetMapping("/marca")
-    public String marca(){
-        return "paginas/marca";
+    public String cadastro(){
+       return "paginas/marca";
     }
-
-
 
 }

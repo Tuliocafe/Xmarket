@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.controller;
 import br.com.araujo.xmarket.model.Categoria;
 import br.com.araujo.xmarket.service.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,10 +24,23 @@ public class CategoriaController {
         return service.buscarPeloId(id);
     }
 
-    @PostMapping("/categoia")
+    @PostMapping("/categorias")
     public Categoria incluirNovo(@RequestBody Categoria novo){
         Categoria res = service.criaNovo(novo);
         return res;
+    }
+
+    @PutMapping("/categorias/{id}")
+    public ResponseEntity<Categoria> atualizarCategoria(@RequestBody Categoria dados, @PathVariable Integer id){
+        Categoria res = service.AtualizarDados(dados, id);
+        if(res != null){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.badRequest().build();
+    }
+    @DeleteMapping("/categoria/{id}")
+    public void removerCategoria(@PathVariable Integer id){
+        service.excluirCategoria(id);
     }
 
 }

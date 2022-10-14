@@ -7,10 +7,12 @@ import java.util.ArrayList;
 public interface ICategoriaService {
     public Categoria criaNovo(Categoria novo);
 
-    public Categoria AtualizarDados(Categoria dados);
+    public Categoria AtualizarDados(Categoria dados, Integer id);
 
     public ArrayList<Categoria> buscarTodos();
 
     public Categoria buscarPeloId(Integer id);
+
+    public void excluirCategoria(Integer id);
 
 }

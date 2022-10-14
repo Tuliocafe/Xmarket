@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public interface IMarcaService {
     public Marca criaNovo (Marca novo);
-    public Marca atualizarDados (Marca dados);
+    public Marca atualizarDados (Marca dados, Integer id);
     public ArrayList<Marca> buscarTodos();
     public Marca buscarPeloId(Integer id);
     public void excluirMarca(Integer id);

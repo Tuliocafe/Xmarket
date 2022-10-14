@@ -1,5 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
 import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,19 @@ public class ProdutoController {
         return ResponseEntity.status(404).build();
     }
 
+    @GetMapping("/produtos/busca/{nome_produto}")
+    public ResponseEntity<ArrayList<Produto>>  pesquisaPeloNometeste(@PathVariable String nome_produto){
+        ArrayList<Produto>  listProduto = service.recuperaTodosPorNome(nome_produto);
+        if(listProduto.isEmpty()) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(listProduto);
+    }
+
+    @GetMapping("/produtos/{id_produto}/historicos")
+    public ResponseEntity<ArrayList<IHistoricoPrecoProdutoDTO>> recuperaHistoricoProduto(@PathVariable Integer id_produto){
+    ArrayList<IHistoricoPrecoProdutoDTO> listaHistorico = service.buscaHistoricoPorPreco(id_produto);
+    return  ResponseEntity.ok(listaHistorico);
+    }
+
     @PostMapping("/produtos")
     public ResponseEntity<Produto> cadastrarNovo(@RequestBody Produto novo){
         Produto res = service.cadastrarNovo(novo);
@@ -40,10 +54,20 @@ public class ProdutoController {
         return ResponseEntity.badRequest().build();
     }
 
-    @GetMapping("/produtos/busca/{nome_produto}")
-    public ResponseEntity<ArrayList<Produto>>  pesquisaPeloNometeste(@PathVariable String nome_produto){
-        ArrayList<Produto>  listProduto = service.recuperaTodosPorNome(nome_produto);
-        if(listProduto.isEmpty()) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(listProduto);
+    @DeleteMapping("/produtos/{id_produto}")
+    public  ResponseEntity<Produto> excluirMarca(@PathVariable Integer id_produto){
+        service.excluirProduto(id_produto);
+        return ResponseEntity.ok(null);
     }
+
+    @PutMapping("/produtos/{id_produto}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Integer id_produto, @RequestBody Produto novo){
+        Produto atualizado = service.atualizaProduto(novo, id_produto);
+        if(atualizado != null) return ResponseEntity.ok(atualizado);
+        return ResponseEntity.badRequest().build();
+    }
+
+
+
+
 }

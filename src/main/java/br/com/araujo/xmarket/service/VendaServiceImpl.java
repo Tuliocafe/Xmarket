@@ -23,8 +23,7 @@ public class VendaServiceImpl implements IVendaService {
     @Override
     public Venda atualizarDados(Venda dados) {
         if(dados.getId()!=null ){
-            return
-                    dao.save(dados);
+            return dao.save(dados);
         }
         return null;
     }

@@ -15,12 +15,21 @@ public class StatusVendas {
     private Integer id;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private DescricaoStatus status;
 
     @OneToMany(mappedBy = "statusVendas", cascade = CascadeType.ALL)
     @JsonIgnoreProperties
     List<Venda> listaVendas;
 
+
+    public DescricaoStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DescricaoStatus status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;
@@ -30,19 +39,15 @@ public class StatusVendas {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
-    public List<Venda> getListaVendas() {
-        return listaVendas;
-    }
+//    public List<Venda> getListaVendas() {
+//        return listaVendas;
+//    }
+//
+//    public void setListaVendas(List<Venda> listaVendas) {
+//        this.listaVendas = listaVendas;
+//    }
 
-    public void setListaVendas(List<Venda> listaVendas) {
-        this.listaVendas = listaVendas;
-    }
+
 }

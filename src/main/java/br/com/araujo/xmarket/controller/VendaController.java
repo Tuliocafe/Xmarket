@@ -20,15 +20,14 @@ public class VendaController {
         return service.buscarTodas();
     }
 
-    @GetMapping("/vendas/{id_venda}")
-    public ResponseEntity<Venda> buscarPeloId(@PathVariable Integer id_venda){
-        Venda res = service.buscarPeloId(id_venda);
+    @GetMapping("/vendas/{id}")
+    public ResponseEntity<Venda> buscarPeloId(@PathVariable Integer id){
+        Venda res = service.buscarPeloId(id);
         if (res != null) {
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.status(404).build();
     }
-
 
     @PostMapping("/vendas")
     public ResponseEntity<Venda> incluirNovo(@RequestBody Venda novo){
@@ -39,7 +38,7 @@ public class VendaController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PutMapping("/vendas")
+    @PutMapping("/vendas/{id_venda}")
     public ResponseEntity<Venda> alterarVenda(@RequestBody Venda dados){
         Venda res = service.atualizarDados(dados);
         if(res != null){
@@ -49,8 +48,8 @@ public class VendaController {
     }
 
     @DeleteMapping("vendas/{id_venda}")
-    public ResponseEntity<Venda> excluirVenda(@PathVariable Integer id){
-        service.excluirVenda(id);
+    public ResponseEntity<Venda> excluirVenda(@PathVariable Integer id_venda){
+        service.excluirVenda(id_venda);
         return ResponseEntity.ok(null);
     }
 

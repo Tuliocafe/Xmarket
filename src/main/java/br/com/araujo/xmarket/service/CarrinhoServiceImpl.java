@@ -1,18 +1,20 @@
 package br.com.araujo.xmarket.service;
 
-import br.com.araujo.xmarket.dao.VendaDao;
+import br.com.araujo.xmarket.dao.CarrinhoDao;
+import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Venda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+
 @Service
-public class VendaServiceImpl implements IVendaService {
+public class CarrinhoServiceImpl implements ICarrinhoService{
     @Autowired
-    public VendaDao dao;
+    public CarrinhoDao dao;
 
     @Override
-    public Venda criaNova(Venda novo) {
+    public CarrinhoCompra criaNovo(CarrinhoCompra novo) {
         if(novo.getPrecoTotal() != null)
         {
             return dao.save(novo);
@@ -21,25 +23,25 @@ public class VendaServiceImpl implements IVendaService {
     }
 
     @Override
-    public Venda atualizarDados(Venda dados) {
-        if(dados.getId()!=null ){
+    public CarrinhoCompra atualizarDados(CarrinhoCompra dados) {
+        if(dados.getId()!= null){
             return dao.save(dados);
         }
         return null;
     }
 
     @Override
-    public ArrayList<Venda> buscarTodas() {
-        return (ArrayList<Venda>)dao.findAll();
+    public ArrayList<CarrinhoCompra> buscarTodas() {
+        return (ArrayList<CarrinhoCompra>)dao.findAll();
     }
 
     @Override
-    public Venda buscarPeloId(Integer id) {
+    public CarrinhoCompra buscarPeloId(Integer id) {
         return dao.findById(id).orElse(null);
     }
 
     @Override
-    public void excluirVenda(Integer id) {
+    public void excluirCarrinho(Integer id) {
         dao.deleteById(id);
     }
 }

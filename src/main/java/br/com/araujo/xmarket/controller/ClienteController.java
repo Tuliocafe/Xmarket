@@ -33,7 +33,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> cadastrarNovo( Cliente cliente){
 
         Cliente res = clienteService.criaNovo(cliente);
         if (res != null){
@@ -42,14 +42,14 @@ public class ClienteController {
         return ResponseEntity.badRequest().build();
     }
 
-    @PutMapping("/clientes")
-    public ResponseEntity<Cliente> alterarVenda(@RequestBody Cliente cliente){
-        Cliente response = clienteService.atualizarDados(cliente);
-        if(response != null){
-            return ResponseEntity.ok(response);
-        }
-        return ResponseEntity.badRequest().build();
-    }
+//    @PutMapping("/clientes")
+//    public ResponseEntity<Cliente> alterarVenda(@RequestBody Cliente cliente){
+//        Cliente response = clienteService.atualizarDados(cliente);
+//        if(response != null){
+//            return ResponseEntity.ok(response);
+//        }
+//        return ResponseEntity.badRequest().build();
+//    }
 
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> AtualizaCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastre-se</title>
@@ -18,46 +18,45 @@
         <div class="row">
             <div class="col-md-6 offset-md-3 ">
                 <div class="formulario-cadastro">
-                    <form method="post" action="clientes" class="mt-5 border p-5 bg-light shadow">
+                    <form  action="#" th:action="@{/clientes}  th:object="${cliente} method="post" class="mt-5 border p-5 bg-light shadow">
                         <h3 class="mb-4 text-secondary">Faça seu cadastro</h3>
                         <div class="row">
                     
                             <div class="mb-3 col-md-6">
                                 <label>Nome</label>
-                                <input type="text" name="nome" class="form-control" placeholder="Insira seu Primeiro Nome">
+                                <input type="text" th:field="*{nome}" class="form-control" placeholder="Insira seu Primeiro Nome">
                             </div>
                             <div class="mb-3 col-md-6">
                                 <label>Sobrenome</label>
-                                <input type="text" name="sobrenome" class="form-control" placeholder="Insira seu Sobrenome">
+                                <input type="text"  th:field="*{sobrenome}" class="form-control" placeholder="Insira seu Sobrenome">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>CPF</label>
-                                <input type="text" name="cpf" class="form-control" onkeypress="$(this).mask('000.000.000-00')" placeholder="Insira seu CPF">
+                                <input type="text"  th:field="*{cpf}" class="form-control" onkeypress="$(this).mask('000.000.000-00')" placeholder="Insira seu CPF">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Registro Geral (RG)</label>
-                                <input type="text" name="rg" class="form-control" placeholder="Insira seu Registro Geral (RG)">
+                                <input type="text" th:field="*{rg}" class="form-control" placeholder="Insira seu Registro Geral (RG)">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Data de nascimento</label>
-                                <input type="datetime" name="dataNascimento" class="form-control"  placeholder="Insira sua Data de Nascimento dd/mm/aaaa">
+                                <input type="text" th:field="*{dataNascimento}"  class="form-control"  placeholder="Insira sua Data de Nascimento dd/mm/aaaa">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Telefone 1</label>
-                                <input type="text" name="telefoneUm" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
+                                <input type="text" th:field="*{telefoneUm}" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
                             </div>
                             <div class="mb-3 col-md-12" >
                                 <label>Telefone 2</label>
-                                <input type="text" name="telefoneDois" class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
+                                <input type="text" th:field="*{telefoneDois}"  class="form-control" onkeypress="$(this).mask('(00) 00000-0000')" placeholder="Insira seu Telefone">
                             </div>
-                                    <form action="clientes" method="post">
                                         <div class="mb-3 col-md-12" >
                                             <label>E-mail</label>
-                                            <input type="email" name="email" class="form-control" placeholder="Insira seu E-mail no formato email@email.com">
+                                            <input type="email"  th:field="*{email}" class="form-control" placeholder="Insira seu E-mail no formato email@email.com">
                                         </div>
                                         <div class="mb-3 col-md-12" >
                                             <label>Senha</label>
-                                            <input type="password" name="senha" class="form-control" placeholder="Insira uma senha">
+                                            <input type="password"  th:field="*{senha}" class="form-control" placeholder="Insira uma senha">
                                         </div>
                                         <!-- <div class="mb-3 col-md-12" >
                                             <label>Repita a senha</label>
@@ -65,34 +64,29 @@
                                         </div> -->
                                         <div class="mb-3 col-md-12" >
                                             <label>Data de Login</label>
-                                            <input type="datetime" name="dataLogin" class="form-control" onkeypress="$(this).mask('0000-00-00')" placeholder="Insira a data de login">
+                                            <input type="text" th:field="*{dataLogin}"  class="form-control" onkeypress="$(this).mask('0000-00-00')" placeholder="Insira a data de login">
                                         </div>
                                         <div class="mb-3 col-md-12" >
                                             <label>Status do Usuario</label>
-                                            <input type="number" name="status" class="form-control" placeholder="Insira o status (int)">
+                                            <input type="number" th:field="*{status}" class="form-control" placeholder="Insira o status (int)">
                                         </div>
-                                        
+
                                         <div class="mb-3 col-md-12" >
-                                            <label>Tipo de usuário</label>
-                                            <select name="tipoUsuario" id="" class="mb-1 col-lg-12">
-                                                <option name="tipoUsuario" value="usuario">usuario</option>
-                                                <option name="tipoUsuario" value="administrador">administrador</option>
-                                                <option name="tipoUsuario" value="funcionario">funcionario</option>
-                                            </select>
+                                            <label>Tipo Usuario</label>
+                                            <input type="text" th:field="*{tipoUsuario}" class="form-control" placeholder="Insira o status (int)">
                                         </div>
+
+                                    </div>
                                         <div class="col-md-12" >
                                             <button class="btn btn-primary float-end">Inscrever-se</button>
                                         </div>
-                                    </form>
 
-                        </div>
                     </form>
                     <p class="text-center mt-3 text-secondary">Se já possui conta, por favor <a href="login">Faça Login</a></p>
                 </div>
             </div>
         </div>
     </div>
-
 
 
 

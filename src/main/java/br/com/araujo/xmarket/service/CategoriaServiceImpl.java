@@ -22,7 +22,7 @@ public class CategoriaServiceImpl implements ICategoriaService{
     }
 
     @Override
-    public Categoria AtualizarDados(Categoria dados) {
+    public Categoria AtualizarDados(Categoria dados, Integer id) {
         if(dados.getId_categoria_produto() != null && dados.getNome_categoria() !=null){
          return dao.save(dados);
         }
@@ -37,5 +37,10 @@ public class CategoriaServiceImpl implements ICategoriaService{
     @Override
     public Categoria buscarPeloId(Integer id) {
         return dao.findById(id).orElse(null);
+    }
+
+    @Override
+    public void excluirCategoria(Integer id) {
+        dao.deleteById(id);
     }
 }

@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.ClienteLoginDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
+import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.ClienteLogin;
@@ -111,14 +112,14 @@ public class ClienteService implements IClienteService {
 
     //RECEBER UM DTO VIA ENDERECODAO
     @Override
-    public Endereco atualizarEndereco(Endereco endereco, Integer id) {
+    public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco) {
 
-//        Cliente novoCliente = clienteDao.findById(id).orElse(null);
+        Cliente novoCliente = clienteDao.findById(idUsuario).orElse(null);
 
-        Endereco novoEndereco = enderecoDAO.findById(id).orElse(null);
+        Endereco novoEndereco = enderecoDAO.findById(idEndereco).orElse(null);
 
-//        novoEndereco = endereco;
-
+        novoEndereco.setCidade(endereco.getCidade());
+        novoEndereco.setCliente(novoCliente);
         novoEndereco.setBairro(endereco.getBairro());
         novoEndereco.setCep(endereco.getCep());
         novoEndereco.setTipoEndereco(endereco.getTipoEndereco());
@@ -136,4 +137,10 @@ public class ClienteService implements IClienteService {
     return null;
 
 
-}}
+}
+
+    @Override
+    public IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco) {
+        return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
+    }
+}

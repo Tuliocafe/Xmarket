@@ -61,19 +61,40 @@ public class ClienteController {
 
         return ResponseEntity.badRequest().build();
     }
-    @PutMapping("/clientes/{id}/endereco")
-    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id") Integer id) {
-        Endereco response =  clienteService.atualizarEndereco(endereco, id);
+
+    @GetMapping("/clientes/{id}/enderecos")
+    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
+
+        return clienteService.buscaEnderecoPeloIdCliente(id);
+
+    }
+
+    @GetMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
+    public IEnderecoDTO recuperaPorId(@PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
+
+        return clienteService.buscaEnderecoPeloId(idUsuario, idEndereco);
+
+    }
+    @PutMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
+    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
+
+        Endereco response =  clienteService.atualizarEnderecoDoCliente(endereco, idUsuario, idEndereco);
 
         if(response != null){
             return ResponseEntity.ok(response);
         }
-
         return ResponseEntity.badRequest().build();
-
     }
 
 
+
+    @PostMapping("/clientes/{id_usuario}/enderecos")
+    public ResponseEntity<Endereco> cadastrarNovo(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario){
+
+//        return clienteService.salvaEndereco(endereco);
+        return null;
+
+    }
 
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
@@ -85,9 +106,6 @@ public class ClienteController {
         return ResponseEntity.ok(null);
     }
 
-    @GetMapping("/clientes/{id}/enderecos")
-    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
-        return clienteService.buscaEnderecoPeloIdCliente(id);
-    }
+
 
 }

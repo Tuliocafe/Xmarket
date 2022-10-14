@@ -24,7 +24,10 @@ public class TaskController {
        return "paginas/cadastro";
     }
 
-
+    @GetMapping("/marca")
+    public String marca(){
+        return "paginas/marca";
+    }
 
 
 

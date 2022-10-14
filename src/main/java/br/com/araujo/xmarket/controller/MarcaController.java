@@ -31,7 +31,7 @@ public class MarcaController {
     }
 
     @PostMapping("/marcas")
-    public ResponseEntity<Marca> incluirNovo(@RequestBody Marca novo){
+    public ResponseEntity<Marca> incluirNovo(Marca novo){
         Marca res = service.criaNovo(novo);
         if (res != null){
             return ResponseEntity.ok(res);

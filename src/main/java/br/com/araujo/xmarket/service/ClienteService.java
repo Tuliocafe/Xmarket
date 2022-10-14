@@ -1,13 +1,16 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.ClienteDAO;
+import br.com.araujo.xmarket.dao.ClienteLoginDAO;
+import br.com.araujo.xmarket.dao.EnderecoDAO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
+import br.com.araujo.xmarket.model.ClienteLogin;
+import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class ClienteService implements IClienteService {
@@ -15,9 +18,23 @@ public class ClienteService implements IClienteService {
     @Autowired
     public ClienteDAO clienteDao;
 
+    @Autowired
+    ClienteLoginDAO clienteLoginDAO;
+
+    @Autowired
+    EnderecoDAO enderecoDAO;
+
     @Override
     public Cliente criaNovo(Cliente cliente) {
-        if (cliente != null) {
+
+        ClienteLogin clienteLogin = new ClienteLogin();
+
+        clienteLogin = cliente.getClienteLogin();
+
+
+        if (cliente != null && clienteLogin != null) {
+
+            clienteLoginDAO.save(clienteLogin);
             return clienteDao.save(cliente);
         }
         return null;
@@ -61,7 +78,12 @@ public class ClienteService implements IClienteService {
 
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
+//        if (clienteDao.existsById(id) ) ;
+
+
         if (novoCliente != null) {
+
+            //novoCliente.cloneCliente(cliente);
 
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
@@ -71,6 +93,12 @@ public class ClienteService implements IClienteService {
             novoCliente.setTelefoneDois(cliente.getTelefoneDois());
             novoCliente.setRg(cliente.getRg());
             novoCliente.setDataCriacaoUsuario(cliente.getDataCriacaoUsuario());
+            novoCliente.setDataCriacaoUsuario(cliente.getDataCriacaoUsuario());
+
+
+
+//            novoCliente.setListaEnderecos(cliente.getListaEnderecos());
+//            novoCliente.setClienteLogin(cliente.getClienteLogin());
             clienteDao.save(novoCliente);
 
             // TODO
@@ -81,5 +109,31 @@ public class ClienteService implements IClienteService {
     }
 
 
+    //RECEBER UM DTO VIA ENDERECODAO
+    @Override
+    public Endereco atualizarEndereco(Endereco endereco, Integer id) {
 
-}
+//        Cliente novoCliente = clienteDao.findById(id).orElse(null);
+
+        Endereco novoEndereco = enderecoDAO.findById(id).orElse(null);
+
+//        novoEndereco = endereco;
+
+        novoEndereco.setBairro(endereco.getBairro());
+        novoEndereco.setCep(endereco.getCep());
+        novoEndereco.setTipoEndereco(endereco.getTipoEndereco());
+        novoEndereco.setComplemento(endereco.getComplemento());
+        novoEndereco.setLogradouro(endereco.getLogradouro());
+        novoEndereco.setReferencia(endereco.getReferencia());
+
+        if (novoEndereco != null) {
+
+            enderecoDAO.save(novoEndereco);
+
+            return novoEndereco;
+        }
+
+    return null;
+
+
+}}

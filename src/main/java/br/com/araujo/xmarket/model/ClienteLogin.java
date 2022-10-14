@@ -21,7 +21,7 @@ public class ClienteLogin {
     @Enumerated(EnumType.STRING)
     private TipoUsuario tipoUsuario;
 
-    @Column(name = "estatus_usuario_login", columnDefinition = "TINYINT")
+    @Column(name = "status_usuario_login", columnDefinition = "TINYINT")
     private boolean status;
 
     @Column(name = "dataLogin")
@@ -33,6 +33,19 @@ public class ClienteLogin {
     @OneToOne(mappedBy = "clienteLogin")
     @JsonIgnoreProperties("clienteLogin")
     private Cliente cliente;
+
+    public ClienteLogin() {
+    }
+
+    public ClienteLogin(Integer id, String senha, TipoUsuario tipoUsuario, boolean status, String dataLogin, String email, Cliente cliente) {
+        this.id = id;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+        this.status = status;
+        DataLogin = dataLogin;
+        this.email = email;
+        this.cliente = cliente;
+    }
 
     public Cliente getCliente() {
         return cliente;

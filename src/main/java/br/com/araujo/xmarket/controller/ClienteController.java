@@ -2,6 +2,7 @@ package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
+import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,8 +33,9 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente produto){
-        Cliente res = clienteService.criaNovo(produto);
+    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente cliente){
+
+        Cliente res = clienteService.criaNovo(cliente);
         if (res != null){
             return ResponseEntity.ok(res);
         }
@@ -59,6 +61,19 @@ public class ClienteController {
 
         return ResponseEntity.badRequest().build();
     }
+    @PutMapping("/clientes/{id}/endereco")
+    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id") Integer id) {
+        Endereco response =  clienteService.atualizarEndereco(endereco, id);
+
+        if(response != null){
+            return ResponseEntity.ok(response);
+        }
+
+        return ResponseEntity.badRequest().build();
+
+    }
+
+
 
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){

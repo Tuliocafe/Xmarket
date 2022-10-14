@@ -1,8 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dto.HistoricoPrecoProdutoDTO;
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
-import br.com.araujo.xmarket.model.Marca;
 import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;

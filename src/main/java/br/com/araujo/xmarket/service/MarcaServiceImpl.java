@@ -15,10 +15,11 @@ public class MarcaServiceImpl implements IMarcaService {
 
     @Override
     public Marca criaNovo(Marca novo) {
-        if(novo.getNome_marca() != null) {
-            return dao.save(novo);
-        }
-        return null;
+       Marca newMarca = new Marca();
+       newMarca.setNome_marca(novo.getNome_marca());
+       newMarca.setDescricao(novo.getDescricao());
+        dao.save(newMarca);
+        return newMarca;
     }
 
     @Override

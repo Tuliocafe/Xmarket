@@ -1,12 +1,10 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.ClienteDAO;
-import br.com.araujo.xmarket.dao.ClienteLoginDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
 import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.ClienteLogin;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,22 +18,12 @@ public class ClienteService implements IClienteService {
     public ClienteDAO clienteDao;
 
     @Autowired
-    ClienteLoginDAO clienteLoginDAO;
-
-    @Autowired
     EnderecoDAO enderecoDAO;
 
     @Override
     public Cliente criaNovo(Cliente cliente) {
+        if (cliente != null ) {
 
-        ClienteLogin clienteLogin = new ClienteLogin();
-
-        clienteLogin = cliente.getClienteLogin();
-
-
-        if (cliente != null && clienteLogin != null) {
-
-            clienteLoginDAO.save(clienteLogin);
             return clienteDao.save(cliente);
         }
         return null;
@@ -94,7 +82,10 @@ public class ClienteService implements IClienteService {
             novoCliente.setTelefoneDois(cliente.getTelefoneDois());
             novoCliente.setRg(cliente.getRg());
             novoCliente.setDataCriacaoUsuario(cliente.getDataCriacaoUsuario());
-            novoCliente.setDataCriacaoUsuario(cliente.getDataCriacaoUsuario());
+            novoCliente.setEmail(cliente.getEmail());
+            novoCliente.setSenha(cliente.getSenha());
+            novoCliente.setTipoUsuario(cliente.getTipoUsuario());
+            novoCliente.setStatus(cliente.getStatus());
 
 
 

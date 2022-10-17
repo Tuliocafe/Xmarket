@@ -38,7 +38,7 @@
                         <path
                             d="M352 96h64c17.7 0 32 14.3 32 32V384c0 17.7-14.3 32-32 32H352c-17.7 0-32 14.3-32 32s14.3 32 32 32h64c53 0 96-43 96-96V128c0-53-43-96-96-96H352c-17.7 0-32 14.3-32 32s14.3 32 32 32zm-7.5 177.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H32c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32H160v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z" />
                     </svg>
-                    <a href="list">Login</a>
+                    <a href="admin">Login</a>
                 </button>
             </div>
 
@@ -102,18 +102,27 @@
             <div class="title text-center">
                 <h2 class="position-relative d-inline-block">Nossas Marcas</h2>
             </div>
+            <div class="row g-0 " >
 
-            <div class="row g-0" >
                 <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group">
                     <button type="button" class="btn m-2 text-dark active-filter-btn" data-filter="*">Todas</button>
-                    <button type="button" class="btn m-2 text-dark" data-filter=".best">Hering</button>
-                    <button type="button" class="btn m-2 text-dark" data-filter=".feat">Lacoste</button>
-                    <button type="button" class="btn m-2 text-dark" data-filter=".new">Nike</button>
                 </div>
+
+                <div class="col-md-4 col-lg-3 col-xl-2 p-2 mt-1 best" data-th-each="marcas:${marcas}">
+<!--                <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group" data-th-each="marcas:${marcas}" >-->
+                <div class="d-flex flex-wrap justify-content-center mt-5 filter-button-group"  >
+
+<!--                    <button type="button" class="btn m-2 text-dark active-filter-btn" data-filter="*">Todas</button>-->
+                    <button type="button" class="btn m-2 text-dark" data-th-text="${marcas.nome_marca}" data-filter="gucci" ></button>
+                    <button type="button" class="btn m-2 text-dark" data-filter=".feat">Lacoste</button>
+                    <button type="button" class="btn m-2 text-dark" data-filter="Lacoste">Nike</button>
+                </div>
+                    </div>
                 <div class="collection-list mt-4 row gx-0 gy-3" >
-                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 best" data-th-each="produto:${produtos}">
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2" data-th-each="produto:${produtos}">
                         <div class="collection-img position-relative">
-                            <img src="images/c_formal_gray_shirt.png" class="w-100">
+                            <img  th:src="${produto.imagem_path}" class="w-100">
+<!--                            <img  th:src="images/c_formal_gray_shirt.png" class="w-100">-->
                             <span
                                 class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>
                         </div>
@@ -126,47 +135,51 @@
                                 <span class="text-primary"><i class="fas fa-star"></i></span>
                             </div>
                             <p class="text-capitalize my-1" data-th-text="${produto.nome_produto}"></p>
-                            <span class="fw-bold" data-th-text="${produto.preco_produto}"></span>
+                            <span> R$ </span>
+                            <span class="fw-bold" data-th-text="${#numbers.formatDecimal(produto.preco_produto,0,'COMMA', 2, 'POINT')}"></span>
+                            <p>
+                            <a href="#" class="btn btn-primary mt-3">Adicionar ao Carrinho</a>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 feat">
+                        <div class="collection-img position-relative">
+                            <img src="images/c_pant_girl.png" class="w-100">
+                            <span
+                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="rating mt-3">
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                            </div>
+                            <p class="text-capitalize my-1">Lacoste</p>
+                            <span class="fw-bold">R$ 45.50</span>
                         </div>
                     </div>
 
-<!--                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 feat">-->
-<!--                        <div class="collection-img position-relative">-->
-<!--                            <img src="images/c_pant_girl.png" class="w-100">-->
-<!--                            <span-->
-<!--                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>-->
-<!--                        </div>-->
-<!--                        <div class="text-center">-->
-<!--                            <div class="rating mt-3">-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                            </div>-->
-<!--                            <p class="text-capitalize my-1">Lacoste</p>-->
-<!--                            <span class="fw-bold">R$ 45.50</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
-<!--                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 new">-->
-<!--                        <div class="collection-img position-relative">-->
-<!--                            <img src="images/c_polo-shirt.png" class="w-100">-->
-<!--                            <span-->
-<!--                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>-->
-<!--                        </div>-->
-<!--                        <div class="text-center">-->
-<!--                            <div class="rating mt-3">-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="text-primary"><i class="fas fa-star"></i></span>-->
-<!--                            </div>-->
-<!--                            <p class="text-capitalize my-1">Nike</p>-->
-<!--                            <span class="fw-bold">$ 45.50</span>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 new">
+                        <div class="collection-img position-relative">
+                            <img src="images/c_polo-shirt.png" class="w-100">
+                            <span
+                                class="position-absolute bg-primary text-white d-flex align-items-center justify-content-center">sale</span>
+                        </div>
+                        <div class="text-center">
+                            <div class="rating mt-3">
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                                <span class="text-primary"><i class="fas fa-star"></i></span>
+                            </div>
+                            <p class="text-capitalize my-1">Nike</p>
+                            <span class="fw-bold">$ 45.50</span>
+                        </div>
+                    </div>
 
 <!--                    <div class="col-md-6 col-lg-4 col-xl-3 p-2 best">-->
 <!--                        <div class="collection-img position-relative">-->
@@ -264,6 +277,7 @@
 <!--                    </div>-->
 <!--                </div>-->
             </div>
+        </div>
         </div>
     </section>
     <!-- fim dos produtos-->

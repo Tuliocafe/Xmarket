@@ -41,10 +41,23 @@ public class Cliente {
     @Column(name = "dataCriacao_usuario", nullable = true)
     private String dataCriacaoUsuario;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_usuario_login", referencedColumnName = "id_usuario_login")
-    @JsonIgnoreProperties("cliente")
-    private ClienteLogin clienteLogin;
+
+    //colunas que vieram de de usuario_login:
+
+    @Column(name = "senha")
+    private String senha;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "tipo_usuario")
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
+    @Column(name = "status", columnDefinition = "TINYINT")
+    private Integer status;
+
+
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("cliente")
@@ -62,8 +75,12 @@ public class Cliente {
         this.telefoneDois = cliente.getTelefoneDois();
         this.rg = cliente.getRg();
         this.dataCriacaoUsuario = cliente.getDataCriacaoUsuario();
-        this.clienteLogin = cliente.getClienteLogin();
         this.listaEnderecos = cliente.getListaEnderecos();
+        this.senha = cliente.getSenha();
+        this.tipoUsuario = cliente.getTipoUsuario();
+        this.status = cliente.getStatus();
+        this.email = cliente.getEmail();
+
     }
 
 
@@ -147,12 +164,38 @@ public class Cliente {
         this.dataCriacaoUsuario = dataCriacaoUsuario;
     }
 
-    public ClienteLogin getClienteLogin() {
-        return clienteLogin;
+
+
+    public String getSenha() {
+        return senha;
     }
 
-    public void setClienteLogin(ClienteLogin clienteLogin) {
-        this.clienteLogin = clienteLogin;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     @Override
@@ -160,11 +203,11 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(sobrenome, cliente.sobrenome) && Objects.equals(cpf, cliente.cpf) && Objects.equals(dataNascimento, cliente.dataNascimento) && Objects.equals(telefoneUm, cliente.telefoneUm) && Objects.equals(telefoneDois, cliente.telefoneDois) && Objects.equals(rg, cliente.rg) && Objects.equals(dataCriacaoUsuario, cliente.dataCriacaoUsuario) && Objects.equals(clienteLogin, cliente.clienteLogin) && Objects.equals(listaEnderecos, cliente.listaEnderecos);
+        return status == cliente.status && Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(sobrenome, cliente.sobrenome) && Objects.equals(cpf, cliente.cpf) && Objects.equals(dataNascimento, cliente.dataNascimento) && Objects.equals(telefoneUm, cliente.telefoneUm) && Objects.equals(telefoneDois, cliente.telefoneDois) && Objects.equals(rg, cliente.rg) && Objects.equals(dataCriacaoUsuario, cliente.dataCriacaoUsuario) && Objects.equals(senha, cliente.senha) && Objects.equals(email, cliente.email) && tipoUsuario == cliente.tipoUsuario && Objects.equals(listaEnderecos, cliente.listaEnderecos);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, sobrenome, cpf, dataNascimento, telefoneUm, telefoneDois, rg, dataCriacaoUsuario, clienteLogin, listaEnderecos);
+        return Objects.hash(id, nome, sobrenome, cpf, dataNascimento, telefoneUm, telefoneDois, rg, dataCriacaoUsuario, senha, email, tipoUsuario, status, listaEnderecos);
     }
 }

@@ -1,6 +1,8 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.model.Marca;
 import br.com.araujo.xmarket.model.Produto;
+import br.com.araujo.xmarket.service.IMarcaService;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,17 @@ public class TaskController {
 
     @Autowired
     private IProdutoService service;
+
+    @Autowired
+    private IMarcaService serviceMarcas;
+
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
         ModelAndView mv = new ModelAndView("index");
+        Iterable<Marca> marcas = serviceMarcas.buscarTodos();
         mv.addObject("produtos",produtos);
+        mv.addObject("marcas", marcas);
         return mv;
     }
 
@@ -37,5 +45,8 @@ public class TaskController {
 
     @GetMapping("/carrinho")
     public String carrinho(){ return   "paginas/carrinho";}
+
+    @GetMapping("/admin")
+    public String admin(){return "paginas/administrativa";}
 
 }

@@ -33,7 +33,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> cadastrarNovo( Cliente cliente){
 
         Cliente res = clienteService.criaNovo(cliente);
         if (res != null){

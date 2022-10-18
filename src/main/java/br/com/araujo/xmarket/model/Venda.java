@@ -83,4 +83,12 @@ public class Venda {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public Venda(Date dataVenda, Double precoTotal, String descricao, StatusVendas statusVendas, Cliente cliente) {
+        this.dataVenda = dataVenda;
+        this.precoTotal = precoTotal;
+        this.descricao = descricao;
+        this.statusVendas = statusVendas;
+        this.cliente = cliente;
+    }
 }

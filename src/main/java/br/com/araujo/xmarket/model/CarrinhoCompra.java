@@ -37,6 +37,14 @@ public class CarrinhoCompra {
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
+    public CarrinhoCompra(Integer quantidade, Double desconto, Double precoUnitario, Double precoTotal, Venda venda, Produto produto) {
+        this.quantidade = quantidade;
+        this.desconto = desconto;
+        this.precoUnitario = precoUnitario;
+        this.precoTotal = precoTotal;
+        this.venda = venda;
+        this.produto = produto;
+    }
 
     public Integer getId() {
         return id;

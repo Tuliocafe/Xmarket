@@ -36,6 +36,18 @@ public class Venda {
     @JoinColumn(name = "id_usuario")
     private Cliente cliente;
 
+    public Venda() {
+    }
+
+    public Venda(Integer id, Date dataVenda, Double precoTotal, String descricao, StatusVendas statusVendas, Cliente cliente) {
+        this.id = id;
+        this.dataVenda = dataVenda;
+        this.precoTotal = precoTotal;
+        this.descricao = descricao;
+        this.statusVendas = statusVendas;
+        this.cliente = cliente;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }

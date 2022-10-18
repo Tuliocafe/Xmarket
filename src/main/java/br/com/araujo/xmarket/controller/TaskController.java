@@ -24,23 +24,32 @@ public class TaskController {
         Iterable<Produto> produtos = service.recuperarTodos();
         ModelAndView mv = new ModelAndView("index");
         Iterable<Marca> marcas = serviceMarcas.buscarTodos();
-        mv.addObject("produtos",produtos);
+        mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
         return mv;
     }
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "paginas/login";
     }
 
     @GetMapping("/marca")
-    public String cadastro(){
-       return "paginas/marca";
+    public String cadastro() {
+        return "paginas/marca";
     }
 
+    @GetMapping("/cadastro")
+    public String cadastroUsuario() {
+        return "paginas/cadastro";
+    }
+
+
     @GetMapping("/admin")
-    public String admin(){return "paginas/administrativa";}
+    public String admin() {
+        return "paginas/administrativa";
+    }
+
 
 }

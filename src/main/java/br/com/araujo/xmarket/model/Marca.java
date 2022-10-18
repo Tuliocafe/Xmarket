@@ -6,6 +6,14 @@ import javax.persistence.*;
 @Entity
 @Table(name="marca")
 public class Marca {
+    public Marca(Integer id_marca, String nome_marca, String descricao) {
+        this.id_marca = id_marca;
+        this.nome_marca = nome_marca;
+        this.descricao = descricao;
+    }
+
+    public Marca() {
+    }
 
     @Column(name="id_marca")
     @Id

@@ -5,6 +5,22 @@ import javax.persistence.*;
 @Entity
 @Table(name = "produto")
 public class Produto {
+
+    public Produto(Integer id_produto, Integer quantidade_produto, String nome, Double preco, String tamanho, String cor, String imagem_path, Marca marca, Categoria categoria) {
+        this.id_produto = id_produto;
+        this.quantidade_produto = quantidade_produto;
+        this.nome = nome;
+        this.preco = preco;
+        this.tamanho = tamanho;
+        this.cor = cor;
+        this.imagem_path = imagem_path;
+        this.marca = marca;
+        this.categoria = categoria;
+    }
+
+    public Produto() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produto")
@@ -106,4 +122,6 @@ public class Produto {
     public void setCor(String cor) {
         this.cor = cor;
     }
+
+
 }

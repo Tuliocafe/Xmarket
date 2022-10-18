@@ -23,7 +23,9 @@ public class ClienteService implements IClienteService {
     @Override
     public Cliente criaNovo(Cliente cliente) {
         if (cliente != null ) {
-
+            if (cliente.getStatus() != null){
+                cliente.setStatus(1);
+            }
             return clienteDao.save(cliente);
         }
         return null;

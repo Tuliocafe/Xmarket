@@ -35,4 +35,7 @@ public class TaskController {
        return "paginas/marca";
     }
 
+    @GetMapping("/carrinho")
+    public String carrinho(){ return   "paginas/carrinho";}
+
 }

@@ -40,6 +40,9 @@ public class TaskController {
         return "paginas/marca";
     }
 
+    @GetMapping("/carrinho")
+    public String carrinho(){ return   "paginas/carrinho";}
+
     @GetMapping("/cadastro")
     public String cadastroUsuario() {
         return "paginas/cadastro";

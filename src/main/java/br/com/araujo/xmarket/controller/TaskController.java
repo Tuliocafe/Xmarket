@@ -5,13 +5,10 @@ import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IMarcaService;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 
 @Controller
 public class TaskController {
@@ -27,30 +24,35 @@ public class TaskController {
         Iterable<Produto> produtos = service.recuperarTodos();
         ModelAndView mv = new ModelAndView("index");
         Iterable<Marca> marcas = serviceMarcas.buscarTodos();
-        mv.addObject("produtos",produtos);
+        mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
         return mv;
     }
 
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "paginas/login";
-    }
-    @GetMapping("/cadastro")
-    public String cadastro(){
-        return "paginas/cadastro";
     }
 
     @GetMapping("/marca")
-    public String marca(){
-       return "paginas/marca";
+    public String cadastro() {
+        return "paginas/marca";
     }
 
     @GetMapping("/carrinho")
     public String carrinho(){ return   "paginas/carrinho";}
 
+    @GetMapping("/cadastro")
+    public String cadastroUsuario() {
+        return "paginas/cadastro";
+    }
+
+
     @GetMapping("/admin")
-    public String admin(){return "paginas/administrativa";}
+    public String admin() {
+        return "paginas/administrativa";
+    }
+
 
 }

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "venda")
@@ -27,6 +28,10 @@ public class Venda {
     @Column(name = "descricao_venda")
     private String descricao;
 
+    @OneToMany(mappedBy = "venda", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("venda")
+    List<CarrinhoCompra> listaItensCarrinho;
+
     @ManyToOne
     @JoinColumn(name = "id_status_vendas")
     @JsonIgnoreProperties("listaVendas")
@@ -39,13 +44,23 @@ public class Venda {
     public Venda() {
     }
 
-    public Venda(Integer id, Date dataVenda, Double precoTotal, String descricao, StatusVendas statusVendas, Cliente cliente) {
+
+    public Venda(Integer id, Date dataVenda, Double precoTotal, String descricao, List<CarrinhoCompra> listaItensCarrinho, StatusVendas statusVendas, Cliente cliente) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.precoTotal = precoTotal;
         this.descricao = descricao;
+        this.listaItensCarrinho = listaItensCarrinho;
         this.statusVendas = statusVendas;
         this.cliente = cliente;
+    }
+
+    public List<CarrinhoCompra> getListaItensCarrinho() {
+        return listaItensCarrinho;
+    }
+
+    public void setListaItensCarrinho(List<CarrinhoCompra> listaItensCarrinho) {
+        this.listaItensCarrinho = listaItensCarrinho;
     }
 
     public Cliente getCliente() {

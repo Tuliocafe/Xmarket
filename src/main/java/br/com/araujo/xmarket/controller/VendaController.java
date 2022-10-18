@@ -1,5 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.ItemDTO;
+import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.IVendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +55,9 @@ public class VendaController {
         return ResponseEntity.ok(null);
     }
 
-
-
+    @PostMapping("vendas/{id_venda}")
+    public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto, @PathVariable Integer idVenda) {
+        return service.incluirItemNaVenda(itemDto, idVenda);
+    }
 
 }

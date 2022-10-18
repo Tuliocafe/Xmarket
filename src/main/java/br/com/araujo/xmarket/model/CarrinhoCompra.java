@@ -28,14 +28,15 @@ public class CarrinhoCompra {
 
     @ManyToOne
     @JoinColumn(name = "id_venda")
-    @JsonIgnoreProperties("listaVendas")
+    @JsonIgnoreProperties("listaItensCarrinho")
     private Venda venda;
 
-
-    //inserir id_produto
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
+
+    public CarrinhoCompra() {
+    }
 
     public CarrinhoCompra(Integer quantidade, Double desconto, Double precoUnitario, Double precoTotal, Venda venda, Produto produto) {
         this.quantidade = quantidade;

@@ -1,6 +1,8 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.VendaDao;
+import br.com.araujo.xmarket.dto.ItemDTO;
+import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Venda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,5 +43,10 @@ public class VendaServiceImpl implements IVendaService {
     @Override
     public void excluirVenda(Integer id) {
         dao.deleteById(id);
+    }
+
+    @Override
+    public CarrinhoCompra incluirItemNaVenda(ItemDTO itemDto, Integer idVenda) {
+        return null;
     }
 }

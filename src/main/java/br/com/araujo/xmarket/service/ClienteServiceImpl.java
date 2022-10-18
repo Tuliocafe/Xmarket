@@ -2,7 +2,6 @@ package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
-import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
-public class ClienteService implements IClienteService {
+public class ClienteServiceImpl implements IClienteService {
 
 
 

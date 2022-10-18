@@ -9,10 +9,13 @@ import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
 public class ClienteService implements IClienteService {
+
+
 
     @Autowired
     public ClienteDAO clienteDao;
@@ -23,9 +26,10 @@ public class ClienteService implements IClienteService {
     @Override
     public Cliente criaNovo(Cliente cliente) {
         if (cliente != null ) {
-            if (cliente.getStatus() != null){
-                cliente.setStatus(1);
-            }
+            LocalDateTime data = LocalDateTime.now();
+            cliente.setStatus(1);
+            System.out.println(data);
+            cliente.setDataCriacaoUsuario(data.toString());
             return clienteDao.save(cliente);
         }
         return null;

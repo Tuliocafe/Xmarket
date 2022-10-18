@@ -46,6 +46,9 @@ public class CarrinhoCompra {
         this.produto = produto;
     }
 
+    public CarrinhoCompra() {
+    }
+
     public Integer getId() {
         return id;
     }

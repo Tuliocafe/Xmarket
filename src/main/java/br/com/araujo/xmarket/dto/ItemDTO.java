@@ -3,7 +3,7 @@ package br.com.araujo.xmarket.dto;
 public class ItemDTO {
 
     private Integer quantidade;
-    private Double precoUnitario;
+//    private Double precoUnitario;
     private Double desconto;
     private int idVenda;
     private int idProduto;
@@ -16,13 +16,13 @@ public class ItemDTO {
         this.quantidade = quantidade;
     }
 
-    public Double getPrecoUnitario() {
-        return precoUnitario;
-    }
+//    public Double getPrecoUnitario() {
+//        return precoUnitario;
+//    }
 
-    public void setPrecoUnitario(Double precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
+//    public void setPrecoUnitario(Double precoUnitario) {
+//        this.precoUnitario = precoUnitario;
+//    }
 
     public Double getDesconto() {
         return desconto;

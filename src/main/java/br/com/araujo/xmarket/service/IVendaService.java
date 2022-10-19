@@ -15,7 +15,7 @@ public interface IVendaService {
     public ArrayList<Venda> buscarTodas();
     public Venda buscarPeloId(Integer id);
     public void excluirVenda(Integer id);
-    public CarrinhoCompra incluirItemNaVenda( ItemDTO itemDto,  Integer idVenda);
+    public CarrinhoCompra incluirItemNaVenda( ItemDTO itemDto);
 
 
 

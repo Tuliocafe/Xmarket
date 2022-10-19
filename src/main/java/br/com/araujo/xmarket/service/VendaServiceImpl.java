@@ -46,6 +46,7 @@ public class VendaServiceImpl implements IVendaService {
                             throw new RuntimeException("Status de venda inexistente");
                         }
                 ))
+                .dataVenda(dataAgora.toString())
                 .build();
 
        return vendaDao.save(novaVenda);
@@ -95,6 +96,7 @@ public class VendaServiceImpl implements IVendaService {
 
         // usando padrão builder do lombok
         Double precoTotalItem = (itemDto.getQuantidade() * produto.getPreco_produto()) - itemDto.getDesconto();
+
         CarrinhoCompra novoItem = CarrinhoCompra.builder()
                 .precoTotal(precoTotalItem)
                 .quantidade(itemDto.getQuantidade())

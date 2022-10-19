@@ -14,12 +14,12 @@ public class CategoriaController {
     @Autowired
     private ICategoriaService service;
 
-    @GetMapping("/categoria")
+    @GetMapping("/categorias")
     public ArrayList<Categoria> recuperarTodos(){
         return service.buscarTodos();
     }
 
-    @GetMapping("/categoria/{id}")
+    @GetMapping("/categorias/{id}")
     public Categoria buscarPeloId(@PathVariable Integer id){
         return service.buscarPeloId(id);
     }
@@ -38,7 +38,7 @@ public class CategoriaController {
         }
         return ResponseEntity.badRequest().build();
     }
-    @DeleteMapping("/categoria/{id}")
+    @DeleteMapping("/categorias/{id}")
     public void removerCategoria(@PathVariable Integer id){
         service.excluirCategoria(id);
     }

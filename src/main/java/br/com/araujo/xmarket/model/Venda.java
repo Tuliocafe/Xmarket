@@ -1,14 +1,15 @@
 package br.com.araujo.xmarket.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "venda")
 
 public class Venda {

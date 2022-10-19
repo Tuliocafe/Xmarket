@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.ItemDTO;
+import br.com.araujo.xmarket.dto.VendaDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.IVendaService;
@@ -32,7 +33,7 @@ public class VendaController {
     }
 
     @PostMapping("/vendas")
-    public ResponseEntity<Venda> incluirNovo(@RequestBody Venda novo){
+    public ResponseEntity<Venda> incluirNovo(@RequestBody VendaDTO novo){
         Venda res = vendaService.criaNova(novo);
         if(res != null){
             return ResponseEntity.ok(res);
@@ -55,7 +56,7 @@ public class VendaController {
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("vendas/{id_venda}")
+    @PostMapping("vendas/{id_venda}/item")
     public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
         return vendaService.incluirItemNaVenda(itemDto);
     }

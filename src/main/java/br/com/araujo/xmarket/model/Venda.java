@@ -118,4 +118,7 @@ public class Venda {
         this.statusVendas = statusVendas;
         this.cliente = cliente;
     }
+
+    public Venda() {
+    }
 }

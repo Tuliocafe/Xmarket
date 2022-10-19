@@ -1,14 +1,15 @@
 package br.com.araujo.xmarket.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Builder
 @Table(name = "venda")
 
 public class Venda {
@@ -18,9 +19,8 @@ public class Venda {
     @Column(name = "id_venda", nullable = false)
     private Integer id;
 
-    @Column(name = "data_venda", columnDefinition="DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dataVenda;
+    @Column(name = "data_venda")
+    private String dataVenda;
 
     @Column(name = "preco_total_vendas")
     private Double precoTotal;
@@ -41,11 +41,9 @@ public class Venda {
     @JoinColumn(name = "id_usuario")
     private Cliente cliente;
 
-    public Venda() {
-    }
 
 
-    public Venda(Integer id, Date dataVenda, Double precoTotal, String descricao, List<CarrinhoCompra> listaItensCarrinho, StatusVendas statusVendas, Cliente cliente) {
+    public Venda(Integer id, String dataVenda, Double precoTotal, String descricao, List<CarrinhoCompra> listaItensCarrinho, StatusVendas statusVendas, Cliente cliente) {
         this.id = id;
         this.dataVenda = dataVenda;
         this.precoTotal = precoTotal;
@@ -87,11 +85,12 @@ public class Venda {
         this.id = id;
     }
 
-    public Date getDataVenda() {
+
+    public String getDataVenda() {
         return dataVenda;
     }
 
-    public void setDataVenda(Date dataVenda) {
+    public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
     }
 
@@ -111,12 +110,6 @@ public class Venda {
         this.descricao = descricao;
     }
 
-    public Venda(Date dataVenda, Double precoTotal, String descricao, StatusVendas statusVendas, Cliente cliente) {
-        this.dataVenda = dataVenda;
-        this.precoTotal = precoTotal;
-        this.descricao = descricao;
-        this.statusVendas = statusVendas;
-        this.cliente = cliente;
-    }
+
 
 }

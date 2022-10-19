@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.ItemDTO;
+import br.com.araujo.xmarket.dto.VendaDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.IVendaService;
@@ -15,16 +16,16 @@ import java.util.ArrayList;
 public class VendaController {
 
     @Autowired
-    private IVendaService service;
+    private IVendaService vendaService;
 
     @GetMapping("/vendas")
     public ArrayList<Venda> recuperaTodos(){
-        return service.buscarTodas();
+        return vendaService.buscarTodas();
     }
 
     @GetMapping("/vendas/{id}")
     public ResponseEntity<Venda> buscarPeloId(@PathVariable Integer id){
-        Venda res = service.buscarPeloId(id);
+        Venda res = vendaService.buscarPeloId(id);
         if (res != null) {
             return ResponseEntity.ok(res);
         }
@@ -32,8 +33,8 @@ public class VendaController {
     }
 
     @PostMapping("/vendas")
-    public ResponseEntity<Venda> incluirNovo(@RequestBody Venda novo){
-        Venda res = service.criaNova(novo);
+    public ResponseEntity<Venda> incluirNovo(@RequestBody VendaDTO novo){
+        Venda res = vendaService.criaNova(novo);
         if(res != null){
             return ResponseEntity.ok(res);
         }
@@ -42,7 +43,7 @@ public class VendaController {
 
     @PutMapping("/vendas/{id_venda}")
     public ResponseEntity<Venda> alterarVenda(@RequestBody Venda dados){
-        Venda res = service.atualizarDados(dados);
+        Venda res = vendaService.atualizarDados(dados);
         if(res != null){
             return ResponseEntity.ok(res);
         }
@@ -51,13 +52,13 @@ public class VendaController {
 
     @DeleteMapping("vendas/{id_venda}")
     public ResponseEntity<Venda> excluirVenda(@PathVariable Integer id_venda){
-        service.excluirVenda(id_venda);
+        vendaService.excluirVenda(id_venda);
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("vendas/{id_venda}")
-    public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto, @PathVariable Integer idVenda) {
-        return service.incluirItemNaVenda(itemDto, idVenda);
+    @PostMapping("vendas/{id_venda}/item")
+    public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
+        return vendaService.incluirItemNaVenda(itemDto);
     }
 
 }

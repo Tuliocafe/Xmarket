@@ -28,15 +28,6 @@ public class CarrinhoController {
     return ResponseEntity.status(404).build();
     }
 
-    @PostMapping("/carrinhos")
-    public ResponseEntity<CarrinhoCompra> incluirNovo(@RequestBody CarrinhoCompra novo){
-        CarrinhoCompra res = service.criaNovo(novo);
-        if(res != null){
-            return ResponseEntity.ok(res);
-        }
-        return ResponseEntity.badRequest().build();
-    }
-
     @PutMapping("/carrinhos/{id}")
     public ResponseEntity<CarrinhoCompra> alterarCarrinho(@RequestBody CarrinhoCompra dados){
         CarrinhoCompra res = service.atualizarDados(dados);

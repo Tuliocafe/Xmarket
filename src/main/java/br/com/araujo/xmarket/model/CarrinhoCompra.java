@@ -1,10 +1,12 @@
 package br.com.araujo.xmarket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Table(name = "carrinho_de_compras")
 
 public class CarrinhoCompra {
@@ -35,10 +37,8 @@ public class CarrinhoCompra {
     @JoinColumn(name = "id_produto")
     private Produto produto;
 
-    public CarrinhoCompra() {
-    }
-
-    public CarrinhoCompra(Integer quantidade, Double desconto, Double precoUnitario, Double precoTotal, Venda venda, Produto produto) {
+    public CarrinhoCompra(Integer id, Integer quantidade, Double desconto, Double precoUnitario, Double precoTotal, Venda venda, Produto produto) {
+        this.id = id;
         this.quantidade = quantidade;
         this.desconto = desconto;
         this.precoUnitario = precoUnitario;

@@ -6,12 +6,14 @@ import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
+@Primary
 public class ClienteServiceImpl implements IClienteService {
 
 

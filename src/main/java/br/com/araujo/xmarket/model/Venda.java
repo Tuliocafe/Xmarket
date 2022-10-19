@@ -41,8 +41,7 @@ public class Venda {
     @JoinColumn(name = "id_usuario")
     private Cliente cliente;
 
-    public Venda() {
-    }
+
 
 
     public Venda(Integer id, Date dataVenda, Double precoTotal, String descricao, List<CarrinhoCompra> listaItensCarrinho, StatusVendas statusVendas, Cliente cliente) {

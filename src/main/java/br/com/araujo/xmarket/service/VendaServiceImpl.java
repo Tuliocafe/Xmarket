@@ -94,13 +94,22 @@ public class VendaServiceImpl implements IVendaService {
                     throw new RuntimeException("Esse Produto não existe");
                 });
 
+        if(produto.getQuantidade_produto() < itemDto.getQuantidade())
+        {
+            throw new RuntimeException("Quantidade em estoque insuficiente");
+
+        }
+
+        produto.setQuantidade_produto(produto.getQuantidade_produto() - itemDto.getQuantidade());
+
+        produtoDao.save(produto);
+
         // usando padrão builder do lombok
-        Double precoTotalItem = (itemDto.getQuantidade() * produto.getPreco_produto()) - itemDto.getDesconto();
+        Double precoTotalItem = (itemDto.getQuantidade() * produto.getPreco_produto());
 
         CarrinhoCompra novoItem = CarrinhoCompra.builder()
                 .precoTotal(precoTotalItem)
                 .quantidade(itemDto.getQuantidade())
-                .desconto(itemDto.getDesconto())
                 .precoUnitario(produto.getPreco_produto())
                 .venda(venda)
                 .produto(produto)

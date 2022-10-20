@@ -4,6 +4,7 @@ import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.ProdutoDao;
 import br.com.araujo.xmarket.dao.StatusVendasDao;
 import br.com.araujo.xmarket.dao.VendaDao;
+import br.com.araujo.xmarket.dto.IRelatorioVendaDTO;
 import br.com.araujo.xmarket.dto.ItemDTO;
 import br.com.araujo.xmarket.dto.VendaDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
@@ -15,19 +16,21 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class VendaServiceImpl implements IVendaService {
     @Autowired
     public VendaDao vendaDao;
 
     @Autowired
-    ProdutoDao produtoDao;
+    public ProdutoDao produtoDao;
 
     @Autowired
-    ClienteDAO clienteDao;
+    public ClienteDAO clienteDao;
 
     @Autowired
-    StatusVendasDao statusVendasDao;
+    public StatusVendasDao statusVendasDao;
     @Override
     public Venda criaNova(VendaDTO novaVendaDTO) {
 
@@ -110,5 +113,10 @@ public class VendaServiceImpl implements IVendaService {
         vendaDao.save(venda);
         return novoItem;
 
+    }
+
+    @Override
+    public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2) {
+        return vendaDao.findVendaByDate(data1, data2);
     }
 }

@@ -53,6 +53,11 @@ public class Venda {
         this.cliente = cliente;
     }
 
+    public Venda() {
+    }
+
+
+
     public List<CarrinhoCompra> getListaItensCarrinho() {
         return listaItensCarrinho;
     }
@@ -112,6 +117,4 @@ public class Venda {
 
 
 
-    public Venda() {
-    }
 }

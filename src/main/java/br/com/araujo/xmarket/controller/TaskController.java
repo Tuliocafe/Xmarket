@@ -1,9 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.model.CarrinhoCompra;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Marca;
-import br.com.araujo.xmarket.model.Produto;
+import br.com.araujo.xmarket.model.*;
 import br.com.araujo.xmarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,12 +38,22 @@ public class TaskController {
         return mv;
     }
 
+//    @GetMapping("/carrinho")
+//    public ModelAndView carrinho(){
+////        Cliente cliente = serviceCliente.buscarPeloId(1);
+//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
+//        ModelAndView mv = new ModelAndView("paginas/carrinho");
+//        mv.addObject("carrinhos",carrinhos );
+//        return mv;}
+
     @GetMapping("/carrinho")
     public ModelAndView carrinho(){
 //        Cliente cliente = serviceCliente.buscarPeloId(1);
-        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
+        Venda vendas = serviceVenda.buscarPeloId(13);
+//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
-        mv.addObject("carrinhos",carrinhos );
+        mv.addObject("vendas",vendas );
+//        mv.addObject("carrinhos",carrinhos );
         return mv;}
 
 

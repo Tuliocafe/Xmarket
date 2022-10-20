@@ -183,3 +183,24 @@ footer a:hover{
         border-bottom: none;
     }
 }
+
+#modal{
+width: 80%;
+height: 80%;
+background-color: #ddd9ce;
+border: 1px solid black;
+ position: absolute;
+ top: 0; bottom: 0 ; right:0; left: 0 ;
+ margin: auto;
+ z-index: 1031;
+display: none;
+padding: 1%;
+border-radius: 10px;
+}
+
+#fecharModal {
+    cursor: pointer;
+    color: red; position:absolute; top: 10px; right: 10px;
+
+}
+

@@ -1,5 +1,6 @@
 package br.com.araujo.xmarket.service;
 
+import br.com.araujo.xmarket.dto.IRelatorioVendaDTO;
 import br.com.araujo.xmarket.dto.ItemDTO;
 import br.com.araujo.xmarket.dto.VendaDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IVendaService {
 
@@ -17,6 +19,7 @@ public interface IVendaService {
     public Venda buscarPeloId(Integer id);
     public void excluirVenda(Integer id);
     public CarrinhoCompra incluirItemNaVenda( ItemDTO itemDto);
+    public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2);
 
 
 

@@ -90,7 +90,6 @@
 
                                         <form  th:action="@{carrinhos/{id}(id=${carrinho.id})}"  th:method="delete" >
                                             <input type="hidden" name="_method" value="delete" />
-
                                             <button class="fas fa-trash-alt" type="submit" >DELETAR </button>
 
                                         </form>
@@ -134,7 +133,7 @@
                             <p>R$<span id="precoTotal" ></span></p>
                         </div>
                         <button class="btn btn-primary text-uppercase"
-                                onclick="criarProduto()" >Finalizar a Compra</button>
+                                onclick="atualizarVenda()" >Finalizar a Compra</button>
 
                     </div>
 

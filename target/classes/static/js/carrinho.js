@@ -9,9 +9,18 @@
 //        }
 //    }
 // )
+
 var dados
 var valorTotal = document.getElementById("precoTotal")
 var quantidadeIten = document.getElementById("quantidadeIten")
+var idVenda = 13
+var idUsuario = 209
+var vendaAtualizada
+var carrinho
+
+
+//teste[listaItensCarrinho] = 'novovalor'
+
 
 getdados()
 
@@ -24,6 +33,7 @@ async function calcularTotal(){
 }
 
 async function getdados(){
+
     var endPoint = "http://localhost:8080/vendas/13"
     init = {
             method: "GET",
@@ -40,37 +50,89 @@ async function getdados(){
 
         dados = await response.json()
 
-////    console.log(dados)
-////        console.log(dados.listaItensCarrinho[0].precoUnitario)
+//    console.log(dados)
+//        console.log(dados.listaItensCarrinho[0].precoUnitario)
+
+
+//var carrinho = {carrinho: [{ id: 1,
+//                            quantidade: 5,
+//                            precoTotal: 1495 },]
+//}
+
+
+            vendaAtualizada = {           id: idVenda,
+                                precoTotal: valorTotal,
+                                statusVendas: {
+                                    id: 3
+                                },
+                                cliente: {
+                                    id: idUsuario
+                             },
+                             listaItensCarrinho: [{
+                                       id: 13
+                                       }
+                             ],
+                            }
+
+vendaAtualizada.listaItensCarrinho = dados.listaItensCarrinho
+carrinho = dados.listaItensCarrinho
+
 
 //
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
-//         if(dados.listaItensCarrinho[i].precoTotal != null){
              somaValores += dados.listaItensCarrinho[i].precoTotal
-             console.log(somaValores)
-             console.log("precototal")
-             console.log(dados.listaItensCarrinho[i].precoTotal)
-//         }
+//             console.log(somaValores)
+//             console.log("precototal")
+//             console.log(dados.listaItensCarrinho[i].precoTotal)
 
          }
-          console.log(somaValores)
-         valorTotal.innerHTML =  somaValores
+//        console.log(vendaAtualizada)
+        console.log(carrinho)
+//        console.log(dados)
+
+
+        valorTotal.innerHTML =  somaValores
         console.log(dados.listaItensCarrinho.length)
 
-
+        dados.listaItensCarrinho[0].precoTotal = 1495
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
-        console.log(dados.precoTotal)
-//        dados.precoTotal = 320
-        console.log(dados)
-        console.log(dados.precoTotal)
-        console.log(dados.listaItensCarrinho[1].quantidade)
-//    return new Promise ((resolve, reject) => { resolve(dados);});
+//        console.log( dados.listaItensCarrinho[0])
 
+carrinho = dados.listaItensCarrinho[0]
+carrinho ['venda'] = {id: dados.id}
+
+carrinho.precoUnitario = 1000
+console.log(carrinho)
 }
 
-//async function criarProduto(){
-//    var endPointPost = "http://localhost:8080/vendas/11"
+//        console.log(dados.precoTotal)
+//        dados.precoTotal = 320
+//        console.log(dados)
+//        console.log(dados.precoTotal)
+//        console.log(dados.listaItensCarrinho[1].quantidade)
+
+
+
+async function criarProduto(){
+
+
+
+    fetch('http://localhost:8080/carrinhos/1',{
+    method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    body: JSON.stringify(carrinho),}).then((response) => response.json())
+                   .then((result) => {
+                     console.log('Success:', result);
+                   })
+                   .catch((error) => {
+                     console.error('Error:', error);
+                   });
+
+//    console.log(dadosJson)
+//    var endPointPost = "http://localhost:8080/vendas/13"
 //       init = {
 //               method: "PUT",
 //               mode: 'cors',
@@ -81,20 +143,11 @@ async function getdados(){
 //                   'Content-Type': 'application/json'
 //               },
 //               referrerPolicy: 'no-referrer',
-//               body: '{
-//                        "Id": 11,
-//                        "precoTotal": 470.0,
-//                        "descricao": "venda feita pela procidure hjgfhgf",
-//                        "statusVendas": {
-//                              "id": 2
-//                          },
-//                          "cliente": {
-//                              "id": 3
-//                          },}'
+//               body: teste
 //           }
 //    var response = await fetch(endPointPost, init);
 //    console.log(response)
-//}
+}
 
 
 

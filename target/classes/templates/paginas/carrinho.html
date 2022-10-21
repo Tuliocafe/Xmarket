@@ -26,9 +26,10 @@
 </head>
 
 <body class="bg-light" >
-<div class="container-fluid" id='lista' data-th-each="venda:${vendas}" >
+<div class="container-fluid"  data-th-each="venda:${vendas}" >
+    <input id="idVenda" value="${venda.id}"> </input>
     <div class="row" >
-        <div class="col-md-10 col-11 mx-auto" >
+        <div  class=  "col-md-10 col-11 mx-auto" >
             <div class="row mt-5 gx-3">
                 <!-- left side div -->
                 <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow" >
@@ -133,7 +134,7 @@
                             <p>R$<span id="precoTotal" ></span></p>
                         </div>
                         <button class="btn btn-primary text-uppercase"
-                                onclick="criarProduto()" >Finalizar a Compra</button>
+                                onclick="atualizarVenda()" >Finalizar a Compra</button>
 
                     </div>
 

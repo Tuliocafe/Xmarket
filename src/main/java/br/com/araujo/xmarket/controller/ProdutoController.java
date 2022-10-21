@@ -66,8 +66,4 @@ public class ProdutoController {
         if(atualizado != null) return ResponseEntity.ok(atualizado);
         return ResponseEntity.badRequest().build();
     }
-
-
-
-
 }

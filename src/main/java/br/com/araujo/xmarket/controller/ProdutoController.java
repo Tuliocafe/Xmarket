@@ -1,8 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
-import br.com.araujo.xmarket.model.Marca;
 import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +41,8 @@ public class ProdutoController {
 
     @GetMapping("/produtos/{id_produto}/historicos")
     public ResponseEntity<ArrayList<IHistoricoPrecoProdutoDTO>> recuperaHistoricoProduto(@PathVariable Integer id_produto){
-        ArrayList<IHistoricoPrecoProdutoDTO> listaHistorico = service.buscaHistoricoPorPreco(id_produto);
-        return  ResponseEntity.ok(listaHistorico);
+    ArrayList<IHistoricoPrecoProdutoDTO> listaHistorico = service.buscaHistoricoPorPreco(id_produto);
+    return  ResponseEntity.ok(listaHistorico);
     }
 
     @PostMapping("/produtos")
@@ -67,13 +65,6 @@ public class ProdutoController {
         Produto atualizado = service.atualizaProduto(novo, id_produto);
         if(atualizado != null) return ResponseEntity.ok(atualizado);
         return ResponseEntity.badRequest().build();
-    }
-
-    @GetMapping("/produtos/{id}/marcas")
-    public ArrayList<Marca> buscarMarca(@PathVariable Integer id){
-
-        return service.buscaEnderecoPeloIdCliente(id);
-
     }
 
 

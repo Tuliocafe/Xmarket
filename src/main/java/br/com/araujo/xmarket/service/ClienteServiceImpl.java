@@ -95,20 +95,15 @@ public class ClienteServiceImpl implements IClienteService {
             novoCliente.setStatus(cliente.getStatus());
 
 
-
-//            novoCliente.setListaEnderecos(cliente.getListaEnderecos());
-//            novoCliente.setClienteLogin(cliente.getClienteLogin());
             clienteDao.save(novoCliente);
 
-            // TODO
-            // Atualizar Enderecos Usuario
             return novoCliente;
         }
         return null;
     }
 
 
-    //RECEBER UM DTO VIA ENDERECODAO
+
     @Override
     public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco) {
 
@@ -136,9 +131,12 @@ public class ClienteServiceImpl implements IClienteService {
 
 
 }
-
     @Override
     public IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco) {
         return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
     }
+
+
+
+
 }

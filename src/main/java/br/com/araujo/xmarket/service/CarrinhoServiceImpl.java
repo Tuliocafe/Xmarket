@@ -1,7 +1,11 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dao.CarrinhoDao;
+import br.com.araujo.xmarket.dao.ProdutoDao;
+import br.com.araujo.xmarket.dao.VendaDao;
+import br.com.araujo.xmarket.dto.CarrinhoDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
+import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.model.Venda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,37 +15,72 @@ import java.util.ArrayList;
 @Service
 public class CarrinhoServiceImpl implements ICarrinhoService{
     @Autowired
-    public CarrinhoDao dao;
+    public CarrinhoDao carrinhoDao;
+
+    @Autowired
+    public VendaDao vendaDao;
+
+    @Autowired
+    public ProdutoDao produtoDao;
+
 
     @Override
     public CarrinhoCompra criaNovo(CarrinhoCompra novo) {
         if(novo.getPrecoTotal() != null)
         {
-            return dao.save(novo);
+            return carrinhoDao.save(novo);
         }
         return null;
     }
 
+
+
     @Override
-    public CarrinhoCompra atualizarDados(CarrinhoCompra dados) {
-        if(dados.getId()!= null){
-            return dao.save(dados);
+    public CarrinhoCompra atualizarDados(CarrinhoDTO dados) {
+
+        Venda venda = vendaDao.findById(dados.getVenda()).orElse(null);
+
+        Produto produto =  produtoDao.findById(dados.getProduto()).orElse(null);
+
+        assert produto != null;
+        if(produto.getQuantidade_produto() < dados.getQuantidade())
+        {
+            throw new RuntimeException("Quantidade em estoque insuficiente");
+
         }
-        return null;
+
+        produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade());
+
+        produtoDao.save(produto);
+
+
+
+        CarrinhoCompra novoItem = CarrinhoCompra.builder()
+                .precoTotal(dados.getPrecoTotal())
+                .quantidade(dados.getQuantidade())
+                .precoUnitario(produto.getPreco_produto())
+                .venda(venda)
+                .produto(produto)
+                .build();
+
+        carrinhoDao.save(novoItem);
+        return novoItem;
+
+
     }
 
     @Override
     public ArrayList<CarrinhoCompra> buscarTodas() {
-        return (ArrayList<CarrinhoCompra>)dao.findAll();
+        return (ArrayList<CarrinhoCompra>) carrinhoDao.findAll();
     }
 
     @Override
     public CarrinhoCompra buscarPeloId(Integer id) {
-        return dao.findById(id).orElse(null);
+        return carrinhoDao.findById(id).orElse(null);
     }
 
     @Override
     public void excluirCarrinho(Integer id) {
-        dao.deleteById(id);
+        carrinhoDao.deleteById(id);
     }
 }

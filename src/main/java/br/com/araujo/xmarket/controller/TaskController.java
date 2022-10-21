@@ -1,13 +1,13 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.model.CarrinhoCompra;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Marca;
-import br.com.araujo.xmarket.model.Produto;
+import br.com.araujo.xmarket.dto.ItemDTO;
+import br.com.araujo.xmarket.model.*;
 import br.com.araujo.xmarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -30,6 +30,7 @@ public class TaskController {
     private ICarrinhoService serviceCarrinho;
 
 
+
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
@@ -40,12 +41,21 @@ public class TaskController {
         return mv;
     }
 
+//    @GetMapping("/carrinho")
+//    public ModelAndView carrinho(){
+////        Cliente cliente = serviceCliente.buscarPeloId(1);
+//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
+//        ModelAndView mv = new ModelAndView("paginas/carrinho");
+//        mv.addObject("carrinhos",carrinhos );
+//        return mv;}
+
     @GetMapping("/carrinho")
     public ModelAndView carrinho() {
 //        Cliente cliente = serviceCliente.buscarPeloId(1);
-        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
+        Venda vendas = serviceVenda.buscarPeloId(13);
+//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
-        mv.addObject("carrinhos", carrinhos);
+      //  mv.addObject("carrinhos", carrinhos);
         return mv;
     }
 
@@ -60,6 +70,9 @@ public class TaskController {
         System.out.println(marcas);
         return mv;
     }
+//        mv.addObject("vendas",vendas );
+////        mv.addObject("carrinhos",carrinhos );
+//        return mv;}
 
 
     @GetMapping("/login")
@@ -90,5 +103,16 @@ public class TaskController {
     public String admin() {
         return "paginas/administrativa";
     }
+
+    @GetMapping("/paginaLogin")
+    public ModelAndView paginaLogin() {
+        Iterable<Produto> produtos = service.recuperarTodos();
+        ModelAndView mv = new ModelAndView("paginas/cliente");
+        Iterable<Marca> marcas = serviceMarcas.buscarTodos();
+        mv.addObject("produtos", produtos);
+        mv.addObject("marcas", marcas);
+        return mv;
+    }
+
 
 }

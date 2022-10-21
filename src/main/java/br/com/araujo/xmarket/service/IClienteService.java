@@ -8,11 +8,15 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
 
+
 public interface IClienteService {
 
-    public Cliente criaNovo (Cliente cliente);
-    public Cliente atualizarDados (Cliente cliente);
+    public Cliente criaNovo(Cliente cliente);
+
+    public Cliente atualizarDados(Cliente cliente);
+
     public ArrayList<Cliente> buscarTodos();
+
     public Cliente buscarPeloId(Integer id);
 
     public ArrayList<Cliente> buscaPorNome(String nome);
@@ -25,6 +29,8 @@ public interface IClienteService {
 
     public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco);
 
-    IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario,  Integer idEndereco);
+    IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco);
+
+
 
 }

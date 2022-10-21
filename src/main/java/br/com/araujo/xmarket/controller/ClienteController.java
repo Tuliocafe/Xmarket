@@ -42,14 +42,6 @@ public class ClienteController {
         return ResponseEntity.badRequest().build();
     }
 
-//    @PutMapping("/clientes")
-//    public ResponseEntity<Cliente> alterarVenda(@RequestBody Cliente cliente){
-//        Cliente response = clienteService.atualizarDados(cliente);
-//        if(response != null){
-//            return ResponseEntity.ok(response);
-//        }
-//        return ResponseEntity.badRequest().build();
-//    }
 
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> AtualizaCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {
@@ -86,15 +78,6 @@ public class ClienteController {
         return ResponseEntity.badRequest().build();
     }
 
-
-
-    @PostMapping("/clientes/{id_usuario}/enderecos")
-    public ResponseEntity<Endereco> cadastrarNovo(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario){
-
-//        return clienteService.salvaEndereco(endereco);
-        return null;
-
-    }
 
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){

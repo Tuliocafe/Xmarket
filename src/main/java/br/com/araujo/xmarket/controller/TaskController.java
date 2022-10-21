@@ -71,14 +71,6 @@ public class TaskController {
         return "paginas/marca";
     }
 
-
-
-//    @GetMapping("/carrinho")
-//    public String carrinho() {
-//
-//        return "paginas/carrinho";
-//    }
-
     @GetMapping("/cadastro")
     public String cadastroUsuario() {
         return "paginas/cadastro";
@@ -88,6 +80,16 @@ public class TaskController {
     @GetMapping("/admin")
     public String admin() {
         return "paginas/administrativa";
+    }
+
+    @GetMapping("/paginaLogin")
+    public ModelAndView paginaLogin() {
+        Iterable<Produto> produtos = service.recuperarTodos();
+        ModelAndView mv = new ModelAndView("paginas/cliente");
+        Iterable<Marca> marcas = serviceMarcas.buscarTodos();
+        mv.addObject("produtos", produtos);
+        mv.addObject("marcas", marcas);
+        return mv;
     }
 
 

@@ -40,17 +40,15 @@ async function getdados(){
 
         dados = await response.json()
 
-////    console.log(dados)
-////        console.log(dados.listaItensCarrinho[0].precoUnitario)
+//    console.log(dados)
+//        console.log(dados.listaItensCarrinho[0].precoUnitario)
 
 //
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
-//         if(dados.listaItensCarrinho[i].precoTotal != null){
              somaValores += dados.listaItensCarrinho[i].precoTotal
              console.log(somaValores)
              console.log("precototal")
              console.log(dados.listaItensCarrinho[i].precoTotal)
-//         }
 
          }
           console.log(somaValores)
@@ -65,8 +63,6 @@ async function getdados(){
         console.log(dados)
         console.log(dados.precoTotal)
         console.log(dados.listaItensCarrinho[1].quantidade)
-//    return new Promise ((resolve, reject) => { resolve(dados);});
-
 }
 
 //async function criarProduto(){

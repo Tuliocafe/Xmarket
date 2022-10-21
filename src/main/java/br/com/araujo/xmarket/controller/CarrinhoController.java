@@ -1,5 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.CarrinhoDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.service.ICarrinhoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class CarrinhoController {
     }
 
     @PutMapping("/carrinhos/{id}")
-    public ResponseEntity<CarrinhoCompra> alterarCarrinho(@RequestBody CarrinhoCompra dados){
+    public ResponseEntity<CarrinhoCompra> alterarCarrinho(@RequestBody CarrinhoDTO dados){
         CarrinhoCompra res = service.atualizarDados(dados);
         if(res != null){
             return ResponseEntity.ok(res);

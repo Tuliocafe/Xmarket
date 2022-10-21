@@ -30,7 +30,6 @@ public class TaskController {
     private ICarrinhoService serviceCarrinho;
 
 
-
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
@@ -42,12 +41,25 @@ public class TaskController {
     }
 
     @GetMapping("/carrinho")
-    public ModelAndView carrinho(){
+    public ModelAndView carrinho() {
 //        Cliente cliente = serviceCliente.buscarPeloId(1);
         Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
-        mv.addObject("carrinhos",carrinhos );
-        return mv;}
+        mv.addObject("carrinhos", carrinhos);
+        return mv;
+    }
+
+    @GetMapping("/cadastroProduto")
+    public ModelAndView cadastroMarca() {
+
+        ModelAndView mv = new ModelAndView("paginas/cadastro");
+        Iterable<Marca> marcas = serviceMarcas.buscarTodos();
+
+        mv.addObject("marcas", marcas);
+        System.out.println("----------------------------------------------------");
+        System.out.println(marcas);
+        return mv;
+    }
 
 
     @GetMapping("/login")
@@ -60,7 +72,6 @@ public class TaskController {
 
         return "paginas/marca";
     }
-
 
 
 //    @GetMapping("/carrinho")
@@ -79,6 +90,5 @@ public class TaskController {
     public String admin() {
         return "paginas/administrativa";
     }
-
 
 }

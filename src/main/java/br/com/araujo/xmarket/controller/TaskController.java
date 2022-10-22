@@ -13,7 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TaskController {
-
+    @Autowired
+    ClienteServiceImpl clienteServiceImpl;
     @Autowired
     private IProdutoService service;
 
@@ -41,13 +42,15 @@ public class TaskController {
         return mv;
     }
 
-//    @GetMapping("/carrinho")
-//    public ModelAndView carrinho(){
-////        Cliente cliente = serviceCliente.buscarPeloId(1);
-//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
-//        ModelAndView mv = new ModelAndView("paginas/carrinho");
-//        mv.addObject("carrinhos",carrinhos );
-//        return mv;}
+    @GetMapping("/form")
+    public ModelAndView clientes(){
+        ModelAndView mv = new ModelAndView("paginas/form");
+        Cliente clientes = clienteServiceImpl.buscarPeloId(211);
+        mv.addObject("clientes", clientes);
+        return mv;
+    }
+
+
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho(){
@@ -91,6 +94,8 @@ public class TaskController {
         mv.addObject("marcas", marcas);
         return mv;
     }
+
+
 
 
 }

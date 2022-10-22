@@ -42,7 +42,7 @@ public class ClienteServiceImpl implements IClienteService {
         if (cliente.getId() != null && cliente.getNome() != null) {
             return clienteDao.save(cliente);
         }
-        return null;
+        return cliente;
     }
 
     @Override

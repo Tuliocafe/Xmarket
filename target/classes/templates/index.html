@@ -141,14 +141,15 @@
                         <span> R$ </span>
                         <span class="fw-bold"
                               data-th-text="${#numbers.formatDecimal(produto.preco_produto,0,'COMMA', 2, 'POINT')}"></span>
-
-                        
+                        <p>
                         <form  th:method="POST" >
                             <input type="hidden" name="_method" value="delete" />
 
                             <button class="btn btn-primary mt-3" type="submit" >Adicionar ao Carrinho </button>
 
                         </form>
+                        </p>
+
 
 <!--                            <a href="#" id='' >  Adicionar ao Carrinho</a>-->
                     </div>

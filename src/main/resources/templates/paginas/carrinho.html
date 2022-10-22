@@ -27,7 +27,7 @@
 
 <body class="bg-light" >
 <div class="container-fluid"  data-th-each="venda:${vendas}" >
-    <input id="idVenda" value="${venda.id}"> </input>
+    <p id="idVenda" th:text="${venda.id}" style="visibility: hidden;"> </p>
     <div class="row" >
         <div  class=  "col-md-10 col-11 mx-auto" >
             <div class="row mt-5 gx-3">

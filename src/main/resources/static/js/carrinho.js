@@ -1,22 +1,17 @@
-
-//var product_total_amt = document.getElementById('product_total_amt');
 var frete = document.getElementById('frete');
 var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
 
-var fetchId = 'http://localhost:8080/carrinhos/'
+var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
+var rotaVendas = 'http://localhost:8080/vendas/'
 
-// var precoUnitario = document.getElementById('precoUnitario');
-// var precoTotalItem = document.getElementById('preco');
-//     precoTotalItem.innerHTML = parseInt(precoUnitario.innerHTML);
-//     product_total_amt.innerHTML = parseInt(precoTotalItem.innerHTML);
+
 var somaValores = 0
 var dados
 var valorTotal = document.getElementById("precoTotal")
 var quantidadeIten = document.getElementById("quantidadeIten")
 var carrinho  = {listaCarrinho: []}
 var vendaAtualizada
-var idVenda = 13
 
 
 getdados()
@@ -30,7 +25,7 @@ async function calcularTotal(){
 }
 
 async function getdados(){
-    var endPoint = "http://localhost:8080/vendas/" +idVenda
+    var endPoint = "http://localhost:8080/vendas/" +idVenda.innerHTML
     init = {
             method: "GET",
             mode: 'cors',
@@ -42,71 +37,54 @@ async function getdados(){
             referrerPolicy: 'no-referrer',
         }
         var response = await fetch(endPoint, init);
-
+        var somaValorTotal = 0
 
         dados = await response.json()
 
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
-             somaValores += dados.listaItensCarrinho[i].precoTotal;
+             somaValores = (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
+             somaValorTotal += somaValores
              carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id ,quantidade: dados.listaItensCarrinho[i].quantidade,
-              venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto})
+             venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto, precoTotal: somaValores } )
          }
-        valorTotal.innerHTML =  somaValores
+        valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
-
-
-
-
-//carrinho ={id: dados. }
-//carrinho  = {id: dados.id}
-//carrinho  = {produto: dados.listaItensCarrinho[0].produto.id_produto}
-
-
-//vendaAtualizada.listaCarrinho.push({id: 7})
-
-
-
 }
-//calcularTotal()
 
-//        console.log(dados.precoTotal)
-//        dados.precoTotal = 320
-//        console.log(dados)
-//        console.log(dados.precoTotal)
-//        console.log(dados.listaItensCarrinho[1].quantidade)
+
 
 async function atualizarVenda(){
-
+    try{
          for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-               vendaAtualizada = carrinho.listaCarrinho[i]
-               fetchId = fetchId + carrinho.listaCarrinho[i].id
-               console.log(fetchId)
-               console.log(vendaAtualizada)
-               putDados()
+               rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
+               putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
          }
+         vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
 
-//         vendaAtualizada = {id: idVenda , precoTotal: parseInt(valorTotal), cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
-//         console.log(vendaAtualizada)
 
+    rotaVendas = rotaVendas + dados.id
+    putDados(rotaVendas, vendaAtualizada )
+    } catch(e){
+        alert("Nao foi Possivel")}
 }
 
 
 
-
-async function putDados(){
-
-    fetch(fetchId,{
+async function putDados(rota, dadosJson){
+var rota
+var dadosJson
+    fetch(rota,{
     method: 'put',
       headers: {
         'Content-Type': 'application/json',
       },
-    body: JSON.stringify(vendaAtualizada),}).then((response) => response.json())
+    body: JSON.stringify(dadosJson),}).then((response) => response.json())
                    .then((result) => {
                      console.log('Success:', result);
                    })
                    .catch((error) => {
-                     console.error('Error:', error);
+                     console.error('error:', error);
                    });
 }
 
@@ -119,14 +97,14 @@ async function putDados(){
 const diminuir = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-//    var precoTotal = document.getElementById(precoTotal);
     if (quantidade.value <= 1) {
         quantidade.value = 1;
-        alert('Não é possível valores negativos');
+        alert('Valor minimo 1');
     } else {
        for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
                   if(incdec == carrinho.listaCarrinho[i].id){
                     carrinho.listaCarrinho[i].quantidade --
+                    carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
                   }
                 }
          quantidade.value = parseInt(quantidade.value) - 1;
@@ -142,34 +120,15 @@ const aumentar = (incdec, valorUnitario) => {
        for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
                   if(incdec == carrinho.listaCarrinho[i].id){
                     carrinho.listaCarrinho[i].quantidade ++
+                    carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
                   }
                 }
 
           quantidade.value = parseInt(quantidade.value) + 1;
           valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
 
-//    console.log(dados.listaItensCarrinho[0].quantidade)
-//    console.log(valorUnitario)
-//    var precoUnitario = document.getElementById(precoUnitario);
-
 }
 
-// localStorage.setItem("flagDesconto", false)
-// const discount_code = () => {
-//     let total = parseInt(product_total_amt.innerHTML);
-//     let infoDesconto = document.getElementById('infoDesconto');
-//    if(localStorage.getItem("flagDesconto") == "false"){
-//     if (codigoDesconto.value === 'xMarket') {
-//         let novoTotal = total - 15;
-//         product_total_amt.innerHTML = novoTotal;
-//
-//         infoDesconto.innerHTML = "Desconto valido!";
-//         localStorage.setItem("flagDesconto", true)
-//     } else {
-//         infoDesconto.innerHTML = "Esse código não é valido! Tente novamente";
-//     }
-//    }
-//}
 
 
 

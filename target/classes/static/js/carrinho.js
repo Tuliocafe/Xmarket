@@ -5,10 +5,7 @@ var codigoDesconto = document.getElementById('codigoDesconto1');
 var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
 var rotaVendas = 'http://localhost:8080/vendas/'
 
-// var precoUnitario = document.getElementById('precoUnitario');
-// var precoTotalItem = document.getElementById('preco');
-//     precoTotalItem.innerHTML = parseInt(precoUnitario.innerHTML);
-//     product_total_amt.innerHTML = parseInt(precoTotalItem.innerHTML);
+
 var somaValores = 0
 var dados
 var valorTotal = document.getElementById("precoTotal")
@@ -16,7 +13,7 @@ var quantidadeIten = document.getElementById("quantidadeIten")
 var carrinho  = {listaCarrinho: []}
 var vendaAtualizada
 
-console.log(idVenda.innerHTML)
+
 
 getdados()
 
@@ -54,6 +51,7 @@ async function getdados(){
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
+    console.log(dados.listaItensCarrinho[0].produto.quantidade_produto)
 }
 
 
@@ -64,13 +62,10 @@ async function atualizarVenda(){
                rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
                putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
          }
-
          vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
 
 
     rotaVendas = rotaVendas + dados.id
-
-    console.log(rotaVendas)
     putDados(rotaVendas, vendaAtualizada )
     } catch(e){
         alert("Nao foi Possivel")}
@@ -104,10 +99,9 @@ var dadosJson
 const diminuir = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-//    var precoTotal = document.getElementById(precoTotal);
     if (quantidade.value <= 1) {
         quantidade.value = 1;
-        alert('Não é possível valores negativos');
+        alert('Valor minimo 1');
     } else {
        for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
                   if(incdec == carrinho.listaCarrinho[i].id){
@@ -117,7 +111,6 @@ const diminuir = (incdec, valorUnitario) => {
                 }
          quantidade.value = parseInt(quantidade.value) - 1;
          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) -  valorUnitario
-
     }
 }
 
@@ -125,12 +118,22 @@ const diminuir = (incdec, valorUnitario) => {
 const aumentar = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-       for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-                  if(incdec == carrinho.listaCarrinho[i].id){
-                    carrinho.listaCarrinho[i].quantidade ++
-                    carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
-                  }
-                }
+    for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
+
+
+               if(incdec == carrinho.listaCarrinho[i].id){
+                console.log (quantidade.value)
+                console.log("valor banco")
+                console.log(dados.listaItensCarrinho[i].produto.quantidade_produto)
+                        if (quantidade.value >= dados.listaItensCarrinho[i].produto.quantidade_produto) {
+                            quantidade.value = dados.listaItensCarrinho[i].produto.quantidade_produto
+                            alert('Limite estoque atingido');
+                        }else{
+                 carrinho.listaCarrinho[i].quantidade ++
+                 carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
+               }
+               }
+    }
 
           quantidade.value = parseInt(quantidade.value) + 1;
           valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario

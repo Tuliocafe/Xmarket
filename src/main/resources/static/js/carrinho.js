@@ -14,6 +14,7 @@ var carrinho  = {listaCarrinho: []}
 var vendaAtualizada
 
 
+
 getdados()
 
 
@@ -109,7 +110,6 @@ const diminuir = (incdec, valorUnitario) => {
                 }
          quantidade.value = parseInt(quantidade.value) - 1;
          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) -  valorUnitario
-
     }
 }
 
@@ -117,12 +117,20 @@ const diminuir = (incdec, valorUnitario) => {
 const aumentar = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-       for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-                  if(incdec == carrinho.listaCarrinho[i].id){
-                    carrinho.listaCarrinho[i].quantidade ++
-                    carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
-                  }
-                }
+    for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
+
+
+               if(incdec == carrinho.listaCarrinho[i].id){
+
+                        if (quantidade.value >= dados.listaItensCarrinho[i].produto.quantidade_produto) {
+                            quantidade.value = dados.listaItensCarrinho[i].produto.quantidade_produto
+                            alert('Limite estoque atingido');
+                        }else{
+                 carrinho.listaCarrinho[i].quantidade ++
+                 carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
+               }
+               }
+    }
 
           quantidade.value = parseInt(quantidade.value) + 1;
           valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario

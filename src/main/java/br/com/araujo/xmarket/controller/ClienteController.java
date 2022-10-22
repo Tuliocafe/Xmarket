@@ -1,5 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dao.ClienteJPA;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
@@ -7,6 +8,7 @@ import br.com.araujo.xmarket.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
@@ -14,6 +16,9 @@ import java.util.ArrayList;
 public class ClienteController {
     @Autowired
     ClienteServiceImpl clienteServiceImpl;
+
+//    @Autowired
+//    ClienteJPA clienteJPA;
 
     @GetMapping("/clientes")
     public ArrayList<Cliente> recuperaTodosClientes()
@@ -88,6 +93,15 @@ public class ClienteController {
         clienteServiceImpl.excluirCliente(id);
         return ResponseEntity.ok(null);
     }
+
+
+//    @GetMapping("/listaClientes")
+//    public ModelAndView clientes(){
+//        ModelAndView mv = new ModelAndView("clientes");
+//        Iterable<Cliente> clienteIt = clienteServiceImpl.buscarTodos();
+//        mv.addObject("clientes", clienteIt);
+//        return mv;
+//    }
 
 
 

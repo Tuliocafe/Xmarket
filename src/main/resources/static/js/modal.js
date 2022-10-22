@@ -8,3 +8,7 @@ acessarModal.addEventListener('click', function () {
 fecharModal.addEventListener('click', function () {
     modal.style.display = 'none';
 })
+
+$('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })

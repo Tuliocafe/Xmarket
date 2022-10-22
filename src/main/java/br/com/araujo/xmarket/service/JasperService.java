@@ -24,7 +24,6 @@ public class JasperService {
     private static final String JASPER_SUFIXO = ".jasper";  //sera a extensao do arquivo
 
 
-
     @Autowired
     private Connection connection;
 

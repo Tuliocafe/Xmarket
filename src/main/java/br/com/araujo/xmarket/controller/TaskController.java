@@ -34,7 +34,7 @@ public class TaskController {
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("../static/index");
         Iterable<Marca> marcas = serviceMarcas.buscarTodos();
         mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
@@ -50,34 +50,19 @@ public class TaskController {
 //        return mv;}
 
     @GetMapping("/carrinho")
-    public ModelAndView carrinho() {
+    public ModelAndView carrinho(){
 //        Cliente cliente = serviceCliente.buscarPeloId(1);
         Venda vendas = serviceVenda.buscarPeloId(13);
 //        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
-      //  mv.addObject("carrinhos", carrinhos);
-        return mv;
-    }
-
-    @GetMapping("/cadastroProduto")
-    public ModelAndView cadastroMarca() {
-
-        ModelAndView mv = new ModelAndView("paginas/cadastro");
-        Iterable<Marca> marcas = serviceMarcas.buscarTodos();
-
-        mv.addObject("marcas", marcas);
-        System.out.println("----------------------------------------------------");
-        System.out.println(marcas);
-        return mv;
-    }
-//        mv.addObject("vendas",vendas );
-////        mv.addObject("carrinhos",carrinhos );
-//        return mv;}
+        mv.addObject("vendas",vendas );
+//        mv.addObject("carrinhos",carrinhos );
+        return mv;}
 
 
     @GetMapping("/login")
     public String login() {
-        return "paginas/login";
+        return "../templates/paginas/login";
     }
 
     @GetMapping("/marca")
@@ -85,13 +70,6 @@ public class TaskController {
 
         return "paginas/marca";
     }
-
-
-//    @GetMapping("/carrinho")
-//    public String carrinho() {
-//
-//        return "paginas/carrinho";
-//    }
 
     @GetMapping("/cadastro")
     public String cadastroUsuario() {

@@ -128,6 +128,4 @@ public class VendaServiceImpl implements IVendaService {
     public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2) {
         return vendaDao.findVendaByDate(data1, data2);
     }
-
-
 }

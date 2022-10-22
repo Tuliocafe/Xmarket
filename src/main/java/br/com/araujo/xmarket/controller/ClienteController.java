@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
+import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteServiceImpl;
@@ -87,6 +88,18 @@ public class ClienteController {
     public ResponseEntity<Cliente> excluirCliente( @PathVariable Integer id){
         clienteServiceImpl.excluirCliente(id);
         return ResponseEntity.ok(null);
+    }
+    @PostMapping("/clientes/login")
+    public ResponseEntity<Cliente> Logar(  @RequestBody  LoginDTO clienteLogin){
+
+        Cliente cliente =  clienteServiceImpl.logar(clienteLogin);
+
+
+      if ( cliente != null )
+      {
+          return ResponseEntity.ok(cliente);
+      }
+        return ResponseEntity.badRequest().build();
     }
 
 

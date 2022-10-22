@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -95,96 +95,88 @@
 <div id="modal" >
     <h3 id="fecharModal">X</h3>
     <h1 style="text-align: center;">Relatório de Vendas</h1>
-<div style="text-align:center">
-    <form action="" method="get">
-        <label>Filtrar relatório por data:</label>
-        <span> De </span>
-        <input name="filtrar" class="filtrar" type="date">
-        <span> Até </span>
-        <input name="filtrar" class="filtrar" type="date">
-        <input type="submit" value="Gerar" style="radius: 5px; background-color: #fff; color:rgb(85,85,85)">
-    </form>
-</div>
+    <div style="text-align:center">
+        <form action="" method="get">
+            <label>Filtrar relatório por data:</label>
+            <span> De </span>
+            <input name="filtrar" class="filtrar" type="date">
+            <span> Até </span>
+            <input name="filtrar" class="filtrar" type="date">
+            <input type="submit" value="Gerar" style="radius: 5px; background-color: #fff; color:rgb(85,85,85)">
+        </form>
+    </div>
     <div style="position:absolute; bottom: 10px; right: 10px;">
-    <button type="button" class="btn btn-outline-secondary" ><a th:href="@{/admin/pdf/jr1(code='01', acao ='v')}" style="text-decoration: none; color: black;">Gerar Relatorio</a></button>
+        <button type="button" class="btn btn-outline-secondary" ><a th:href="@{/admin/pdf/jr1(code='01', acao ='v')}" style="text-decoration: none; color: black;">Gerar Relatorio</a></button>
     </div>
 </div>
 
 <div id="modal1" >
     <h3 id="fecharModal1">X</h3>
     <h1 style="text-align: center;">Cadastro de Marcas</h1>
-        <form th:action="@{marcas}" th:method="post">
-            <div class="row">
-                <div class="mb-3 col-md-12" >
-                    <label>Nome da Marca:</label>
-                    <input type="text" name="nome_marca" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
-                </div>
-                <div class="mb-3 col-md-12" >
-                    <label>Descrição:</label>
-                    <input type="text" name="descricao" class="form-control" placeholder="Digite a descrição da marca." REQUIRED>
-                </div>
-                <div class="col-md-12" >
-                    <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
-                </div>
+    <form th:action="@{marcas}" th:method="post">
+        <div class="row">
+            <div class="mb-3 col-md-12" >
+                <label>Nome da Marca:</label>
+                <input type="text" name="nome_marca" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar.">
             </div>
-        </form>
+            <div class="mb-3 col-md-12" >
+                <label>Descrição:</label>
+                <input type="text" name="descricao" class="form-control" placeholder="Digite a descrição da marca.">
+            </div>
+            <div class="col-md-12" >
+                <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
+            </div>
+        </div>
+    </form>
 </div>
 
-    <div id="modal2" >
-        <h3 id="fecharModal2">X</h3>
-        <h1 style="text-align: center;">Cadastro de Produtos</h1>
-            <form th:action="@{cadastroProduto}" th:method="post">
-                <div class="row">
-                    <div class="mb-3 col-md-12" >
-                        <label>Quantidade do Produto:</label>
-                        <input type="number" name="quantidade_produto" class="form-control" placeholder="Digite a quantidade do produto em estoque." REQUIRED>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label>Nome do Produto:</label>
-                        <input type="text" name="nome" class="form-control" placeholder="Digite o nome do produto que deseja cadastrar." REQUIRED>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label>Digite o valor do produto:</label>
-                        <span class="input-group-text">R$</span>
-                        <input type="number" name="preco" step="0.01" min="0.01" class="form-control" placeholder="Digite o valor do produto." REQUIRED>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label>Tamanho do produto:</label>
-                        <input type="text" name="tamanho" class="form-control" placeholder="Digite o tamanho do produto." REQUIRED>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label>Cor do produto:</label>
-                        <input type="text" name="cor" class="form-control" placeholder="Digite a cor do produto." REQUIRED>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label class="input-group-text">Envie a imagem do produto:</label>
-                        <input type="file" name="imagem_path" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
-                    </div>
-
-
-<!--                    <label>Profession:</label>-->
-<!--                    <select th:field="*{profession}">-->
-<!--                        <option th:each="p : ${listProfession}" th:value="${p}" th:text="${p}" />-->
-<!--                    </select>-->
-
-
-                    <div class="mb-3 col-md-12" >
-                        <label>Marca do produto</label>
-                        <select class="form-control" id="dropDownList">
-                            <option value="0">select option</option>
-                            <option th:each="marcas : ${marcas}" th:value="${marcas.id_marca}" th:text="${marcas.nome_marca}">
-                        </select>
-                    </div>
-                    <div class="mb-3 col-md-12" >
-                        <label>Categoria do produto:</label>
-                        <input type="text" name="categoria" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
-                    </div>
-                    <div class="col-md-12" >
-                        <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
-                    </div>
-                </div>
-            </form>
-    </div>
+<div id="modal2" >
+    <h3 id="fecharModal2">X</h3>
+    <h1 style="text-align: center;">Cadastro de Produtos</h1>
+    <form th:action="@{cadastroProduto}" th:method="post">
+        <div class="row">
+            <div class="mb-3 col-md-12" >
+                <label>Quantidade do Produto:</label>
+                <input type="number" name="quantidade_produto" class="form-control" placeholder="Digite a quantidade do produto em estoque." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Nome do Produto:</label>
+                <input type="text" name="nome" class="form-control" placeholder="Digite o nome do produto que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Digite o valor do produto:</label>
+                <span class="input-group-text">R$</span>
+                <input type="number" name="preco" step="0.01" min="0.01" class="form-control" placeholder="Digite o valor do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Tamanho do produto:</label>
+                <input type="text" name="tamanho" class="form-control" placeholder="Digite o tamanho do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Cor do produto:</label>
+                <input type="text" name="cor" class="form-control" placeholder="Digite a cor do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label class="input-group-text">Envie a imagem do produto:</label>
+                <input type="file" name="imagem_path" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Marca do produto</label>
+                <select class="form-control" id="dropDownList">
+                    <option value="0">select option</option>
+                    <option th:each="marcas : ${marcas}" th:value="${marcas.id_marca}" th:text="${marcas.nome_marca}"></option>
+                </select>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Categoria do produto:</label>
+                <input type="text" name="categoria" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="col-md-12" >
+                <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script src="js/modal.js"></script>
 </body>

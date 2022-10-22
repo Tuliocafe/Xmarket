@@ -29,13 +29,13 @@
         </a>
 
         <div class="order-lg-2 nav-btns">
-            <button type="button"  class="btn position-relative" >
+            <button id="carrinhoIndex" type="button"  class="btn position-relative" >
 <!--                <i class="fa fa-shopping-cart" ></i>-->
 
-                <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span>
-                <a class="fa fa-shopping-cart" href="carrinho"></a>
+<!--                <span class="position-absolute top-0 start-100 translate-middle badge bg-primary">5</span>-->
+                <a  class="fa fa-shopping-cart" href="carrinho"></a>
             </button>
-            <button type="button" class="btn position-relative">
+            <button id="buttonLogin" type="button" class="btn position-relative">
                 <svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                     <!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                     <path
@@ -143,15 +143,8 @@
                               data-th-text="${#numbers.formatDecimal(produto.preco_produto,0,'COMMA', 2, 'POINT')}"></span>
 
 
-                        <p>
-                        <form class="btn btn-primary mt-3"  th:action="@{carrinhos/{id}(id=${carrinho.id})}"  th:method="POST" >
-                            <input type="hidden" name="_method" value="delete" />
+                        <button onclick="verificaLogin()"> Adicionar ao Carrinho</button>
 
-                            <button class="fas fa-trash-alt" type="submit" >DELETAR </button>
-
-                        </form>
-
-                            <a href="#" >Adicionar ao Carrinho</a>
                     </div>
 
                 </div>
@@ -552,22 +545,22 @@
 <!-- end of popular -->
 
 <!-- newsletter -->
-<section id="newsletter" class="py-5">
-    <div class="container">
-        <div class="d-flex flex-column align-items-center justify-content-center">
-            <div class="title text-center pt-3 pb-5">
-                <h2 class="position-relative d-inline-block ms-4">Receba novidades</h2>
-            </div>
+<!--<section id="newsletter" class="py-5">-->
+<!--    <div class="container">-->
+<!--        <div class="d-flex flex-column align-items-center justify-content-center">-->
+<!--            <div class="title text-center pt-3 pb-5">-->
+<!--                <h2 class="position-relative d-inline-block ms-4">Receba novidades</h2>-->
+<!--            </div>-->
 
-            <p class="text-center text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus rem
-                officia accusantium maiores quisquam dolorum?</p>
-            <div class="input-group mb-3 mt-3">
-                <input type="text" class="form-control" placeholder="Enter Your Email ...">
-                <button class="btn btn-primary" type="submit">Subscribe</button>
-            </div>
-        </div>
-    </div>
-</section>
+<!--            <p class="text-center text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus rem-->
+<!--                officia accusantium maiores quisquam dolorum?</p>-->
+<!--            <div class="input-group mb-3 mt-3">-->
+<!--                <input type="text" class="form-control" placeholder="Enter Your Email ...">-->
+<!--                <button class="btn btn-primary" type="submit">Subscribe</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 <!-- end of newsletter -->
 
 <!-- footer -->

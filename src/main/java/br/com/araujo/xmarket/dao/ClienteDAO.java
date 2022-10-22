@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.dao;
 
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
+import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 @Repository
-public interface ClienteDAO extends CrudRepository<Cliente, Integer> {
+public interface ClienteDAO extends JpaRepository<Cliente, Integer> {
     ArrayList<Cliente> findByNomeContaining(String palavra);
 
 
@@ -46,5 +47,5 @@ public interface ClienteDAO extends CrudRepository<Cliente, Integer> {
             where usuario_cadastro.id_usuario = :idUsuario and endereco.id_endereco = :idEndereco""", nativeQuery = true)
     IEnderecoDTO buscaEnderecoPeloId(@Param("idUsuario") Integer idUsuario, @Param("idEndereco") Integer idEndereco);
 
-
+        Cliente getByEmail(String email);
 }

@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
+import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -136,7 +137,17 @@ public class ClienteServiceImpl implements IClienteService {
         return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
     }
 
+    @Override
+    public Cliente logar(LoginDTO login) {
 
+       Cliente cliente =  clienteDao.getByEmail(login.getEmail());
+
+
+       if(cliente != null) {
+            return cliente;
+        }
+        return null;
+    }
 
 
 }

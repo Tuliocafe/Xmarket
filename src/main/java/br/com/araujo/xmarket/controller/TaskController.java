@@ -35,7 +35,7 @@ public class TaskController {
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("../static/index");
         Iterable<Marca> marcas = serviceMarcas.buscarTodos();
         mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
@@ -65,7 +65,7 @@ public class TaskController {
 
     @GetMapping("/login")
     public String login() {
-        return "paginas/login";
+        return "../templates/paginas/login";
     }
 
     @GetMapping("/marca")

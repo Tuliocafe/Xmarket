@@ -2,6 +2,7 @@ package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dto.EnderecoDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
+import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.data.repository.query.Param;
@@ -30,6 +31,8 @@ public interface IClienteService {
     public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco);
 
     IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco);
+
+    Cliente logar(LoginDTO login);
 
 
 

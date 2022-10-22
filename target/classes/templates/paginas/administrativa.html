@@ -21,7 +21,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top">
     <div class="container">
-        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index.html">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="./index">
             <img src="images/shopping-bag-icon.png" alt="site icon">
             <span class="text-uppercase fw-lighter ms-2">XMarket</span>
         </a>
@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item px-2 py-2" style="display: flex;">
-                    <a class="nav-link text-uppercase text-dark" style="margin:auto;" href="#header">home</a>
+                    <a class="nav-link text-uppercase text-dark" style="margin:auto;" href="./index">home</a>
                 </li>
                 <li class="nav-item px-2 py-2">
                     <div class="dropdown">
@@ -42,8 +42,8 @@
                             Cadastrar
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Produto</a></li>
-                            <li><a class="dropdown-item" href="#">Marca</a></li>
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal1">Marca</a></li>
+                            <li style="cursor: pointer;" ><a class="dropdown-item" id="acessarModal2">Produto</a></li>
                         </ul>
                     </div>
                 </li>
@@ -53,10 +53,19 @@
                             Relatorios
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" id="acessarModal">Relatorio 1</a></li>
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal">Relatório de Vendas</a></li>
                             <li><a class="dropdown-item" href="#">Relatorio 2</a></li>
-                            <li><a class="dropdown-item" href="#">Relatorio 3</a></li>
-                            <li><a class="dropdown-item" href="#">Relatorio 4</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item px-2 py-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Documentação
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="/swagger-ui.html">API</a></li>
                         </ul>
                     </div>
                 </li>
@@ -66,14 +75,9 @@
     </div>
 </nav>
 
-<div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar</button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-</div>
+
+
+
 
 <section id="collection" class="py-5" >
     <div class="container">
@@ -90,18 +94,91 @@
 
 <div id="modal" >
     <h3 id="fecharModal">X</h3>
-    <form action="" method="get">
-        <label>Filtrar por data:</label>
-        <span> De </span>
-        <input name="filtrar" id="filtrar" type="date"><br>
-        <span> Até </span>
-        <input name="filtrar" id="filtrar1" type="date">
-        <input type="submit" value="Filtrar">
-    </form>
-    <button type="button" ><a th:href="@{/admin/pdf/jr1(code='01', acao ='v')}" style="text-decoration: none; color: black;">Gerar Relatorio</a></button>
+    <h1 style="text-align: center;">Relatório de Vendas</h1>
+    <div style="text-align:center">
+        <form action="" method="get">
+            <label>Filtrar relatório por data:</label>
+            <span> De </span>
+            <input name="filtrar" class="filtrar" type="date">
+            <span> Até </span>
+            <input name="filtrar" class="filtrar" type="date">
+            <input type="submit" value="Gerar" style="radius: 5px; background-color: #fff; color:rgb(85,85,85)">
+        </form>
+    </div>
+    <div style="position:absolute; bottom: 10px; right: 10px;">
+        <button type="button" class="btn btn-outline-secondary" ><a th:href="@{/admin/pdf/jr1(code='01', acao ='v')}" style="text-decoration: none; color: black;">Gerar Relatorio</a></button>
+    </div>
 </div>
 
+<div id="modal1" >
+    <h3 id="fecharModal1">X</h3>
+    <h1 style="text-align: center;">Cadastro de Marcas</h1>
+    <form th:action="@{marcas}" th:method="post">
+        <div class="row">
+            <div class="mb-3 col-md-12" >
+                <label>Nome da Marca:</label>
+                <input type="text" name="nome_marca" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar.">
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Descrição:</label>
+                <input type="text" name="descricao" class="form-control" placeholder="Digite a descrição da marca.">
+            </div>
+            <div class="col-md-12" >
+                <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="modal2" >
+    <h3 id="fecharModal2">X</h3>
+    <h1 style="text-align: center;">Cadastro de Produtos</h1>
+    <form th:action="@{cadastroProduto}" th:method="post">
+        <div class="row">
+            <div class="mb-3 col-md-12" >
+                <label>Quantidade do Produto:</label>
+                <input type="number" name="quantidade_produto" class="form-control" placeholder="Digite a quantidade do produto em estoque." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Nome do Produto:</label>
+                <input type="text" name="nome" class="form-control" placeholder="Digite o nome do produto que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Digite o valor do produto:</label>
+                <span class="input-group-text">R$</span>
+                <input type="number" name="preco" step="0.01" min="0.01" class="form-control" placeholder="Digite o valor do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Tamanho do produto:</label>
+                <input type="text" name="tamanho" class="form-control" placeholder="Digite o tamanho do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Cor do produto:</label>
+                <input type="text" name="cor" class="form-control" placeholder="Digite a cor do produto." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label class="input-group-text">Envie a imagem do produto:</label>
+                <input type="file" name="imagem_path" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Marca do produto</label>
+                <select class="form-control" id="dropDownList">
+                    <option value="0">select option</option>
+                    <option th:each="marcas : ${marcas}" th:value="${marcas.id_marca}" th:text="${marcas.nome_marca}"></option>
+                </select>
+            </div>
+            <div class="mb-3 col-md-12" >
+                <label>Categoria do produto:</label>
+                <input type="text" name="categoria" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>
+            </div>
+            <div class="col-md-12" >
+                <button class="btn btn-primary float-end" type="submit" ><a th:href="@{/admin}">Cadastrar</a></button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script src="js/modal.js"></script>
 </body>
 </html>
+

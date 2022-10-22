@@ -51,7 +51,6 @@ async function getdados(){
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
-    console.log(dados.listaItensCarrinho[0].produto.quantidade_produto)
 }
 
 
@@ -122,9 +121,7 @@ const aumentar = (incdec, valorUnitario) => {
 
 
                if(incdec == carrinho.listaCarrinho[i].id){
-                console.log (quantidade.value)
-                console.log("valor banco")
-                console.log(dados.listaItensCarrinho[i].produto.quantidade_produto)
+
                         if (quantidade.value >= dados.listaItensCarrinho[i].produto.quantidade_produto) {
                             quantidade.value = dados.listaItensCarrinho[i].produto.quantidade_produto
                             alert('Limite estoque atingido');

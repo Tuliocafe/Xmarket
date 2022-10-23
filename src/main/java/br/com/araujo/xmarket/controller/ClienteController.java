@@ -1,6 +1,5 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dao.ClienteJPA;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
@@ -10,10 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 @RestController
 public class ClienteController {
@@ -97,7 +94,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/login")
-    public ResponseEntity<Cliente> Logar(@RequestBody LoginDTO clienteLogin) {
+    public ResponseEntity<Cliente> Logar(@RequestBody LoginDTO clienteLogin) throws Exception {
 
         Cliente cliente = clienteServiceImpl.logar(clienteLogin);
 
@@ -105,9 +102,12 @@ public class ClienteController {
             return ResponseEntity.ok(cliente);
         }
 
-        return new ResponseEntity("Usuário ou senha Inválida", HttpStatus.BAD_REQUEST);
+//        throw  new Exception("Usuario e senha inválida");
+       return new ResponseEntity("Usuario e senha inválida", HttpStatus.BAD_REQUEST);
 
     }
+
+
 
 
 //    @GetMapping("/listaClientes")

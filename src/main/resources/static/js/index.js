@@ -38,6 +38,11 @@ async function verificaCarrinho(){
 }
 
 
+async function botaoCarrinho(){
+    window.location.href = "carrinho/" + venda
+}
+
+
 
 
 function addItem(idproduto){

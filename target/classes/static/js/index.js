@@ -31,9 +31,15 @@ async function verificaCarrinho(){
         venda = await listavenda[0].id
         console.log(venda)
         }catch(e){
+
         console.log("Nao tem venda aberta")
         }
 
+}
+
+
+async function botaoCarrinho(){
+    window.location.href = "carrinho/" + venda
 }
 
 

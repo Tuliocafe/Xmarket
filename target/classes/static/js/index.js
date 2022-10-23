@@ -1,8 +1,11 @@
 var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
+var botaoSair = document.getElementById("botaoSair");
 
 setTimeout(sessao, 5000000);
+
+
 var venda
 var usuario = 209
 var listavenda
@@ -31,6 +34,7 @@ async function verificaCarrinho(){
         venda = await listavenda[0].id
         console.log(venda)
         }catch(e){
+
         console.log("Nao tem venda aberta")
         }
 
@@ -98,11 +102,11 @@ if (logado) {
 
  if (logado) {
 
-     if(localStorage.getItem('cliente') !=""){
      var auxCliente = localStorage.getItem("cliente");
      console.log(auxCliente);
      var cliente = JSON.parse(auxCliente);
 //             alert(cliente.nome);
+        botaoSair.style.display = "flex";
              botaoLogin.style.display = "none";
              carrinhoIcone.style.display = "flex";
 
@@ -110,8 +114,20 @@ if (logado) {
      else {
          botaoLogin.style.display = "flex";
          carrinhoIcone.style.display = "none";
+         botaoSair.style.display = "none";
+
 
      }
+
+
+
+     botaoSair.addEventListener('click', sairDaPagina);
+
+     function sairDaPagina(){
+         localStorage.clear();
+         alert("Usuário Deslogado");
+         window.location.href = "/index"
+
      }
 
 // } else {
@@ -136,9 +152,10 @@ var botaoCarrinho = document.getElementById('botaoCarrinho');
 var auxCliente = localStorage.getItem("cliente");
 var cliente = JSON.parse(auxCliente);
 
-
 console.log(cliente);
 console.log(cliente.id);
+
+
 
 botaoCarrinho.addEventListener('click', function(){
     var novaVenda = {
@@ -159,9 +176,8 @@ var endPoint = 'http://localhost:8080/vendas'
     fetch(endPoint, init).then(function (response) {
     return response.json();
 
-
     }).then(function (data) {
-    console.log(data);
+       console.log(data);
         alert('success criacaoVenda');
         var auxVenda = localStorage.setItem("venda", JSON.stringify(data))
         var vendaCriada =  JSON.parse(auxCliente);

@@ -7,6 +7,7 @@ import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,7 +104,9 @@ public class ClienteController {
         if (cliente != null) {
             return ResponseEntity.ok(cliente);
         }
-        return ResponseEntity.badRequest().build();
+
+        return new ResponseEntity("Usuário ou senha Inválida", HttpStatus.BAD_REQUEST);
+
     }
 
 

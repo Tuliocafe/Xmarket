@@ -1,8 +1,11 @@
 var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
+var botaoSair = document.getElementById("botaoSair");
 
 setTimeout(sessao, 5000000);
+
+
 var venda
 var usuario = 209
 var listavenda
@@ -99,11 +102,11 @@ if (logado) {
 
  if (logado) {
 
-     if(localStorage.getItem('cliente') !=""){
      var auxCliente = localStorage.getItem("cliente");
      console.log(auxCliente);
      var cliente = JSON.parse(auxCliente);
 //             alert(cliente.nome);
+        botaoSair.style.display = "flex";
              botaoLogin.style.display = "none";
              carrinhoIcone.style.display = "flex";
 
@@ -111,8 +114,20 @@ if (logado) {
      else {
          botaoLogin.style.display = "flex";
          carrinhoIcone.style.display = "none";
+         botaoSair.style.display = "none";
+
 
      }
+
+
+
+     botaoSair.addEventListener('click', sairDaPagina);
+
+     function sairDaPagina(){
+         localStorage.clear();
+         alert("Usuário Deslogado");
+         window.location.href = "/index"
+
      }
 
 // } else {

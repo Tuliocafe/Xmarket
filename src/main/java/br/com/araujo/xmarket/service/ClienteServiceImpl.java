@@ -143,9 +143,15 @@ public class ClienteServiceImpl implements IClienteService {
 
        Cliente cliente =  clienteDao.getByEmail(loginUsuario.getEmail());
 
-        if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
+       if (cliente == null)
+       {
+           return null;
+       }
+
+      if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
             return cliente;
         }
+
 
         return null;
     }

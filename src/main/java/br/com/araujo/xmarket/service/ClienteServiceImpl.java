@@ -81,7 +81,7 @@ public class ClienteServiceImpl implements IClienteService {
         if (novoCliente != null) {
 
             //novoCliente.cloneCliente(cliente);
-
+            novoCliente.setId(cliente.getId()); //
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
             novoCliente.setSobrenome(cliente.getSobrenome());

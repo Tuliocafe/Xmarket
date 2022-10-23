@@ -1,13 +1,10 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dto.ItemDTO;
 import br.com.araujo.xmarket.model.*;
 import br.com.araujo.xmarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -42,14 +39,13 @@ public class TaskController {
         return mv;
     }
 
-    @GetMapping("/form")
+    @GetMapping("/areaCliente")
     public ModelAndView clientes(){
-        ModelAndView mv = new ModelAndView("paginas/form");
+        ModelAndView mv = new ModelAndView("paginas/areaCliente");
         Cliente clientes = clienteServiceImpl.buscarPeloId(211);
         mv.addObject("clientes", clientes);
         return mv;
     }
-
 
 
     @GetMapping("/carrinho")
@@ -57,10 +53,12 @@ public class TaskController {
 //        Cliente cliente = serviceCliente.buscarPeloId(1);
         Venda vendas = serviceVenda.buscarPeloId(13);
 //        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
+//        ModelAndView mv = new ModelAndView("paginas/carrinho");
         ModelAndView mv = new ModelAndView("paginas/carrinho");
         mv.addObject("vendas",vendas );
 //        mv.addObject("carrinhos",carrinhos );
-        return mv;}
+        return mv;
+    }
 
 
     @GetMapping("/login")

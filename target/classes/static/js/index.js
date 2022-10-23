@@ -24,6 +24,8 @@ if (logado) {
 }
 
 
+
+
  if (logado) {
 
      if(localStorage.getItem('cliente') !=""){
@@ -55,3 +57,49 @@ function sessao(){
     alert("O usuário está deslogado");
     window.location.href = "/index"
 }
+
+
+//Cria uma venda no banco de dados
+
+var botaoCarrinho = document.getElementById('botaoCarrinho');
+
+var auxCliente = localStorage.getItem("cliente");
+var cliente = JSON.parse(auxCliente);
+
+
+console.log(cliente);
+console.log(cliente.id);
+
+botaoCarrinho.addEventListener('click', function(){
+    var novaVenda = {
+
+    "idCliente": cliente.id,
+    "statusVenda": 2
+
+    };
+
+    var init = {
+        method: 'POST',
+        headers: { "Content-Type": 'application/json'},
+        body: JSON.stringify(novaVenda)
+    }
+
+var endPoint = 'http://localhost:8080/vendas'
+
+    fetch(endPoint, init).then(function (response) {
+    return response.json();
+
+
+    }).then(function (data) {
+    console.log(data);
+        alert('success criacaoVenda');
+        var auxVenda = localStorage.setItem("venda", JSON.stringify(data))
+        var vendaCriada =  JSON.parse(auxCliente);
+        console.log(vendaCriada);
+        alert(vendaCriada.id);
+        window.location.href = "/index"
+
+    })
+})
+
+

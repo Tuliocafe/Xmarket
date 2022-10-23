@@ -45,11 +45,6 @@ async function verificaCarrinho(){
 
 function addItem(idproduto){
 
-
-
-
-
-
     var idproduto = idproduto
     console.log(idproduto)
 
@@ -84,11 +79,11 @@ function verificaLogin()
 {
 alert('verific');
 if (logado) {
-     if(localStorage.getItem('cliente') !=""){
+
          var auxCliente = localStorage.getItem("cliente");
          console.log(auxCliente);
          var cliente = JSON.parse(auxCliente);
-     }
+
      }
      else {
         alert("Usuário não está logado")
@@ -98,14 +93,12 @@ if (logado) {
 }
 
 
-
-
  if (logado) {
 
      var auxCliente = localStorage.getItem("cliente");
      console.log(auxCliente);
      var cliente = JSON.parse(auxCliente);
-//             alert(cliente.nome);
+
         botaoSair.style.display = "flex";
              botaoLogin.style.display = "none";
              carrinhoIcone.style.display = "flex";

@@ -61,9 +61,9 @@ async function atualizarVenda(){
                rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
                putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
          }
-         vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
 
 
+    vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
     rotaVendas = rotaVendas + dados.id
     putDados(rotaVendas, vendaAtualizada )
     } catch(e){
@@ -118,23 +118,18 @@ const aumentar = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
     for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-
-
                if(incdec == carrinho.listaCarrinho[i].id){
-
                         if (quantidade.value >= dados.listaItensCarrinho[i].produto.quantidade_produto) {
                             quantidade.value = dados.listaItensCarrinho[i].produto.quantidade_produto
                             alert('Limite estoque atingido');
-                        }else{
-                 carrinho.listaCarrinho[i].quantidade ++
-                 carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
-               }
-               }
-    }
-
-          quantidade.value = parseInt(quantidade.value) + 1;
-          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
-
+                             }else{
+                             carrinho.listaCarrinho[i].quantidade ++
+                             carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
+                             quantidade.value = parseInt(quantidade.value) + 1;
+                             valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
+                             }
+                          }
+                }
 }
 
 

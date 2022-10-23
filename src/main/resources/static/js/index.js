@@ -3,12 +3,49 @@ var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 
 setTimeout(sessao, 5000000);
-var venda = 13
+var venda
+var usuario = 209
+var listavenda
+
+
+verificaCarrinho()
+
+async function verificaCarrinho(){
+
+    var endPoint = "http://localhost:8080/vendas/usuario/" + usuario
+    init = {
+            method: "GET",
+            mode: 'cors',
+            cache: 'no-cache',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            referrerPolicy: 'no-referrer',
+        }
+
+            var response = await fetch(endPoint, init);
+            listavenda = await response.json();
+
+        try{
+        venda = await listavenda[0].id
+        console.log(venda)
+        }catch(e){
+
+        console.log("Nao tem venda aberta")
+        }
+
+}
 
 
 
 
 function addItem(idproduto){
+
+
+
+
+
 
     var idproduto = idproduto
     console.log(idproduto)
@@ -35,7 +72,7 @@ function addItem(idproduto){
     console.log(data);
         alert('Produto adicionado com sucesso');
             })
-        }
+}
 
 
 

@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.controller;
 import br.com.araujo.xmarket.dto.ItemDTO;
 import br.com.araujo.xmarket.dto.VendaDTO;
 import br.com.araujo.xmarket.model.CarrinhoCompra;
+import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.IVendaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ public class VendaController {
     public ArrayList<Venda> recuperaTodos(){
         return vendaService.buscarTodas();
     }
+
+    @GetMapping("/vendas/usuario/{id}")
+    public ResponseEntity<ArrayList<Venda>> buscaIdUsuario(@PathVariable Integer id){
+        ArrayList<Venda> listaVenda = vendaService.buscaIdUsuarioQuere(id);
+        return ResponseEntity.ok(listaVenda);
+    }
+
 
     @GetMapping("/vendas/{id}")
     public ResponseEntity<Venda> buscarPeloId(@PathVariable Integer id){
@@ -60,5 +68,7 @@ public class VendaController {
     public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
         return vendaService.incluirItemNaVenda(itemDto);
     }
+
+
 
 }

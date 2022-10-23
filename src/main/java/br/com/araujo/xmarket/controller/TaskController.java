@@ -54,12 +54,9 @@ public class TaskController {
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho(){
-//        Cliente cliente = serviceCliente.buscarPeloId(1);
         Venda vendas = serviceVenda.buscarPeloId(13);
-//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
         mv.addObject("vendas",vendas );
-//        mv.addObject("carrinhos",carrinhos );
         return mv;}
 
 

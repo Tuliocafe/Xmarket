@@ -29,7 +29,7 @@ public class JasperController {
         if(acao.equals("v")) {
             //inline:fala com navegador que o pdf será aberto por ele,senão o navegador não for compativel será feito  download
 
-            response.setHeader("Content-disposition","inline;filename=relatorio-"+code+".pdf");
+            response.setHeader("Content-disposition","attachment;filename=relatorio-"+code+".pdf");
         }
         else {
             //attachment: fala para o navegador que não deseja abrir o relatorio, mas quer salvar em algum diretorio

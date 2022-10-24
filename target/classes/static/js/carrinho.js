@@ -1,10 +1,9 @@
-
-//var product_total_amt = document.getElementById('product_total_amt');
 var frete = document.getElementById('frete');
 var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
 
-var fetchId = 'http://localhost:8080/carrinhos/'
+var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
+var rotaVendas = 'http://localhost:8080/vendas/'
 
 // var precoUnitario = document.getElementById('precoUnitario');
 // var precoTotalItem = document.getElementById('preco');
@@ -47,61 +46,56 @@ async function getdados(){
         dados = await response.json()
 
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
-             somaValores += dados.listaItensCarrinho[i].precoTotal;
+             somaValores += (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
+
              carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id ,quantidade: dados.listaItensCarrinho[i].quantidade,
-              venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto})
+              venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto}, )
          }
-        valorTotal.innerHTML =  somaValores
+        valorTotal.innerHTML =  somaValores.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
+        console.log(dados)
 
 
 
 
-
-//carrinho ={id: dados. }
+//carrinho ={id: dados }
 //carrinho  = {id: dados.id}
 //carrinho  = {produto: dados.listaItensCarrinho[0].produto.id_produto}
 
 
 //vendaAtualizada.listaCarrinho.push({id: 7})
 
-
-
 }
-//calcularTotal()
 
-//        console.log(dados.precoTotal)
-//        dados.precoTotal = 320
-//        console.log(dados)
-//        console.log(dados.precoTotal)
-//        console.log(dados.listaItensCarrinho[1].quantidade)
+
 
 async function atualizarVenda(){
 
          for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-               vendaAtualizada = carrinho.listaCarrinho[i]
-               fetchId = fetchId + carrinho.listaCarrinho[i].id
-               console.log(fetchId)
-               console.log(vendaAtualizada)
-               putDados()
+               rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
+               putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
          }
 
-//         vendaAtualizada = {id: idVenda , precoTotal: parseInt(valorTotal), cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
-//         console.log(vendaAtualizada)
+         vendaAtualizada = {id: idVenda , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
 
+    rotaVendas = rotaVendas + dados.id
+
+    console.log(rotaVendas)
+
+    putDados(rotaVendas, vendaAtualizada )
 }
 
 
 
-
-async function putDados(){
-
-    fetch(fetchId,{
+async function putDados(rota, dadosJson){
+var rota
+var dadosJson
+    fetch(rota,{
     method: 'put',
       headers: {
         'Content-Type': 'application/json',
       },
-    body: JSON.stringify(vendaAtualizada),}).then((response) => response.json())
+    body: JSON.stringify(dadosJson),}).then((response) => response.json())
                    .then((result) => {
                      console.log('Success:', result);
                    })
@@ -148,28 +142,8 @@ const aumentar = (incdec, valorUnitario) => {
           quantidade.value = parseInt(quantidade.value) + 1;
           valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
 
-//    console.log(dados.listaItensCarrinho[0].quantidade)
-//    console.log(valorUnitario)
-//    var precoUnitario = document.getElementById(precoUnitario);
-
 }
 
-// localStorage.setItem("flagDesconto", false)
-// const discount_code = () => {
-//     let total = parseInt(product_total_amt.innerHTML);
-//     let infoDesconto = document.getElementById('infoDesconto');
-//    if(localStorage.getItem("flagDesconto") == "false"){
-//     if (codigoDesconto.value === 'xMarket') {
-//         let novoTotal = total - 15;
-//         product_total_amt.innerHTML = novoTotal;
-//
-//         infoDesconto.innerHTML = "Desconto valido!";
-//         localStorage.setItem("flagDesconto", true)
-//     } else {
-//         infoDesconto.innerHTML = "Esse código não é valido! Tente novamente";
-//     }
-//    }
-//}
 
 
 

@@ -34,12 +34,12 @@ public class MarcaController {
     }
 
     @PostMapping("/marcas")
-    public ResponseEntity<Void> incluirNovo(Marca novo){
+    public ResponseEntity<Marca> incluirNovo(@RequestBody Marca novo){
         Marca res = service.criaNovo(novo);
 //        return ResponseEntity.status(202).header("Custom-Header", "foo").
 //                .body("Custom header set");
         if (res != null){
-            return ResponseEntity.status(202).build();
+            return ResponseEntity.ok(res);
 //                    return ResponseEntity.status(202).location(URI.create("http://localhost:8080/index")).build();
         }
         return  ResponseEntity.badRequest().build();

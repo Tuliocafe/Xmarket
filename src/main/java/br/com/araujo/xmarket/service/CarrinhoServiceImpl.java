@@ -56,6 +56,7 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
 
 
         CarrinhoCompra novoItem = CarrinhoCompra.builder()
+                .id(dados.getId())
                 .precoTotal(dados.getPrecoTotal())
                 .quantidade(dados.getQuantidade())
                 .precoUnitario(produto.getPreco_produto())

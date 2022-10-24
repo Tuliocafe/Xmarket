@@ -11,6 +11,7 @@ import java.util.ArrayList;
 @Service
 public class ProdutoServiceImpl implements IProdutoService {
 
+
     @Autowired
     private ProdutoDao dao;
 
@@ -42,7 +43,7 @@ public class ProdutoServiceImpl implements IProdutoService {
     public Produto atualizaProduto(Produto novo, Integer idAntigo) {
         novo.setId_produto(idAntigo);
         if(novo.getId_produto() != null && novo.getNome_produto() != null && novo.getPreco_produto()
-                != null && novo.getCategoria() != null && novo.getMarca() != null){
+                 != null && novo.getMarca() != null){
             return dao.save(novo);
         }
         return null;
@@ -52,5 +53,6 @@ public class ProdutoServiceImpl implements IProdutoService {
     public ArrayList<IHistoricoPrecoProdutoDTO> buscaHistoricoPorPreco(Integer id){
         return dao.buscaHistoricoPorPreco(id);
     }
+
 
 }

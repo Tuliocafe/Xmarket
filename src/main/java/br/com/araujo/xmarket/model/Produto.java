@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Table(name = "produto")
 public class Produto {
 
-    public Produto(Integer id_produto, Integer quantidade_produto, String nome, Double preco, String tamanho, String cor, String imagem_path, Marca marca, Categoria categoria) {
+    public Produto(Integer id_produto, Integer quantidade_produto, String nome, Double preco, String tamanho, String cor, String imagem_path, Marca marca) {
         this.id_produto = id_produto;
         this.quantidade_produto = quantidade_produto;
         this.nome = nome;
@@ -15,7 +15,6 @@ public class Produto {
         this.cor = cor;
         this.imagem_path = imagem_path;
         this.marca = marca;
-        this.categoria = categoria;
     }
 
     public Produto() {
@@ -35,6 +34,8 @@ public class Produto {
     private String tamanho;
     @Column(name = "cor", length = 45)
     private String cor;
+
+
     @Column(name = "imagem_path", length = 2555)
     private String imagem_path;
 
@@ -49,13 +50,13 @@ public class Produto {
 
 
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
 
     public Marca getMarca() {
         return marca;

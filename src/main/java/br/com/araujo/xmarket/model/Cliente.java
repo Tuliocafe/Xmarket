@@ -203,7 +203,7 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return status == cliente.status && Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(sobrenome, cliente.sobrenome) && Objects.equals(cpf, cliente.cpf) && Objects.equals(dataNascimento, cliente.dataNascimento) && Objects.equals(telefoneUm, cliente.telefoneUm) && Objects.equals(telefoneDois, cliente.telefoneDois) && Objects.equals(rg, cliente.rg) && Objects.equals(dataCriacaoUsuario, cliente.dataCriacaoUsuario) && Objects.equals(senha, cliente.senha) && Objects.equals(email, cliente.email) && tipoUsuario == cliente.tipoUsuario && Objects.equals(listaEnderecos, cliente.listaEnderecos);
+        return Objects.equals(id, cliente.id) && Objects.equals(nome, cliente.nome) && Objects.equals(sobrenome, cliente.sobrenome) && Objects.equals(cpf, cliente.cpf) && Objects.equals(dataNascimento, cliente.dataNascimento) && Objects.equals(telefoneUm, cliente.telefoneUm) && Objects.equals(telefoneDois, cliente.telefoneDois) && Objects.equals(rg, cliente.rg) && Objects.equals(dataCriacaoUsuario, cliente.dataCriacaoUsuario) && Objects.equals(senha, cliente.senha) && Objects.equals(email, cliente.email) && tipoUsuario == cliente.tipoUsuario && Objects.equals(status, cliente.status) && Objects.equals(listaEnderecos, cliente.listaEnderecos);
     }
 
     @Override

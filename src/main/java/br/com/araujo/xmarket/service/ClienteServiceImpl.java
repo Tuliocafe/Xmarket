@@ -8,7 +8,9 @@ import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -149,5 +151,14 @@ public class ClienteServiceImpl implements IClienteService {
         return null;
     }
 
+    @Override
+    public Endereco criaNovoEndereco(Endereco novoEndereco, Integer idUsuario) {
+        Cliente cliente = clienteDao.findById(idUsuario).orElse(null);
 
+        if(novoEndereco.getId()!=null){
+            return enderecoDAO.save(novoEndereco);
+        }
+        return novoEndereco;
+
+    }
 }

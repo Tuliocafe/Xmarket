@@ -33,6 +33,7 @@ public interface IClienteService {
     IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco);
 
     Cliente logar(LoginDTO login);
+    public Endereco criaNovoEndereco(Endereco endereco, Integer idUsuario);
 
 
 

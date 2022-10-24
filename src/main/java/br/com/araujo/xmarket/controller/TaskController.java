@@ -6,6 +6,7 @@ import br.com.araujo.xmarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -42,10 +43,10 @@ public class TaskController {
         return mv;
     }
 
-    @GetMapping("/areaCliente")
-    public ModelAndView clientes(){
-        ModelAndView mv = new ModelAndView("paginas/areaCliente");
-        Cliente clientes = clienteServiceImpl.buscarPeloId(211);
+    @GetMapping("/area_cliente/{id}")
+    public ModelAndView clientes(@PathVariable Integer id){
+        ModelAndView mv = new ModelAndView( "paginas/areaCliente");
+        Cliente clientes = clienteServiceImpl.buscarPeloId(id);
         mv.addObject("clientes", clientes);
         return mv;
     }

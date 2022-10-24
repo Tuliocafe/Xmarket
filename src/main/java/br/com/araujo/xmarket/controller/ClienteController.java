@@ -39,7 +39,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo( Cliente cliente){
+    public ResponseEntity<Cliente> cadastrarNovo( @RequestBody Cliente cliente){
 
         Cliente res = clienteServiceImpl.criaNovo(cliente);
         if (res != null){
@@ -85,6 +85,7 @@ public class ClienteController {
     }
 
 
+
     @GetMapping("/clientes/busca")
     public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
         return clienteServiceImpl.buscaPorNome(palavra);
@@ -116,6 +117,13 @@ public class ClienteController {
 //        return mv;
 //    }
 
-
+    @PostMapping("/clientes/{id_usuario}/enderecos")
+    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer idUsuario, @RequestBody Endereco novo){
+        Endereco res = clienteServiceImpl.criaNovoEndereco(novo, idUsuario);
+        if (res != null){
+            return ResponseEntity.status(202).build();
+        }
+        return  ResponseEntity.badRequest().build();
+    }
 
 }

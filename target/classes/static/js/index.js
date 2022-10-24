@@ -4,8 +4,9 @@ var carrinhoIcone = document.getElementById("carrinhoIndex");
 
 setTimeout(sessao, 5000000);
 var venda
-var usuario = 209
+var usuario = localStorage.getItem('id')
 var listavenda
+
 
 
 verificaCarrinho()
@@ -31,6 +32,7 @@ async function verificaCarrinho(){
         venda = await listavenda[0].id
         console.log(venda)
         }catch(e){
+
         console.log("Nao tem venda aberta")
         }
 
@@ -116,6 +118,22 @@ if (logado) {
 //
 //     window.location.href = "/index";
 // }
+
+var clienteId= cliente.id
+
+
+console.log(cliente)
+console.log(cliente.id)
+
+
+
+function btnAreaCliente(){
+//           alert(cliente.id)
+//        if(localStorage.getItem('cliente') !=""){
+//            window.location.href = "/login"
+//        }else {
+          window.location.href = "/area_cliente/"+cliente.id}
+      }
 
 
 

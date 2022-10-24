@@ -1,5 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.ApiMessage;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
@@ -21,8 +22,16 @@ public class ClienteController {
 //    ClienteJPA clienteJPA;
 
     @GetMapping("/clientes")
-    public ArrayList<Cliente> recuperaTodosClientes() {
-        return clienteServiceImpl.buscarTodos();
+    public ResponseEntity<?> recuperaTodosClientes() {
+        ArrayList<Cliente>  todosClientes = clienteServiceImpl.buscarTodos();
+
+        if(todosClientes == null)
+        {
+            return new ResponseEntity<>(new ApiMessage("Não existe clientes cadastrados"), HttpStatus.NO_CONTENT);
+        }
+
+        return new ResponseEntity<>(todosClientes, HttpStatus.OK);
+
     }
 
     @GetMapping("/clientes/{id}")
@@ -41,7 +50,8 @@ public class ClienteController {
 
         Cliente res = clienteServiceImpl.criaNovo(cliente);
         if (res != null) {
-            return ResponseEntity.ok(res);
+            return new ResponseEntity<>(res, HttpStatus.CREATED);
+
         }
         return ResponseEntity.badRequest().build();
     }
@@ -103,7 +113,7 @@ public class ClienteController {
         }
 
 //        throw  new Exception("Usuario e senha inválida");
-       return new ResponseEntity("Usuario e senha inválida", HttpStatus.BAD_REQUEST);
+       return new ResponseEntity( new ApiMessage("Usuario e senha inválida"), HttpStatus.BAD_REQUEST);
 
     }
 

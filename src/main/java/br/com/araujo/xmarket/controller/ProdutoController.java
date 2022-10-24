@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
+import br.com.araujo.xmarket.dto.ProdutoDTO;
 import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class ProdutoController {
     }
 
     @PostMapping("/produtos")
-    public ResponseEntity<Produto> cadastrarNovo(@RequestBody Produto novo){
+    public ResponseEntity<Produto> cadastrarNovo(@RequestBody ProdutoDTO novo){
         Produto res = service.cadastrarNovo(novo);
         if (res != null){
             return ResponseEntity.ok(res);

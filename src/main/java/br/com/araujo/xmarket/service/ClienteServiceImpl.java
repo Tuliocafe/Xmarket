@@ -1,31 +1,34 @@
 package br.com.araujo.xmarket.service;
 
+import br.com.araujo.xmarket.dao.CidadeDao;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
+import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Endereco;
+import br.com.araujo.xmarket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 @Primary
 public class ClienteServiceImpl implements IClienteService {
 
 
+    @Autowired
+    EnderecoDAO enderecoDAO;
+
+    @Autowired
+    public CidadeDao cidadeDao;
 
     @Autowired
     public ClienteDAO clienteDao;
 
-    @Autowired
-    EnderecoDAO enderecoDAO;
 
     @Override
     public Cliente criaNovo(Cliente cliente) {
@@ -83,7 +86,7 @@ public class ClienteServiceImpl implements IClienteService {
         if (novoCliente != null) {
 
             //novoCliente.cloneCliente(cliente);
-            novoCliente.setId(cliente.getId()); //
+
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
             novoCliente.setSobrenome(cliente.getSobrenome());
@@ -140,25 +143,54 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
-    public Cliente logar(LoginDTO login) {
+    public Cliente logar(LoginDTO loginUsuario) {
 
-       Cliente cliente =  clienteDao.getByEmail(login.getEmail());
+       Cliente cliente =  clienteDao.getByEmail(loginUsuario.getEmail());
 
+       if (cliente == null)
+       {
+           return null;
+       }
 
-       if(cliente != null) {
+      if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
             return cliente;
         }
+
         return null;
     }
 
     @Override
-    public Endereco criaNovoEndereco(Endereco novoEndereco, Integer idUsuario) {
-        Cliente cliente = clienteDao.findById(idUsuario).orElse(null);
+    public boolean verificaEmail(String email) {
+        return clienteDao.existsByEmail(email);
+    }
 
-        if(novoEndereco.getId()!=null){
-            return enderecoDAO.save(novoEndereco);
-        }
+    @Override
+    public Endereco criaNovoEndereco(EnderecoSalvarDTO endereco) {
+
+        Cidade cidade = cidadeDao.findById(endereco.getCidade()).orElse(null);
+
+        Cliente cliente = clienteDao.findById(endereco.getIdUsuario()).orElse(null);
+
+        if (cidade == null) {return null;}
+        if(cliente == null) {return null;}
+
+
+        Endereco novoEndereco = Endereco.builder()
+                .logradouro(endereco.getLogradouro())
+                .cep(endereco.getCep())
+                .bairro(endereco.getBairro())
+                .complemento(endereco.getComplemento())
+                .referencia(endereco.getReferencia())
+                .tipoEndereco(endereco.getTipo())
+                .cidade(cidade)
+                .cliente(cliente)
+                .build();
+
+       enderecoDAO.save(novoEndereco);
+
         return novoEndereco;
 
     }
+
+
 }

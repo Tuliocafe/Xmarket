@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.service;
 
 import br.com.araujo.xmarket.dto.EnderecoDTO;
+import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
@@ -34,6 +35,11 @@ public interface IClienteService {
 
     Cliente logar(LoginDTO login);
     public Endereco criaNovoEndereco(Endereco endereco, Integer idUsuario);
+
+    public boolean verificaEmail(String email);
+
+    public Endereco criaNovoEndereco (EnderecoSalvarDTO endereco);
+
 
 
 

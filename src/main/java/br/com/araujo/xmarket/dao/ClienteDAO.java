@@ -48,4 +48,7 @@ public interface ClienteDAO extends JpaRepository<Cliente, Integer> {
     IEnderecoDTO buscaEnderecoPeloId(@Param("idUsuario") Integer idUsuario, @Param("idEndereco") Integer idEndereco);
 
         Cliente getByEmail(String email);
+
+    public boolean existsByEmail(String email);
+
 }

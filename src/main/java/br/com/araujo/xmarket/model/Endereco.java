@@ -1,12 +1,20 @@
 package br.com.araujo.xmarket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@Builder
+@Data
 @Table(name = "Endereco")
+@NoArgsConstructor
 public class Endereco {
 
     @Id
@@ -30,8 +38,7 @@ public class Endereco {
     private String referencia;
 
     @Column(name = "tipo_endereco")
-    @Enumerated(EnumType.STRING)
-    private TipoEndereco tipoEndereco;
+    private String tipoEndereco;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -39,85 +46,8 @@ public class Endereco {
     private Cliente cliente;
 
 
-
     @ManyToOne
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getLogradouro() {
-        return logradouro;
-    }
-
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getReferencia() {
-        return referencia;
-    }
-
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
-    }
-
-    public TipoEndereco getTipoEndereco() {
-        return tipoEndereco;
-    }
-
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
-        this.tipoEndereco = tipoEndereco;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-
-    //    id_cidade	int
-//    id_usuario	int
 
 }

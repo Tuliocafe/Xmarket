@@ -156,5 +156,10 @@ public class ClienteServiceImpl implements IClienteService {
         return null;
     }
 
+    @Override
+    public boolean verificaEmail(String email) {
+        return clienteDao.existsByEmail(email);
+    }
+
 
 }

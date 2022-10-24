@@ -48,7 +48,12 @@ public class ClienteController {
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> cadastrarNovo(Cliente cliente) {
 
+        if(clienteServiceImpl.verificaEmail(cliente.getEmail())){
+            return new ResponseEntity( new ApiMessage("Email já existente na base de dados"), HttpStatus.NOT_FOUND);
+        }
+
         Cliente res = clienteServiceImpl.criaNovo(cliente);
+
         if (res != null) {
             return new ResponseEntity<>(res, HttpStatus.CREATED);
 

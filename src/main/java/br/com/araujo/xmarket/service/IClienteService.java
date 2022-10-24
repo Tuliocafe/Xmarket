@@ -34,6 +34,9 @@ public interface IClienteService {
 
     Cliente logar(LoginDTO login);
 
+    public boolean verificaEmail(String email);
+
+
 
 
 }

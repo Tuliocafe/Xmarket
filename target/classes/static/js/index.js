@@ -72,6 +72,14 @@ function addItem(idproduto){
             })
 }
 
+         //pega a informação do login do usuário
+        var logado = localStorage.getItem('logado');
+
+        if (logado) {
+             var auxCliente = localStorage.getItem("cliente");
+             var cliente = JSON.parse(auxCliente);
+         }
+
 
 
 

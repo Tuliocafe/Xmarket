@@ -1,8 +1,11 @@
 package br.com.araujo.xmarket.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Table(name = "produto")
 public class Produto {
 

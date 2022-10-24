@@ -46,7 +46,7 @@ public class ProdutoServiceImpl implements IProdutoService {
         Produto novoProduto = Produto.builder()
                 .quantidade_produto(produto.getQuantidade())
                 .preco(produto.getPreco())
-                .imagem_path(produto.getNome())
+                .imagem_path(produto.getImagem_path())
                 .nome(produto.getNome())
                 .tamanho(produto.getTamanho())
                 .cor(produto.getCor())

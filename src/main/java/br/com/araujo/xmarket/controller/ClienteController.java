@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.ApiMessage;
+import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
@@ -120,6 +121,15 @@ public class ClienteController {
 //        throw  new Exception("Usuario e senha inválida");
        return new ResponseEntity( new ApiMessage("Usuario e senha inválida"), HttpStatus.BAD_REQUEST);
 
+    }
+
+    @PostMapping("/clientes/{id_usuario}/enderecos")
+    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer idUsuario, @RequestBody EnderecoSalvarDTO novoEndereco){
+        Endereco res = clienteServiceImpl.criaNovoEndereco(novoEndereco);
+        if (res != null){
+            return ResponseEntity.status(202).build();
+        }
+        return  ResponseEntity.badRequest().build();
     }
 
 

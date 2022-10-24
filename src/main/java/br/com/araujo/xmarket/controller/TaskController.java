@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +21,8 @@ import java.nio.file.Paths;
 
 @Controller
 public class TaskController {
-
+    @Autowired
+    ClienteServiceImpl clienteServiceImpl;
     @Autowired
     private IProdutoService service;
 
@@ -43,35 +45,41 @@ public class TaskController {
     @GetMapping("/index")
     public ModelAndView home() {
         Iterable<Produto> produtos = service.recuperarTodos();
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("../static/index");
         Iterable<Marca> marcas = serviceMarcas.buscarTodos();
         mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
         return mv;
     }
 
-//    @GetMapping("/carrinho")
-//    public ModelAndView carrinho(){
-////        Cliente cliente = serviceCliente.buscarPeloId(1);
-//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
-//        ModelAndView mv = new ModelAndView("paginas/carrinho");
-//        mv.addObject("carrinhos",carrinhos );
-//        return mv;}
+    @GetMapping("/form")
+    public ModelAndView clientes(){
+        ModelAndView mv = new ModelAndView("paginas/form");
+        Cliente clientes = clienteServiceImpl.buscarPeloId(211);
+        mv.addObject("clientes", clientes);
+        return mv;
+    }
+
+
 
     @GetMapping("/carrinho")
     public ModelAndView carrinho(){
-//        Cliente cliente = serviceCliente.buscarPeloId(1);
         Venda vendas = serviceVenda.buscarPeloId(13);
-//        Iterable<CarrinhoCompra> carrinhos = serviceCarrinho.buscarTodas();
         ModelAndView mv = new ModelAndView("paginas/carrinho");
         mv.addObject("vendas",vendas );
-//        mv.addObject("carrinhos",carrinhos );
+        return mv;}
+
+    @GetMapping("/carrinho/{id}")
+    public ModelAndView carrinhoId(@PathVariable Integer id){
+        Venda vendas = serviceVenda.buscarPeloId(id);
+        ModelAndView mv = new ModelAndView("paginas/carrinho");
+        mv.addObject("vendas",vendas );
         return mv;}
 
 
     @GetMapping("/login")
     public String login() {
-        return "paginas/login";
+        return "../templates/paginas/login";
     }
 
     @GetMapping("/marca")

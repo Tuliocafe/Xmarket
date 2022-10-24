@@ -69,6 +69,7 @@ public class VendaServiceImpl implements IVendaService {
         return (ArrayList<Venda>) vendaDao.findAll();
     }
 
+
     @Override
     public Venda buscarPeloId(Integer id) {
         return vendaDao.findById(id).orElse(null);
@@ -128,4 +129,9 @@ public class VendaServiceImpl implements IVendaService {
     public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2) {
         return vendaDao.findVendaByDate(data1, data2);
     }
+
+    @Override
+    public ArrayList<Venda> buscaIdUsuarioQuere(Integer id){
+        return vendaDao.buscarPeloIdUsuario(id);}
+
 }

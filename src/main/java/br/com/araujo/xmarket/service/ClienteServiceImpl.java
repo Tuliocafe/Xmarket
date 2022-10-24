@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
+import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 @Primary
@@ -41,7 +43,7 @@ public class ClienteServiceImpl implements IClienteService {
         if (cliente.getId() != null && cliente.getNome() != null) {
             return clienteDao.save(cliente);
         }
-        return null;
+        return cliente;
     }
 
     @Override
@@ -136,7 +138,28 @@ public class ClienteServiceImpl implements IClienteService {
         return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
     }
 
+    @Override
+    public Cliente logar(LoginDTO loginUsuario) {
 
+       Cliente cliente =  clienteDao.getByEmail(loginUsuario.getEmail());
+
+       if (cliente == null)
+       {
+           return null;
+       }
+
+      if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
+            return cliente;
+        }
+
+
+        return null;
+    }
+
+    @Override
+    public boolean verificaEmail(String email) {
+        return clienteDao.existsByEmail(email);
+    }
 
 
 }

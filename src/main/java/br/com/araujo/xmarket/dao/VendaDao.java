@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -22,4 +24,9 @@ public interface VendaDao extends CrudRepository <Venda, Integer> {
     List<IRelatorioVendaDTO> findVendaByDate(@Param("date1") String date1, @Param("date2") String date2);
 
 
+    @Query(value = """
+                select *
+                from venda
+                where id_usuario = :id and id_status_vendas = 2""", nativeQuery = true)
+    ArrayList<Venda> buscarPeloIdUsuario(@Param("id") Integer id);
 }

@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "produto")
 public class Produto {
 
-    public Produto(Integer id_produto, Integer quantidade_produto, String nome, Double preco, String tamanho, String cor, String imagem_path, Marca marca) {
+    public Produto(Integer id_produto, Integer quantidade_produto, String nome, Double preco, String tamanho, String cor, String imagem_path, Marca marca, Categoria categoria) {
         this.id_produto = id_produto;
         this.quantidade_produto = quantidade_produto;
         this.nome = nome;
@@ -18,6 +18,7 @@ public class Produto {
         this.cor = cor;
         this.imagem_path = imagem_path;
         this.marca = marca;
+        this.categoria = categoria;
     }
 
     public Produto() {

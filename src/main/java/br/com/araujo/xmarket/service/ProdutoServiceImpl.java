@@ -5,7 +5,6 @@ import br.com.araujo.xmarket.dao.MarcaDao;
 import br.com.araujo.xmarket.dao.ProdutoDao;
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
 import br.com.araujo.xmarket.dto.ProdutoDTO;
-import br.com.araujo.xmarket.model.CarrinhoCompra;
 import br.com.araujo.xmarket.model.Categoria;
 import br.com.araujo.xmarket.model.Marca;
 import br.com.araujo.xmarket.model.Produto;
@@ -18,21 +17,22 @@ import java.util.ArrayList;
 public class ProdutoServiceImpl implements IProdutoService {
 
     @Autowired
+    private ProdutoDao ProdutoDao;
+
+    @Autowired
     private MarcaDao marcaDao;
 
     @Autowired
     private CategoriaDao categoriaDao;
-    @Autowired
-    private ProdutoDao produtoDao;
 
     @Override
     public ArrayList<Produto> recuperarTodos() {
-        return (ArrayList<Produto>) produtoDao.findAll();
+        return (ArrayList<Produto>) ProdutoDao.findAll();
     }
 
     @Override
     public Produto recuperarProdutoId(Integer id) {
-        return produtoDao.findById(id).orElse(null);
+        return ProdutoDao.findById(id).orElse(null);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ProdutoServiceImpl implements IProdutoService {
         Produto novoProduto = Produto.builder()
                 .quantidade_produto(produto.getQuantidade())
                 .preco(produto.getPreco())
-                .imagem_path(produto.getNome())
+                .imagem_path(produto.getImagem_path())
                 .nome(produto.getNome())
                 .tamanho(produto.getTamanho())
                 .cor(produto.getCor())
@@ -54,32 +54,36 @@ public class ProdutoServiceImpl implements IProdutoService {
                 .categoria(categoria)
                 .build();
 
-        produtoDao.save(novoProduto);
+        ProdutoDao.save(novoProduto);
         return novoProduto;
     }
 
+//    @Override
+//    public Produto cadastrarNovo(Produto novo) {
+//        return ProdutoDao.save(novo);
+//    }
+
     public ArrayList<Produto> recuperaTodosPorNome(String nome){
-        return produtoDao.findByNomeContaining(nome);
+        return ProdutoDao.findByNomeContaining(nome);
     }
 
     @Override
     public void excluirProduto(Integer id) {
-        produtoDao.deleteById(id);
+        ProdutoDao.deleteById(id);
     }
 
     @Override
     public Produto atualizaProduto(Produto novo, Integer idAntigo) {
         novo.setId_produto(idAntigo);
-        if(novo.getId_produto() != null && novo.getNome_produto() != null && novo.getPreco_produto()
-                != null && novo.getCategoria() != null && novo.getMarca() != null){
-            return produtoDao.save(novo);
+        if(novo.getId_produto() != null && novo.getNome_produto() != null && novo.getPreco_produto() != null && novo.getMarca() != null){
+            return ProdutoDao.save(novo);
         }
         return null;
     }
 
     @Override
     public ArrayList<IHistoricoPrecoProdutoDTO> buscaHistoricoPorPreco(Integer id){
-        return produtoDao.buscaHistoricoPorPreco(id);
+        return ProdutoDao.buscaHistoricoPorPreco(id);
     }
 
 }

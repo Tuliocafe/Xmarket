@@ -5,20 +5,25 @@ var tamanhoProd = document.getElementById('tamanhoProd');
 var corProd = document.getElementById('corProd');
 var imagem = document.getElementById('imagem');
 var marca = document.getElementById('dropDownList');
+//var categoria = document.getElementById('dropDownList1');
 
 var buttonCadastrarProd = document.getElementById('buttonCadastrarProd');
 
 
 buttonCadastrarProd.addEventListener('click', function(){
 
+    var marca = document.getElementById('dropDownList');
+    console.log('marca', marca.value);
+
     var cadastroProd = {
-    "quantidade_produto": qtdProduto.value,
-    "nome_produto": produto.value,
-    "preco_produto": preco.value,
+    "quantidade": qtdProduto.value,
+    "nome": produto.value,
+    "preco": preco.value,
     "tamanho": tamanhoProd.value,
     "cor": corProd.value,
-    "imagem_path": imagem.value,
+    "imagem_path": "images/"+imagem.files[0].name,
     "marca": marca.value,
+    "categoria": 2
     };
     console.log(cadastroProd);
     var init = {
@@ -68,7 +73,9 @@ function getMarcas(){
         data.forEach(produto=>{
         var option = document.createElement('option')
         var marca = produto.nome_marca
-        option.setAttribute('value', `${marca}`)
+        var id = produto.id_marca;
+        console.log(id)
+        option.setAttribute('value', `${id}`)
         option.appendChild(document.createTextNode(`${marca}`))
         selected.appendChild(option)
         })

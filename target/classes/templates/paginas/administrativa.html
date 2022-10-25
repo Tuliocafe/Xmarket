@@ -102,13 +102,16 @@
     <h3 id="fecharModal">X</h3>
     <h1 style="text-align: center;">Relatório de Vendas</h1>
     <div style="text-align:center">
-        <form action="" method="get">
+        <form>
             <label>Filtrar relatório por data:</label>
             <span> De </span>
-            <input name="filtrar" class="filtrar" type="date">
+            <input name="filtrar" class="filtrar" type="date" id="data-inicio">
             <span> Até </span>
-            <input name="filtrar" class="filtrar" type="date">
-            <input type="submit" value="Gerar" style="radius: 5px; background-color: #fff; color:rgb(85,85,85)">
+            <input name="filtrar" class="filtrar" type="date" id="data-fim">
+
+            <div id="gerarData" class="simularBotao">
+                Filtrar
+            </div>
         </form>
     </div>
     <div style="position:absolute; bottom: 10px; right: 10px;">
@@ -187,7 +190,15 @@
 
         <div class="mb-3 col-md-12" >
         <label>Tamaho do Produto:</label>
-        <input id="tamanhoProd" type="text" name="tamanho" class="form-control" placeholder="Insira o tamanho do produto.">
+<!--        <input id="tamanhoProd" type="text" name="tamanho" class="form-control" placeholder="Insira o tamanho do produto.">-->
+            <select class="form-control" id="tamanhoProd">
+                <option value="0" selected disabled>Selecione o Tamanho do Produto:</option>
+                <option value="1">P</option>
+                <option value="2">M</option>
+                <option value="3">G</option>"
+                <option value="4">GG</option>
+            </select>
+
         </div>
 
         <div class="mb-3 col-md-12" >
@@ -264,6 +275,7 @@
 <!--    </form>-->
 </div>
 
+<script src="js/relatorio.js"></script>
 <script src="js/produto.js"></script>
 <script src="js/marca.js"></script>
 <script src="js/modal.js"></script>

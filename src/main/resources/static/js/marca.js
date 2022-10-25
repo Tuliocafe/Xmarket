@@ -5,6 +5,7 @@ var buttonCadastrar = document.getElementById('buttonCadastrar');
 
 buttonCadastrar.addEventListener('click', function(){
 
+if(marca.value != "" || descricao.value != ""){
     var cadastro = {
     "nome_marca": marca.value,
     "descricao": descricao.value
@@ -14,6 +15,9 @@ buttonCadastrar.addEventListener('click', function(){
         method: 'POST',
         headers: { "Content-Type": 'application/json'},
         body: JSON.stringify(cadastro)
+    }
+    } else{
+    alert("Todos os campos são obrigatórios")
     }
 
 var endPoint = 'http://localhost:8080/marcas'

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 @Primary
@@ -138,14 +139,20 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
-    public Cliente logar(LoginDTO login) {
+    public Cliente logar(LoginDTO loginUsuario) {
 
-       Cliente cliente =  clienteDao.getByEmail(login.getEmail());
+       Cliente cliente =  clienteDao.getByEmail(loginUsuario.getEmail());
 
+       if (cliente == null)
+       {
+           return null;
+       }
 
-       if(cliente != null) {
+      if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
             return cliente;
         }
+
+
         return null;
     }
 

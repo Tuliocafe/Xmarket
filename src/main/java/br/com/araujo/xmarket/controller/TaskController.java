@@ -52,8 +52,15 @@ public class TaskController {
     }
 
 
+    @GetMapping("/carrinho")
+    public ModelAndView carrinho(){
+        Venda vendas = serviceVenda.buscarPeloId(14);
+        ModelAndView mv = new ModelAndView("paginas/carrinho");
+        mv.addObject("vendas",vendas );
+        return mv;}
+
     @GetMapping("/carrinho/{id}")
-    public ModelAndView carrinho(@PathVariable Integer id){
+    public ModelAndView carrinhoid(@PathVariable Integer id){
         Venda vendas = serviceVenda.buscarPeloId(id);
         ModelAndView mv = new ModelAndView("paginas/carrinho");
         mv.addObject("vendas",vendas );

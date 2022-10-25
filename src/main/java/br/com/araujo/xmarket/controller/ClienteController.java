@@ -1,15 +1,14 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dao.ClienteJPA;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 
@@ -22,8 +21,7 @@ public class ClienteController {
 //    ClienteJPA clienteJPA;
 
     @GetMapping("/clientes")
-    public ArrayList<Cliente> recuperaTodosClientes()
-    {
+    public ArrayList<Cliente> recuperaTodosClientes() {
         return clienteServiceImpl.buscarTodos();
     }
 
@@ -39,10 +37,10 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo( Cliente cliente){
+    public ResponseEntity<Cliente> cadastrarNovo(Cliente cliente) {
 
         Cliente res = clienteServiceImpl.criaNovo(cliente);
-        if (res != null){
+        if (res != null) {
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.badRequest().build();
@@ -51,9 +49,9 @@ public class ClienteController {
 
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> AtualizaCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {
-        Cliente response =  clienteServiceImpl.atualizarCliente(cliente, id);
+        Cliente response = clienteServiceImpl.atualizarCliente(cliente, id);
 
-        if(response != null){
+        if (response != null) {
             return ResponseEntity.ok(response);
         }
 
@@ -61,10 +59,8 @@ public class ClienteController {
     }
 
     @GetMapping("/clientes/{id}/enderecos")
-    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id){
-
+    public ArrayList<IEnderecoDTO> buscarEndereco(@PathVariable Integer id) {
         return clienteServiceImpl.buscaEnderecoPeloIdCliente(id);
-
     }
 
     @GetMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
@@ -73,12 +69,13 @@ public class ClienteController {
         return clienteServiceImpl.buscaEnderecoPeloId(idUsuario, idEndereco);
 
     }
+
     @PutMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
     public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
 
-        Endereco response =  clienteServiceImpl.atualizarEnderecoDoCliente(endereco, idUsuario, idEndereco);
+        Endereco response = clienteServiceImpl.atualizarEnderecoDoCliente(endereco, idUsuario, idEndereco);
 
-        if(response != null){
+        if (response != null) {
             return ResponseEntity.ok(response);
         }
         return ResponseEntity.badRequest().build();
@@ -86,26 +83,31 @@ public class ClienteController {
 
 
     @GetMapping("/clientes/busca")
-    public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra){
+    public ArrayList<Cliente> buscarPorNome(@RequestParam(name = "palavra") String palavra) {
         return clienteServiceImpl.buscaPorNome(palavra);
     }
+
     @DeleteMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> excluirCliente( @PathVariable Integer id){
+    public ResponseEntity<Cliente> excluirCliente(@PathVariable Integer id) {
         clienteServiceImpl.excluirCliente(id);
         return ResponseEntity.ok(null);
     }
+
     @PostMapping("/clientes/login")
-    public ResponseEntity<Cliente> Logar(  @RequestBody  LoginDTO clienteLogin){
+    public ResponseEntity<Cliente> Logar(@RequestBody LoginDTO clienteLogin) throws Exception {
 
-        Cliente cliente =  clienteServiceImpl.logar(clienteLogin);
+        Cliente cliente = clienteServiceImpl.logar(clienteLogin);
 
+        if (cliente != null) {
+            return ResponseEntity.ok(cliente);
+        }
 
-      if ( cliente != null )
-      {
-          return ResponseEntity.ok(cliente);
-      }
-        return ResponseEntity.badRequest().build();
+//        throw  new Exception("Usuario e senha inválida");
+       return new ResponseEntity("Usuario e senha inválida", HttpStatus.BAD_REQUEST);
+
     }
+
+
 
 
 //    @GetMapping("/listaClientes")
@@ -115,7 +117,6 @@ public class ClienteController {
 //        mv.addObject("clientes", clienteIt);
 //        return mv;
 //    }
-
 
 
 }

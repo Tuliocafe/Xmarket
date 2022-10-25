@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
           integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
           crossorigin="anonymous" />
-    <link rel="stylesheet" href="./css/style.css"/>
+<!--    <link rel="stylesheet" href="./css/style.css"/>-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 
@@ -39,7 +39,7 @@
                             <!-- cart images div -->
                             <div
                                     class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
-                                <img th:src="${carrinho.produto.imagem_path}" class="img-fluid" alt="cart img">
+                                <img th:src="'../'+${carrinho.produto.imagem_path}" class="img-fluid" alt="cart img">
                             </div>
                             <!-- cart product details -->
                             <div class="col-md-7 col-11 mx-auto px-4 mt-2">
@@ -52,7 +52,7 @@
 <!--                                                                                    <p class="text-capitalize my-1" data-th-text="${carrinhos.desconto}"></p>-->
 <!--                                                                                    <p class="mb-2">CAMISA SOCIAL - XADREZ</p>-->
                                         <p class="mb-2" data-th-text="${carrinho.produto.cor}"></p>
-                                        <p class="mb-3" data-th-text="${carrinho.produto.tamanho}"></p>
+                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.tamanho}"></p>
                                         <p>Estoque</p>
                                         <p class="mb-3" data-th-text="${carrinho.produto.quantidade_produto}"></p>
 
@@ -70,10 +70,8 @@
                                             </li>
                                             <li class="page-item">
                                                 <button class="page-link"
-
-                                                        th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+')'}"> <i
-
-                                                        class="fas fa-plus tamanho-botao"></i></button>
+                                                     th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+')'}">
+                                                        <i class="fas fa-plus tamanho-botao"></i></button>
 
                                             </li>
                                         </ul>
@@ -83,20 +81,30 @@
                                 <div class="row">
                                     <div class="col-8 d-flex justify-content-between remove_wish">
 
-<!--                                        <a  th:href="@{carrinhos/{id}(id=${carrinho.id})}" th:method="delete"-->
-<!--                                        > <p>-->
-<!--                                            <i class="fas fa-trash-alt" ></i>  REMOVER ITEM</p> </a>-->
+<!--                                        <a       onclick='deletarItem()'>-->
+<!--&lt;!&ndash;                                                th:href="deletarItem(${carrinho.id})"&ndash;&gt;-->
+<!--                                         <p>-->
+<!--                                            <i class="fas fa-trash-alt"    ></i>  REMOVER ITEM</p> </a>-->
 
+                                        <p>
+                                        <button class="fas fa-trash-alt"
+                                                th:attr="onclick=${'deletarItem('+carrinho.id+')'}">
+                                              Remover </button> </p>
+
+
+<!--                                        <button onclick="botaoCarrinho()" type="button"  > Remover-->
+<!--                                            <i class="fas fa-trash-alt" ></i>-->
+<!--                                        </button>-->
 
 <!--                            <td class="buttons">-->
 <!--                                        <a th:href="@{carrinhos/14}" th:action="delete"-->
 <!--                                           class="btn btn-danger"><i class="fa fa-trash"></i></a></td>-->
 
-                                        <form  th:action="@{carrinhos/{id}(id=${carrinho.id})}"  th:method="delete" >
-                                            <input type="hidden" name="_method" value="delete" />
-                                            <button class="fas fa-trash-alt" type="submit" >DELETAR </button>
+<!--                                        <form  th:action="'../'+@{carrinhos/{id}(id=${carrinho.id})}"  th:method="delete" >-->
+<!--                                            <input type="hidden" name="_method" value="delete" />-->
+<!--                                            <button class="fas fa-trash-alt" type="submit" >DELETAR </button>-->
 
-                                        </form>
+<!--                                        </form>-->
 
 
                                     </div>

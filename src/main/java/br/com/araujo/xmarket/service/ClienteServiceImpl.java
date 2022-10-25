@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dao.CidadeDao;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
+import br.com.araujo.xmarket.dto.ClienteDTO;
 import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
@@ -31,13 +32,32 @@ public class ClienteServiceImpl implements IClienteService {
 
 
     @Override
-    public Cliente criaNovo(Cliente cliente) {
+    public Cliente criaNovo(ClienteDTO cliente) {
+
+        Endereco endereco = enderecoDAO.findById(cliente.getEndereco().getId()).orElse(null);
+
         if (cliente != null ) {
             LocalDateTime data = LocalDateTime.now();
-            cliente.setStatus(1);
-            System.out.println(data);
-            cliente.setDataCriacaoUsuario(data.toString());
-            return clienteDao.save(cliente);
+
+            Cliente novoCliente = Cliente.builder()
+
+            .nome(cliente.getNome())
+            .cpf(cliente.getCpf())
+            .sobrenome(cliente.getSobrenome())
+            .dataNascimento(cliente.getDataNascimento())
+            .telefoneUm(cliente.getTelefoneUm())
+            .telefoneDois(cliente.getTelefoneDois())
+            .rg(cliente.getRg())
+            .dataCriacaoUsuario(data.toString())
+            .email(cliente.getEmail())
+            .senha(cliente.getSenha())
+            .build();
+            //            .endereco(endereco)
+            //            .status(cliente.setStatus(1))
+            //            .tipoUsuario(cliente.getTipoUsuario())
+
+            clienteDao.save(novoCliente);
+            return novoCliente;
         }
         return null;
     }
@@ -159,6 +179,7 @@ public class ClienteServiceImpl implements IClienteService {
         return null;
     }
 
+
     @Override
     public boolean verificaEmail(String email) {
         return clienteDao.existsByEmail(email);
@@ -190,6 +211,10 @@ public class ClienteServiceImpl implements IClienteService {
 
         return novoEndereco;
 
+    }
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
 

@@ -58,7 +58,7 @@ btnInscrever.addEventListener('click', async function(){
                 alert("Email já existente")
 
                 }    else if(response.status ==201) {
-                    alert("Dados cadastrados com sucesso!")
+                    alert("Dados cadastrados com sucesso! Faça Login")
 
                 window.location.href = "/login"
                 } else {

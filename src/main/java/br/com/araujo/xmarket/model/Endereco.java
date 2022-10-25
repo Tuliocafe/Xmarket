@@ -18,7 +18,7 @@ import java.util.List;
 public class Endereco {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id_endereco")
     private Integer id;
 
@@ -40,13 +40,13 @@ public class Endereco {
     @Column(name = "tipo_endereco")
     private String tipoEndereco;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     @JsonIgnoreProperties("listaEnderecos")
     private Cliente cliente;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
 

@@ -121,10 +121,10 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/{id_usuario}/enderecos")
-    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer idUsuario, @RequestBody EnderecoSalvarDTO novoEndereco){
+    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer id, @RequestBody EnderecoSalvarDTO novoEndereco){
         Endereco res = clienteServiceImpl.criaNovoEndereco(novoEndereco);
         if (res != null){
-            return ResponseEntity.status(202).build();
+            return ResponseEntity.status(201).build();
         }
         return  ResponseEntity.badRequest().build();
     }

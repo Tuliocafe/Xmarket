@@ -35,7 +35,7 @@ public class ClienteServiceImpl implements IClienteService {
     public Cliente criaNovo(ClienteDTO cliente) {
 
         if (cliente != null ) {
-            LocalDateTime data = LocalDateTime.now();
+
 
             Cliente novoCliente = Cliente.builder()
 
@@ -99,7 +99,6 @@ public class ClienteServiceImpl implements IClienteService {
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
 //        if (clienteDao.existsById(id) ) ;
-
 
         if (novoCliente != null) {
 
@@ -195,6 +194,7 @@ public class ClienteServiceImpl implements IClienteService {
 
 
         Endereco novoEndereco = Endereco.builder()
+                .id(endereco.getId())
                 .logradouro(endereco.getLogradouro())
                 .cep(endereco.getCep())
                 .bairro(endereco.getBairro())

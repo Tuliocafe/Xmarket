@@ -1,11 +1,13 @@
 package br.com.araujo.xmarket.service;
 
+import br.com.araujo.xmarket.dao.CidadeDao;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
+import br.com.araujo.xmarket.dto.ClienteDTO;
+import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
 import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.dto.LoginDTO;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Endereco;
+import br.com.araujo.xmarket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -19,21 +21,43 @@ import java.util.Objects;
 public class ClienteServiceImpl implements IClienteService {
 
 
+    @Autowired
+    EnderecoDAO enderecoDAO;
+
+    @Autowired
+    public CidadeDao cidadeDao;
 
     @Autowired
     public ClienteDAO clienteDao;
 
-    @Autowired
-    EnderecoDAO enderecoDAO;
 
     @Override
-    public Cliente criaNovo(Cliente cliente) {
+    public Cliente criaNovo(ClienteDTO cliente) {
+
+        Endereco endereco = enderecoDAO.findById(cliente.getEndereco().getId()).orElse(null);
+
         if (cliente != null ) {
             LocalDateTime data = LocalDateTime.now();
-            cliente.setStatus(1);
-            System.out.println(data);
-            cliente.setDataCriacaoUsuario(data.toString());
-            return clienteDao.save(cliente);
+
+            Cliente novoCliente = Cliente.builder()
+
+            .nome(cliente.getNome())
+            .cpf(cliente.getCpf())
+            .sobrenome(cliente.getSobrenome())
+            .dataNascimento(cliente.getDataNascimento())
+            .telefoneUm(cliente.getTelefoneUm())
+            .telefoneDois(cliente.getTelefoneDois())
+            .rg(cliente.getRg())
+            .dataCriacaoUsuario(data.toString())
+            .email(cliente.getEmail())
+            .senha(cliente.getSenha())
+            .build();
+            //            .endereco(endereco)
+            //            .status(cliente.setStatus(1))
+            //            .tipoUsuario(cliente.getTipoUsuario())
+
+            clienteDao.save(novoCliente);
+            return novoCliente;
         }
         return null;
     }
@@ -152,8 +176,45 @@ public class ClienteServiceImpl implements IClienteService {
             return cliente;
         }
 
-
         return null;
+    }
+
+
+    @Override
+    public boolean verificaEmail(String email) {
+        return clienteDao.existsByEmail(email);
+    }
+
+    @Override
+    public Endereco criaNovoEndereco(EnderecoSalvarDTO endereco) {
+
+        Cidade cidade = cidadeDao.findById(endereco.getCidade()).orElse(null);
+
+        Cliente cliente = clienteDao.findById(endereco.getIdUsuario()).orElse(null);
+
+        if (cidade == null) {return null;}
+        if(cliente == null) {return null;}
+
+
+        Endereco novoEndereco = Endereco.builder()
+                .logradouro(endereco.getLogradouro())
+                .cep(endereco.getCep())
+                .bairro(endereco.getBairro())
+                .complemento(endereco.getComplemento())
+                .referencia(endereco.getReferencia())
+                .tipoEndereco(endereco.getTipo())
+                .cidade(cidade)
+                .cliente(cliente)
+                .build();
+
+       enderecoDAO.save(novoEndereco);
+
+        return novoEndereco;
+
+    }
+    @Override
+    public String toString() {
+        return super.toString();
     }
 
 

@@ -2,6 +2,7 @@ package br.com.araujo.xmarket.dao;
 
 import br.com.araujo.xmarket.dto.IRelatorioVendaDTO;
 import br.com.araujo.xmarket.model.Venda;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -29,4 +30,14 @@ public interface VendaDao extends CrudRepository <Venda, Integer> {
                 from venda
                 where id_usuario = :id and id_status_vendas = 2 order by id_venda desc limit 1""", nativeQuery = true)
     ArrayList<Venda> buscarPeloIdUsuario(@Param("id") Integer id);
+
+    @Modifying
+    @Transactional
+    @Query(value ="select v.data_venda from venda v", nativeQuery = true)
+    List<String> findDataInicio();
+
+    @Modifying
+    @Transactional
+    @Query(value ="select v.data_venda from venda v", nativeQuery = true)
+    List<String> findDataFinal();
 }

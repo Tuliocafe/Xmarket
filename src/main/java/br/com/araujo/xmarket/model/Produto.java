@@ -1,8 +1,11 @@
 package br.com.araujo.xmarket.model;
 
+import lombok.Builder;
+
 import javax.persistence.*;
 
 @Entity
+@Builder
 @Table(name = "produto")
 public class Produto {
 
@@ -35,6 +38,8 @@ public class Produto {
     private String tamanho;
     @Column(name = "cor", length = 45)
     private String cor;
+
+
     @Column(name = "imagem_path", length = 2555)
     private String imagem_path;
 
@@ -49,13 +54,13 @@ public class Produto {
 
 
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public Categoria getCategoria() {
+//        return categoria;
+//    }
+//
+//    public void setCategoria(Categoria categoria) {
+//        this.categoria = categoria;
+//    }
 
     public Marca getMarca() {
         return marca;

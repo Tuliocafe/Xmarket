@@ -1,16 +1,25 @@
 package br.com.araujo.xmarket.controller;
 
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
+import br.com.araujo.xmarket.dto.ProdutoDTO;
 import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.service.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 @RestController
 public class ProdutoController {
+
+    private static String caminhoImagens = "/xmarket/src/main/resources/static/images/";  //como o caminho da imagem nunca muda eu coloco ela static
 
     @Autowired
     private IProdutoService service;
@@ -46,13 +55,14 @@ public class ProdutoController {
     }
 
     @PostMapping("/produtos")
-    public ResponseEntity<Produto> cadastrarNovo(@RequestBody Produto novo){
+    public ResponseEntity<Produto> cadastrarNovo(@RequestBody ProdutoDTO novo){
         Produto res = service.cadastrarNovo(novo);
         if (res != null){
             return ResponseEntity.ok(res);
         }
         return ResponseEntity.badRequest().build();
     }
+
 
     @DeleteMapping("/produtos/{id_produto}")
     public  ResponseEntity<Produto> excluirMarca(@PathVariable Integer id_produto){
@@ -66,4 +76,6 @@ public class ProdutoController {
         if(atualizado != null) return ResponseEntity.ok(atualizado);
         return ResponseEntity.badRequest().build();
     }
+
+
 }

@@ -3,7 +3,6 @@ package br.com.araujo.xmarket.dto;
 import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.model.TipoUsuario;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +18,7 @@ public class ClienteDTO {
     private String sobrenome;
     private String cpf;
     private String rg;
-    private Date dataNascimento;
+    private String dataNascimento;
     private String telefoneUm;
     private String telefoneDois;
     private String dataCriacaoUsuario;
@@ -27,6 +26,7 @@ public class ClienteDTO {
     private String email;
     private TipoUsuario tipoUsuario;
     private Integer status;
-    private Endereco endereco;
+//    private Endereco endereco;
+
 
 }

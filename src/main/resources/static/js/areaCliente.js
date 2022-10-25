@@ -56,7 +56,7 @@ btnSalvar.addEventListener('click', function(){
         return response.json();
 
 
-        }).then(function (data) {
+        }).then(function (data)     {
               console.log(data);
                 alert("Alteração feita com sucesso!")
 

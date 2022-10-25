@@ -34,8 +34,6 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Cliente criaNovo(ClienteDTO cliente) {
 
-        Endereco endereco = enderecoDAO.findById(cliente.getEndereco().getId()).orElse(null);
-
         if (cliente != null ) {
             LocalDateTime data = LocalDateTime.now();
 
@@ -48,7 +46,7 @@ public class ClienteServiceImpl implements IClienteService {
             .telefoneUm(cliente.getTelefoneUm())
             .telefoneDois(cliente.getTelefoneDois())
             .rg(cliente.getRg())
-            .dataCriacaoUsuario(data.toString())
+            .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
             .email(cliente.getEmail())
             .senha(cliente.getSenha())
             .build();

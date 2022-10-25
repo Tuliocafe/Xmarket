@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Builder;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity()
+@Builder
 @Table(name = "usuario_cadastro")
 public class Cliente {
 
@@ -66,6 +68,23 @@ public class Cliente {
     public Cliente() {
     }
 
+    public Cliente(String nome, String sobrenome, String cpf, Date dataNascimento, String telefoneUm, String telefoneDois, String rg, String dataCriacaoUsuario, String senha, String email, TipoUsuario tipoUsuario, Integer status, List<Endereco> listaEnderecos) {
+        this.nome = nome;
+        this.sobrenome = sobrenome;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.telefoneUm = telefoneUm;
+        this.telefoneDois = telefoneDois;
+        this.rg = rg;
+        this.dataCriacaoUsuario = dataCriacaoUsuario;
+        this.senha = senha;
+        this.email = email;
+        this.tipoUsuario = tipoUsuario;
+        this.status = status;
+        this.listaEnderecos = listaEnderecos;
+    }
+
+
     public void cloneCliente(Cliente cliente) {
         this.nome = cliente.getNome();
         this.sobrenome = cliente.getSobrenome();
@@ -81,15 +100,6 @@ public class Cliente {
         this.status = cliente.getStatus();
         this.email = cliente.getEmail();
 
-    }
-
-
-    public List<Endereco> getListaEnderecos() {
-        return listaEnderecos;
-    }
-
-    public void setListaEnderecos(List<Endereco> listaEnderecos) {
-        this.listaEnderecos = listaEnderecos;
     }
 
     public Integer getId() {
@@ -164,8 +174,6 @@ public class Cliente {
         this.dataCriacaoUsuario = dataCriacaoUsuario;
     }
 
-
-
     public String getSenha() {
         return senha;
     }
@@ -196,6 +204,14 @@ public class Cliente {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public List<Endereco> getListaEnderecos() {
+        return listaEnderecos;
+    }
+
+    public void setListaEnderecos(List<Endereco> listaEnderecos) {
+        this.listaEnderecos = listaEnderecos;
     }
 
     @Override

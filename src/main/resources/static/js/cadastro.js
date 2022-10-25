@@ -12,13 +12,14 @@ var senha = document.getElementById('senha');
 var senhaDois = document.getElementById('senhaDois');
 var btnInscrever = document.getElementById('btnInscrever');
 
-console.log('inicio')
+alert('inicio')
+
 
 btnInscrever.addEventListener('click', function(){
-    if(senha.value!=senhaDois.value){
-    alert('Senhas não conferem')
-    }
-        else {
+//    if(senha.value!=senhaDois.value){
+//    alert('Senhas não conferem')
+//    }
+//        else {
     var cadastro = {
 
         "nome": nome.value,
@@ -30,8 +31,7 @@ btnInscrever.addEventListener('click', function(){
         "telefoneDois": telefoneDois.value,
         "email": email.value,
         "senha": senha.value
-    };
-
+    }
     var init ={
         method: 'POST',
         headers: { "Content-Type":'application/json'},
@@ -41,8 +41,10 @@ btnInscrever.addEventListener('click', function(){
     var endpoint = 'http://localhost:8080/clientes'
     console.log("teste")
     fetch(endpoint, init).then(function(response){
+        if(response.status!= 201){
+        alert("status dif 201")
+        }
         return response.json();
-
     }).then(function (data) {
           console.log(data);
           alert("Dados cadastrados com sucesso!")
@@ -50,6 +52,6 @@ btnInscrever.addEventListener('click', function(){
           })
 
           window.location.href = "/login"
-
-    }
+alert('final')
+//    }
 })

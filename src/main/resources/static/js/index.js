@@ -150,7 +150,7 @@ function btnAreaCliente(){
 //        if(localStorage.getItem('cliente') !=""){
 //            window.location.href = "/login"
 //        }else {
-          window.location.href = "/area_cliente/"+cliente.id}
+          window.location.href = "/area_cliente/"+cliente.id
       }
 
 

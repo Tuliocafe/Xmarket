@@ -79,6 +79,10 @@
                     </div>
                 </li>
 
+                <button id="botaoSair" type="button" class="btn btn-outline-secondary" style="margin: 7px">
+                    <a style="text-decoration: none; color: black;" onclick="sairDaPagina()">Logout</a>
+                </button>
+
             </ul>
         </div>
     </div>
@@ -90,7 +94,7 @@
         <div class="row g-0 ">
             <div class="collection-list mt-4 row gx-0 gy-3">
                 <div class="text-center">
-                    <h1 class="text-center">OLÁ "NOME" VOCÊ ESTÁ NA TELA DE ADMINISTRADOR</h1>
+                    <h1 class="text-center" style="margin-top: 28px;">OLÁ <span id="apresentaNome">"NOME"</span> VOCÊ ESTÁ NA TELA DE ADMINISTRADOR</h1>
                 </div>
             </div>
         </div>
@@ -110,14 +114,14 @@
             <input name="filtrar" class="filtrar" type="date" id="data-fim">
 
             <div id="gerarData" class="simularBotao">
-                Filtrar
+                Gerar com Filtro
             </div>
         </form>
     </div>
     <div style="position:absolute; bottom: 10px; right: 10px;">
         <button type="button" class="btn btn-outline-secondary"><a th:href="@{/admin/pdf/jr1(code='01', acao ='v')}"
                                                                    style="text-decoration: none; color: black;">Gerar
-            Relatorio</a></button>
+            Relatorio Geral</a></button>
     </div>
 </div>
 
@@ -216,7 +220,7 @@
         <div class="mb-3 col-md-12" >
         <label>Selecione uma marca para o produto:</label>
             <select class="form-control" id="dropDownList">
-                <option value="0">Selecione a Marca</option>
+                <option value="0" selected disabled>Selecione a Marca</option>
 
             </select>
         </div>
@@ -279,6 +283,7 @@
 <script src="js/produto.js"></script>
 <script src="js/marca.js"></script>
 <script src="js/modal.js"></script>
+<script src="js/admin.js"></script>
 </body>
 </html>
 

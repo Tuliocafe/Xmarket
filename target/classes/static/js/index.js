@@ -2,9 +2,7 @@ var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
-var venda = localStorage.getItem('venda')
-var idVenda
-
+var botaoAdmin = document.getElementById("botaoAdmin");
 
 setTimeout(sessao, 5000000);
 
@@ -145,6 +143,65 @@ if (logado) {
 
 }
 
+
+ if (logado) {
+
+     var auxCliente = localStorage.getItem("cliente");
+     console.log(auxCliente);
+     var cliente = JSON.parse(auxCliente);
+
+        botaoSair.style.display = "flex";
+             botaoLogin.style.display = "none";
+             carrinhoIcone.style.display = "flex";
+
+             if(cliente.tipoUsuario != 'administrador'){
+              botaoAdmin.style.display = "none";
+             } else {
+             botaoAdmin.style.display = "flex";
+             }
+     }
+     else {
+         botaoLogin.style.display = "flex";
+         carrinhoIcone.style.display = "none";
+         botaoSair.style.display = "none";
+          botaoAdmin.style.display = "none";
+
+
+     }
+
+     //Verifica se o usuario é um administrador e deixa visivel ou nao o botão admin
+//     function verificaAdmin(){
+//     var Cliente = localStorage.getItem("cliente");
+//               console.log(auxCliente);
+//               var cliente = JSON.parse(auxCliente);
+//      if (logado && Cliente.tipoUsuario == "administrador") {
+//
+//
+//          botaoAdmin.style.display = "flex";
+//
+//          }
+//          else {
+//             botaoAdmin.style.display = "none";
+//
+//          }
+//}
+
+
+
+
+     botaoSair.addEventListener('click', sairDaPagina);
+
+     function sairDaPagina(){
+         localStorage.clear();
+         alert("Usuário Deslogado");
+         window.location.href = "/index"
+
+     }
+
+// } else {
+//
+//     window.location.href = "/index";
+// }
 
 
 

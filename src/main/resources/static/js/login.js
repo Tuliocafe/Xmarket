@@ -19,12 +19,7 @@ buttonLogin.addEventListener('click', function(){
    fetch(endPoint,init)
     .then(function(response) {
 
-
-
      if (response.status != 200) {
-
-//                    console.log("body " + response.body);
-//                    console.log("headers" + response.headers);
 
                     //conseguir o valor de retorno de uma promisse
                     console.log("RESPONSE.BODY");
@@ -33,8 +28,6 @@ buttonLogin.addEventListener('click', function(){
                     console.log(response);
 
                     console.log(response.text())
-                    console.log(response.text());
-
 //                    console.log("response"+ response);
                      alert("Email ou senha inválidos");
         }

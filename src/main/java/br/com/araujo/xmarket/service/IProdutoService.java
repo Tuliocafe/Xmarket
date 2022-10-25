@@ -3,6 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dto.IHistoricoPrecoProdutoDTO;
 import br.com.araujo.xmarket.dto.ProdutoDTO;
 import br.com.araujo.xmarket.model.Produto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
@@ -19,4 +20,6 @@ public interface IProdutoService {
     public Produto atualizaProduto(Produto novo, Integer idAntigo);
 
     public ArrayList<IHistoricoPrecoProdutoDTO> buscaHistoricoPorPreco(Integer id);
+
+
 }

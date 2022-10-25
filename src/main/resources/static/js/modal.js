@@ -30,3 +30,25 @@ acessarModal2.addEventListener('click', function () {
 fecharModal2.addEventListener('click', function () {
     modal2.style.display = 'none';
 })
+
+
+
+//var fileUpload  = document.getElementById('fileUpload'),
+//    hiddenField = document.getElementById('hiddenField');
+//
+//function fileChanged() {
+//    function onLoad(e) {
+//        // Adicionando o arquivo em base64 ao hidden field:
+//        hiddenField.innerHTML = e.target.result;
+//    }
+//
+//    if (this.files && this.files[0]) {
+//        var fileReader = new FileReader();
+//        fileReader.onload = onLoad;
+//        // Isso vai transformar o arquivo em uma string base64:
+//        fileReader.readAsDataURL(this.files[0]);
+//    }
+//}
+//
+//document.getElementById('#fileUpload')
+//    .addEventListener('change', fileChanged, false);

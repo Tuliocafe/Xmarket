@@ -253,7 +253,13 @@ Overflow-y: scroll;
     right: 10px;
 }
 
-#formulario{
-display: inline-block;
-}
+.simularBotao{
+    background-color: #fff;
+    display: inline;
+    padding: 6px 44px;
+    border-radius: 25pxpx;
+    margin-left: 21px;
+    border: 1px solid rgb(85,85,85);
+    cursor: pointer;
 
+}

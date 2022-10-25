@@ -1,9 +1,6 @@
 package br.com.araujo.xmarket.controller;
 
-import br.com.araujo.xmarket.dto.ApiMessage;
-import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
-import br.com.araujo.xmarket.dto.IEnderecoDTO;
-import br.com.araujo.xmarket.dto.LoginDTO;
+import br.com.araujo.xmarket.dto.*;
 import br.com.araujo.xmarket.model.Cliente;
 import br.com.araujo.xmarket.model.Endereco;
 import br.com.araujo.xmarket.service.ClienteServiceImpl;
@@ -47,7 +44,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> cadastrarNovo(Cliente cliente) {
+    public ResponseEntity<Cliente> cadastrarNovo(@RequestBody ClienteDTO cliente) {
         System.out.println("------------------------------------------------------------" + cliente.getNome());
         if(clienteServiceImpl.verificaEmail(cliente.getEmail())){
             return new ResponseEntity( new ApiMessage("Email já existente na base de dados"), HttpStatus.NOT_FOUND);

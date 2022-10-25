@@ -25,7 +25,7 @@ buttonCadastrarProd.addEventListener('click', function(){
     "marca": marca.value,
     "categoria": 2
     };
-    console.log(cadastroProd);
+//    console.log(cadastroProd);
     var init = {
         method: 'POST',
         headers: { "Content-Type": 'application/json'},
@@ -37,7 +37,7 @@ var endPoint = 'http://localhost:8080/produtos'
     fetch(endPoint, init).then(function (response) {
     return response.json();
     }).then(function (data) {
-    console.log(data);
+//    console.log(data);
         alert('Produto cadastrado com sucesso');
 
         window.location.href = "/admin"
@@ -74,7 +74,7 @@ function getMarcas(){
         var option = document.createElement('option')
         var marca = produto.nome_marca
         var id = produto.id_marca;
-        console.log(id)
+        //console.log(id)
         option.setAttribute('value', `${id}`)
         option.appendChild(document.createTextNode(`${marca}`))
         selected.appendChild(option)

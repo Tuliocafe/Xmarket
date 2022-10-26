@@ -2,6 +2,8 @@ var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
+var botaoAdmin = document.getElementById("botaoAdmin");
+var botaoAreaCliente = document.getElementById("buttonAreaCliente");
 
 setTimeout(sessao, 5000000);
 
@@ -152,6 +154,7 @@ if (logado) {
         botaoSair.style.display = "flex";
              botaoLogin.style.display = "none";
              carrinhoIcone.style.display = "flex";
+             botaoAreaCliente.style.display = "flex";
 
              if(cliente.tipoUsuario != 'administrador'){
               botaoAdmin.style.display = "none";
@@ -163,7 +166,8 @@ if (logado) {
          botaoLogin.style.display = "flex";
          carrinhoIcone.style.display = "none";
          botaoSair.style.display = "none";
-          botaoAdmin.style.display = "none";
+         botaoAdmin.style.display = "none";
+         botaoAreaCliente.style.display = "none";
 
 
      }
@@ -312,3 +316,8 @@ async function verificaCarrinho(){
         }else{idVenda = ''}
    }
 
+function btnAreaCliente (){
+
+      window.location.href = "/area_cliente/"+cliente.id
+
+}

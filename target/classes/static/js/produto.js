@@ -13,7 +13,7 @@ var buttonCadastrarProd = document.getElementById('buttonCadastrarProd');
 buttonCadastrarProd.addEventListener('click', function(){
 
     var marca = document.getElementById('dropDownList');
-    console.log('marca', marca.value);
+
 
     var cadastroProd = {
     "quantidade": qtdProduto.value,
@@ -82,4 +82,4 @@ function getMarcas(){
     })
 }
 
-getMarcas();
+//getMarcas();

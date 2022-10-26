@@ -1,4 +1,10 @@
+var logado = localStorage.getItem('logado');
 
+if (logado) {
+     var auxCliente = localStorage.getItem("cliente");
+     var cliente = JSON.parse(auxCliente);
+
+ }
 
 var nome = document.getElementById('nome');
 var sobrenome = document.getElementById('sobrenome');
@@ -12,26 +18,31 @@ var senha = document.getElementById('senha');
 var senhaDois = document.getElementById('senhaDois');
 var btnInscrever = document.getElementById('btnInscrever');
 
-alert('inicio')
 
+var resposta
 
-btnInscrever.addEventListener('click', function(){
-//    if(senha.value!=senhaDois.value){
-//    alert('Senhas não conferem')
-//    }
-//        else {
-    var cadastro = {
-
-        "nome": nome.value,
-        "sobrenome": sobrenome.value,
-        "cpf": cpf.value,
-        "rg": rg.value,
-        "dataNascimento": dataNascimento.value,
-        "telefoneUm": telefoneUm.value,
-        "telefoneDois": telefoneDois.value,
-        "email": email.value,
-        "senha": senha.value
+btnInscrever.addEventListener('click', async function(){
+    if(senha.value== ""){
+    alert ("Senha não preenchida!")
+    } else if(senha.value!=senhaDois.value){
+    alert('Senhas não conferem')
     }
+        else {
+    var cadastro =  {
+                           "nome": nome.value,
+                           "sobrenome": sobrenome.value,
+                           "cpf": cpf.value,
+                           "dataNascimento": dataNascimento.value,
+                           "telefoneUm": telefoneUm.value,
+                           "telefoneDois": telefoneDois.value,
+                           "rg": rg.value,
+//                           "dataCriacaoUsuario": "2022-10-17 17:57:03",
+                           "senha": senha.value,
+                           "email": email.value,
+                           "tipoUsuario": "administrador",
+                           "status": null
+                       }
+                       console.log(cadastro)
     var init ={
         method: 'POST',
         headers: { "Content-Type":'application/json'},
@@ -40,18 +51,18 @@ btnInscrever.addEventListener('click', function(){
 
     var endpoint = 'http://localhost:8080/clientes'
     console.log("teste")
-    fetch(endpoint, init).then(function(response){
-        if(response.status!= 201){
-        alert("status dif 201")
-        }
-        return response.json();
-    }).then(function (data) {
-          console.log(data);
-          alert("Dados cadastrados com sucesso!")
+    var response = await fetch(endpoint, init)
+    console.log(response)
 
-          })
+         if(response.status== 404){
+                alert("Email já existente")
 
-          window.location.href = "/login"
-alert('final')
-//    }
+                }    else if(response.status ==201) {
+                    alert("Dados cadastrados com sucesso! Faça Login")
+
+                window.location.href = "/login"
+                } else {
+                alert("Código do erro:" + response.status)
+                }
+    }
 })

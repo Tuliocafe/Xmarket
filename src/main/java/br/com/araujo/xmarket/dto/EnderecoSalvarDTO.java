@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode
 public class EnderecoSalvarDTO {
 
-
+    private Integer id;
     private String logradouro;
     private String cep;
     private String bairro;

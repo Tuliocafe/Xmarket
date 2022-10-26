@@ -312,3 +312,8 @@ async function verificaCarrinho(){
         }else{idVenda = ''}
    }
 
+function btnAreaCliente (){
+
+      window.location.href = "/area_cliente/"+cliente.id
+
+}

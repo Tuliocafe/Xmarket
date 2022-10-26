@@ -6,7 +6,7 @@ if (logado) {
 
  }
 
-console.log(cliente.id);
+console.log(cliente.senha);
 
 var id = parseInt(cliente.id);
 var nome = document.getElementById('nome');
@@ -25,10 +25,26 @@ var btnInscrever = document.getElementById('btnInscrever');
 
 
 btnSalvar.addEventListener('click', function(){
-    if(senha.value!=senhaDois.value){
+    if(senha.value != senhaDois.value){
     alert('Senhas não conferem')
+    alert(cliente.senha)
+    return;
     }
-        else {
+
+    if(senha.value == ""){
+        var cadastro = {
+            "id": id,
+            "nome": nome.value,
+            "sobrenome": sobrenome.value,
+            "rg": rg.value,
+            "dataNascimento": dataNascimento.value,
+            "telefoneUm": telefoneUm.value,
+            "telefoneDois": telefoneDois.value,
+            "email": email.value,
+            "cpf": cpf.value,
+            "senha": cliente.senha
+            };
+    }else {
         var cadastro = {
             "id": id,
             "nome": nome.value,
@@ -40,8 +56,8 @@ btnSalvar.addEventListener('click', function(){
             "email": email.value,
             "cpf": cpf.value,
             "senha": senha.value
-        };
-
+            };
+}
         var init ={
             method: 'PUT',
             headers: { "Content-Type":'application/json'},
@@ -56,16 +72,13 @@ btnSalvar.addEventListener('click', function(){
         return response.json();
 
 
-        }).then(function (data) {
+        }).then(function (data)     {
               console.log(data);
                 alert("Alteração feita com sucesso!")
-
-
               })
 
-          }
+          })
 
-})
 
 
 

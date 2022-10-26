@@ -8,7 +8,7 @@ if (logado) {
     nomeAdmin.innerHTML = cliente.nome;
              } else {
                 alert("Você não tem permissão para acessar está página.")
-              
+
                window.location.href = "/index"
              }
 

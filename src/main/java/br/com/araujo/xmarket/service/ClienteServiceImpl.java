@@ -34,27 +34,23 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Cliente criaNovo(ClienteDTO cliente) {
 
-        Endereco endereco = enderecoDAO.findById(cliente.getEndereco().getId()).orElse(null);
+
 
         if (cliente != null ) {
-            LocalDateTime data = LocalDateTime.now();
+
 
             Cliente novoCliente = Cliente.builder()
-
-            .nome(cliente.getNome())
-            .cpf(cliente.getCpf())
-            .sobrenome(cliente.getSobrenome())
-            .dataNascimento(cliente.getDataNascimento())
-            .telefoneUm(cliente.getTelefoneUm())
-            .telefoneDois(cliente.getTelefoneDois())
-            .rg(cliente.getRg())
-            .dataCriacaoUsuario(data.toString())
-            .email(cliente.getEmail())
-            .senha(cliente.getSenha())
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf())
+                .sobrenome(cliente.getSobrenome())
+                .dataNascimento(cliente.getDataNascimento())
+                .telefoneUm(cliente.getTelefoneUm())
+                .telefoneDois(cliente.getTelefoneDois())
+                .rg(cliente.getRg())
+                .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
+                .email(cliente.getEmail())
+                .senha(cliente.getSenha())
             .build();
-            //            .endereco(endereco)
-            //            .status(cliente.setStatus(1))
-            //            .tipoUsuario(cliente.getTipoUsuario())
 
             clienteDao.save(novoCliente);
             return novoCliente;
@@ -100,12 +96,9 @@ public class ClienteServiceImpl implements IClienteService {
 
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
-//        if (clienteDao.existsById(id) ) ;
 
 
         if (novoCliente != null) {
-
-            //novoCliente.cloneCliente(cliente);
 
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
@@ -197,6 +190,7 @@ public class ClienteServiceImpl implements IClienteService {
 
 
         Endereco novoEndereco = Endereco.builder()
+                .id(endereco.getId())
                 .logradouro(endereco.getLogradouro())
                 .cep(endereco.getCep())
                 .bairro(endereco.getBairro())

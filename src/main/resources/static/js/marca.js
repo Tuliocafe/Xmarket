@@ -16,6 +16,7 @@ if(marca.value != "" || descricao.value != ""){
         headers: { "Content-Type": 'application/json'},
         body: JSON.stringify(cadastro)
     }
+    alert('Marca cadastrada com sucesso');
     } else{
     alert("Todos os campos são obrigatórios")
     }
@@ -26,7 +27,7 @@ var endPoint = 'http://localhost:8080/marcas'
     return response.json();
     }).then(function (data) {
     console.log(data);
-        alert('Marca cadastrada com sucesso');
+
 
         window.location.href = "/admin"
 

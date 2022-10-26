@@ -7,6 +7,7 @@ import br.com.araujo.xmarket.model.Produto;
 import br.com.araujo.xmarket.model.Venda;
 import br.com.araujo.xmarket.service.IVendaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,10 +60,23 @@ public class VendaController {
         return ResponseEntity.badRequest().build();
     }
 
+//    @PostMapping("/vendas/{id_venda}/fechar_venda")
+//    public ResponseEntity<Venda> fecharVenda(@PathVariable Integer id)
+//    {
+//        Venda res = vendaService.fecharVenda(id);
+//        return ResponseEntity.status(204).body(res);
+//    }
+
     @DeleteMapping("vendas/{id_venda}")
-    public ResponseEntity<Venda> excluirVenda(@PathVariable Integer id_venda){
-        vendaService.excluirVenda(id_venda);
-        return ResponseEntity.ok(null);
+    public ResponseEntity<?> excluirVenda(@PathVariable Integer id_venda){
+
+        boolean res = vendaService.fecharVenda(id_venda);
+
+        if (res){  return ResponseEntity.status(204).body(res);}
+
+
+        return ResponseEntity.status(412).build();
+
     }
 
     @PostMapping("vendas/{id_venda}/item")

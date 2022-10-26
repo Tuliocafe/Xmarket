@@ -25,12 +25,6 @@ buttonLogin.addEventListener('click', function(){
 
      if (response.status != 200) {
 
-                    //conseguir o valor de retorno de uma promisse
-                    console.log("RESPONSE.BODY");
-                    console.log(response.body);
-                    console.log("RESPONSE");
-                    console.log(response);
-
                     console.log(response.text())
 //                    console.log("response"+ response);
                      alert("Email ou senha inválidos");
@@ -46,7 +40,7 @@ buttonLogin.addEventListener('click', function(){
                 iniciarvenda();
 //                window.location.href = "/index";
     }).catch(function(error) {
-    alert(error)
+    //alert(error)
 //       window.location.href = "/login";
     });
 })

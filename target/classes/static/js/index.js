@@ -2,6 +2,8 @@ var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
+var botaoAreaCliente = document.getElementById("buttonAreaCliente");
+
 var auxVenda = localStorage.getItem('venda')
 var idVenda
 var venda = JSON.parse(auxVenda);
@@ -49,7 +51,6 @@ async function botaoCarrinho(){
             window.location.href = "carrinho/" + idVenda
 
         }else{
-        venda.
         console.log("criar venda")
         await cadastrarCarrinhio()//.then(function(idVenda){console.log(idVenda)})
         window.location.href = "carrinho/" + idVenda
@@ -74,7 +75,7 @@ async function botaoCarrinho(){
          botaoLogin.style.display = "flex";
          carrinhoIcone.style.display = "none";
          botaoSair.style.display = "none";
-  }
+}
 
 
 
@@ -104,6 +105,7 @@ async function addItem(idproduto){
                        "idVenda": idVenda,
                        "idProduto": idproduto
                    };
+
         var init = {
             method: 'POST',
             headers: { "Content-Type": 'application/json'},
@@ -137,8 +139,7 @@ async function addItem(idproduto){
 
 
 
-function verificaLogin()
-{
+function verificaLogin(){
 if (logado) {
          var auxCliente = localStorage.getItem("cliente");
          var cliente = JSON.parse(auxCliente);
@@ -149,6 +150,70 @@ if (logado) {
      }
 
 }
+
+
+// if (logado) {
+//
+//     var auxCliente = localStorage.getItem("cliente");
+//     console.log(auxCliente);
+//     var cliente = JSON.parse(auxCliente);
+//
+//             botaoSair.style.display = "flex";
+//             botaoLogin.style.display = "none";
+//             carrinhoIcone.style.display = "flex";
+//             botaoAreaCliente.style.display = "flex";
+//
+//             if(cliente.tipoUsuario != 'administrador'){
+//              botaoAdmin.style.display = "none";
+//             } else {
+//             botaoAdmin.style.display = "flex";
+//             }
+//     }
+//     else {
+//         botaoLogin.style.display = "flex";
+//         carrinhoIcone.style.display = "none";
+//         botaoSair.style.display = "none";
+//         botaoAdmin.style.display = "none";
+//         botaoAreaCliente.style.display = "none";
+//
+//
+//     }
+
+     //Verifica se o usuario é um administrador e deixa visivel ou nao o botão admin
+//     function verificaAdmin(){
+//     var Cliente = localStorage.getItem("cliente");
+//               console.log(auxCliente);
+//               var cliente = JSON.parse(auxCliente);
+//      if (logado && Cliente.tipoUsuario == "administrador") {
+//
+//
+//          botaoAdmin.style.display = "flex";
+//
+//          }
+//          else {
+//             botaoAdmin.style.display = "none";
+//
+//          }
+//}
+
+
+
+//
+//     botaoSair.addEventListener('click', sairDaPagina);
+//
+//     function sairDaPagina(){
+//         localStorage.clear();
+//         alert("Usuário Deslogado");
+//         window.location.href = "/index"
+//
+//     }
+
+// } else {
+//
+//     window.location.href = "/index";
+// }
+
+
 
 
 function sessao(){
@@ -257,5 +322,11 @@ async function verificaCarrinho(){
         idVenda = await listavenda[0].id
         localStorage.setItem("venda", JSON.stringify(listavenda[0]));
         }else{idVenda = ''}
-   }
+}
 
+
+function btnAreaCliente (){
+
+      window.location.href = "/area_cliente/"+cliente.id
+
+}

@@ -5,19 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
-
-@Builder
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 @Table(name = "usuario_cadastro")
 public class Cliente {
 
@@ -35,9 +33,8 @@ public class Cliente {
     @Column(name = "CPF_usuario")
     private String cpf;
 
-    @Column(name = "dataNascimento_usuario", columnDefinition = "DATE")
-    @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+    @Column(name = "dataNascimento_usuario")
+    private String dataNascimento;
 
     @Column(name = "telefone_usuario")
     private String telefoneUm;
@@ -50,7 +47,6 @@ public class Cliente {
 
     @Column(name = "dataCriacao_usuario", nullable = true)
     private String dataCriacaoUsuario;
-
 
     //colunas que vieram de de usuario_login:
 
@@ -67,9 +63,12 @@ public class Cliente {
     @Column(name = "status", columnDefinition = "TINYINT")
     private Integer status;
 
-
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("cliente")
     List<Endereco> listaEnderecos;
+
+
+
+
 
 }

@@ -34,20 +34,22 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Cliente criaNovo(ClienteDTO cliente) {
 
+
+
         if (cliente != null ) {
 
 
             Cliente novoCliente = Cliente.builder()
-            .nome(cliente.getNome())
-            .cpf(cliente.getCpf())
-            .sobrenome(cliente.getSobrenome())
-            .dataNascimento(cliente.getDataNascimento())
-            .telefoneUm(cliente.getTelefoneUm())
-            .telefoneDois(cliente.getTelefoneDois())
-            .rg(cliente.getRg())
-            .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
-            .email(cliente.getEmail())
-            .senha(cliente.getSenha())
+                .nome(cliente.getNome())
+                .cpf(cliente.getCpf())
+                .sobrenome(cliente.getSobrenome())
+                .dataNascimento(cliente.getDataNascimento())
+                .telefoneUm(cliente.getTelefoneUm())
+                .telefoneDois(cliente.getTelefoneDois())
+                .rg(cliente.getRg())
+                .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
+                .email(cliente.getEmail())
+                .senha(cliente.getSenha())
             .build();
 
             clienteDao.save(novoCliente);
@@ -94,11 +96,9 @@ public class ClienteServiceImpl implements IClienteService {
 
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
-//        if (clienteDao.existsById(id) ) ;
+
 
         if (novoCliente != null) {
-
-            //novoCliente.cloneCliente(cliente);
 
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());

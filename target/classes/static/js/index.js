@@ -2,7 +2,6 @@ var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
-var botaoAdmin = document.getElementById("botaoAdmin");
 var botaoAreaCliente = document.getElementById("buttonAreaCliente");
 
 setTimeout(sessao, 5000000);
@@ -151,7 +150,7 @@ if (logado) {
      console.log(auxCliente);
      var cliente = JSON.parse(auxCliente);
 
-        botaoSair.style.display = "flex";
+             botaoSair.style.display = "flex";
              botaoLogin.style.display = "none";
              carrinhoIcone.style.display = "flex";
              botaoAreaCliente.style.display = "flex";

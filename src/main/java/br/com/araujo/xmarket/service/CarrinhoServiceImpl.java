@@ -59,7 +59,7 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
                 .id(dados.getId())
                 .precoTotal(dados.getPrecoTotal())
                 .quantidade(dados.getQuantidade())
-                .precoUnitario(produto.getPreco_produto())
+                .precoUnitario(produto.getPreco())
                 .venda(venda)
                 .produto(produto)
                 .build();
@@ -81,7 +81,31 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
     }
 
     @Override
-    public void excluirCarrinho(Integer id) {
+    public boolean excluirCarrinho(Integer id) {
+
+        CarrinhoCompra carrinhoCompra = carrinhoDao.findById(id).orElse(null);
+
+        if(carrinhoCompra == null) {return false;}
+
+        Integer idProduto = carrinhoCompra.getProduto().getId_produto();
+
+
+
+        Produto produto = produtoDao.findById(idProduto).orElse(null);
+
+        if(produto == null) {return false;}
+
+        Integer quantidadeProdutoCarrinho = carrinhoCompra.getQuantidade();
+
+        Integer quantidadeProduto = produto.getQuantidade_produto();
+
+        produto.setQuantidade_produto(quantidadeProduto + quantidadeProdutoCarrinho);
+
+        produtoDao.save(produto);
+
         carrinhoDao.deleteById(id);
+
+        return true;
+
     }
 }

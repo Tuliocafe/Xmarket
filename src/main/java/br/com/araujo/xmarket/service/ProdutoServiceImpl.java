@@ -75,7 +75,7 @@ public class ProdutoServiceImpl implements IProdutoService {
     @Override
     public Produto atualizaProduto(Produto novo, Integer idAntigo) {
         novo.setId_produto(idAntigo);
-        if(novo.getId_produto() != null && novo.getNome_produto() != null && novo.getPreco_produto() != null && novo.getMarca() != null){
+        if(novo.getId_produto() != null && novo.getNome() != null && novo.getPreco() != null && novo.getMarca() != null){
             return ProdutoDao.save(novo);
         }
         return null;

@@ -45,7 +45,7 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
         assert produto != null;
         if(produto.getQuantidade_produto() < dados.getQuantidade())
         {
-            throw new RuntimeException("Quantidade em estoque insuficiente");
+            return null;
 
         }
 

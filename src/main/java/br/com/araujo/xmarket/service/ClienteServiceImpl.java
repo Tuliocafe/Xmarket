@@ -40,7 +40,6 @@ public class ClienteServiceImpl implements IClienteService {
             LocalDateTime data = LocalDateTime.now();
 
             Cliente novoCliente = Cliente.builder()
-
             .nome(cliente.getNome())
             .cpf(cliente.getCpf())
             .sobrenome(cliente.getSobrenome())
@@ -52,9 +51,6 @@ public class ClienteServiceImpl implements IClienteService {
             .email(cliente.getEmail())
             .senha(cliente.getSenha())
             .build();
-            //            .endereco(endereco)
-            //            .status(cliente.setStatus(1))
-            //            .tipoUsuario(cliente.getTipoUsuario())
 
             clienteDao.save(novoCliente);
             return novoCliente;

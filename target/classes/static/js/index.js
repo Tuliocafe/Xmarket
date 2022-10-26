@@ -2,7 +2,6 @@ var logado = localStorage.getItem('logado');
 var botaoLogin = document.getElementById('buttonLogin');
 var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
-var botaoAdmin = document.getElementById("botaoAdmin");
 
 setTimeout(sessao, 5000000);
 

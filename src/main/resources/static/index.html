@@ -85,9 +85,9 @@
                 </li>
 
 
-<!--                <li class="nav-item px-2 py-2 border-0">-->
-<!--                    <a onclick="btnAreaCleinte()" >Área do Cliente</a>-->
-<!--                </li>-->
+                <!--                <li class="nav-item px-2 py-2 border-0">-->
+                <!--                    <a onclick="btnAreaCleinte()" >Área do Cliente</a>-->
+                <!--                </li>-->
             </ul>
         </div>
     </div>
@@ -162,7 +162,7 @@
                               data-th-text="${#numbers.formatDecimal(produto.preco_produto,0,'COMMA', 2, 'POINT')}"></span>
                         <p>
 
-                        <button class="btn btn-primary mt-3" th:attr="onclick=${'addItem('+produto.id_produto+')'}"> Adicionar ao Carrinho</button>
+                            <button class="btn btn-primary mt-3" th:attr="onclick=${'addItem('+produto.id_produto+')'}"> Adicionar ao Carrinho</button>
                         </p>
                     </div>
 

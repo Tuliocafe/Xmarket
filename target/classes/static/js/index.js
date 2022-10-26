@@ -4,6 +4,10 @@ var carrinhoIcone = document.getElementById("carrinhoIndex");
 var botaoSair = document.getElementById("botaoSair");
 var botaoAreaCliente = document.getElementById("buttonAreaCliente");
 
+var auxVenda = localStorage.getItem('venda')
+var idVenda
+var venda = JSON.parse(auxVenda);
+var desconto = 0
 setTimeout(sessao, 5000000);
 
 var listavenda
@@ -45,8 +49,7 @@ async function botaoCarrinho(){
     await verificaCarrinho()
     if(idVenda != ''){
             window.location.href = "carrinho/" + idVenda
-            console.log('tem valor')
-            console.log(idVenda)
+
         }else{
         console.log("criar venda")
         await cadastrarCarrinhio()//.then(function(idVenda){console.log(idVenda)})
@@ -72,7 +75,7 @@ async function botaoCarrinho(){
          botaoLogin.style.display = "flex";
          carrinhoIcone.style.display = "none";
          botaoSair.style.display = "none";
-  }
+}
 
 
 
@@ -92,16 +95,13 @@ async function addItem(idproduto){
     await verificaCarrinho()
     if(idVenda != ''){
         }else{
-        console.log("criar venda")
         await cadastrarCarrinhio()
         }
 
     var idproduto = idproduto
-    console.log(idproduto)
-    console.log(venda)
         var item = {
                        "quantidade": 1,
-                       "desconto": 0,
+                       "desconto": desconto,
                        "idVenda": idVenda,
                        "idProduto": idproduto
                    };
@@ -118,9 +118,19 @@ async function addItem(idproduto){
     return response.json();
 
     }).then(function (data) {
-    console.log(data);
-        alert('Produto adicionado com sucesso');
-            })
+    console.log(data)
+
+    alert("Produto já está no carrinho")
+//    if(data.status == 201){
+//        alert('Produto adicionado com sucesso');
+//        }
+//
+//    else if(data.status == "xxx"){
+//        alert("Produto já está no carrinho")
+//            }
+//    else{
+//    alert("Erro ao incluir produto")}
+})
 }
 
 
@@ -129,11 +139,9 @@ async function addItem(idproduto){
 
 
 
-function verificaLogin()
-{
+function verificaLogin(){
 if (logado) {
          var auxCliente = localStorage.getItem("cliente");
-         console.log(auxCliente);
          var cliente = JSON.parse(auxCliente);
      }
      else {
@@ -172,33 +180,33 @@ if (logado) {
      }
 
      //Verifica se o usuario é um administrador e deixa visivel ou nao o botão admin
-//     function verificaAdmin(){
-//     var Cliente = localStorage.getItem("cliente");
-//               console.log(auxCliente);
-//               var cliente = JSON.parse(auxCliente);
-//      if (logado && Cliente.tipoUsuario == "administrador") {
+     function verificaAdmin(){
+     var Cliente = localStorage.getItem("cliente");
+               console.log(auxCliente);
+               var cliente = JSON.parse(auxCliente);
+      if (logado && Cliente.tipoUsuario == "administrador") {
+
+
+          botaoAdmin.style.display = "flex";
+
+          }
+          else {
+             botaoAdmin.style.display = "none";
+
+          }
+}
+
+
+
 //
+//     botaoSair.addEventListener('click', sairDaPagina);
 //
-//          botaoAdmin.style.display = "flex";
+//     function sairDaPagina(){
+//         localStorage.clear();
+//         alert("Usuário Deslogado");
+//         window.location.href = "/index"
 //
-//          }
-//          else {
-//             botaoAdmin.style.display = "none";
-//
-//          }
-//}
-
-
-
-
-     botaoSair.addEventListener('click', sairDaPagina);
-
-     function sairDaPagina(){
-         localStorage.clear();
-         alert("Usuário Deslogado");
-         window.location.href = "/index"
-
-     }
+//     }
 
 // } else {
 //
@@ -305,15 +313,17 @@ async function verificaCarrinho(){
              }
 
     var response = await fetch(endPoint, init);
+    console.log(response)
+    console.log(response.status)
     listavenda = await response.json();
-    console.log(listavenda)
 
+//    console.log(listavenda)
     if(listavenda != ''){
         idVenda = await listavenda[0].id
-        console.log(idVenda)
         localStorage.setItem("venda", JSON.stringify(listavenda[0]));
         }else{idVenda = ''}
-   }
+}
+
 
 function btnAreaCliente (){
 

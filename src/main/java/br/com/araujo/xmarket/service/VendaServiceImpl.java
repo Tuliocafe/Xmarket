@@ -87,18 +87,24 @@ public class VendaServiceImpl implements IVendaService {
         if (venda.getStatusVendas().getStatus().name().equals("finalizada") ||
                 venda.getStatusVendas().getStatus().name().equals("cancelada")
         ) {
-            throw new RuntimeException("O pedido está fechado");
+            return null;
+        }
+
+        for (int i = 0; i < venda.getListaItensCarrinho().size(); i++) {
+
+            if (itemDto.getIdProduto() == venda.getListaItensCarrinho().get(i).getProduto().getId_produto() )
+            {
+                return null;
+            }
+
         }
 
 
-        Produto produto = produtoDao.findById(itemDto.getIdProduto()).orElseThrow(
-                () -> {
-                    throw new RuntimeException("Esse Produto não existe");
-                });
+        Produto produto = produtoDao.findById(itemDto.getIdProduto()).orElse(null);
 
+        assert produto != null;
         if (produto.getQuantidade_produto() < itemDto.getQuantidade()) {
-            throw new RuntimeException("Quantidade em estoque insuficiente");
-
+            return null;
         }
 
         produto.setQuantidade_produto(produto.getQuantidade_produto() - itemDto.getQuantidade());
@@ -106,12 +112,12 @@ public class VendaServiceImpl implements IVendaService {
         produtoDao.save(produto);
 
         // usando padrão builder do lombok
-        Double precoTotalItem = (itemDto.getQuantidade() * produto.getPreco());
+        Double precoTotalItem = (itemDto.getQuantidade() * produto.getPreco_produto());
 
         CarrinhoCompra novoItem = CarrinhoCompra.builder()
                 .precoTotal(precoTotalItem)
                 .quantidade(itemDto.getQuantidade())
-                .precoUnitario(produto.getPreco())
+                .precoUnitario(produto.getPreco_produto())
                 .venda(venda)
                 .produto(produto)
                 .build();

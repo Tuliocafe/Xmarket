@@ -28,7 +28,8 @@ public class VendaController {
     @GetMapping("/vendas/usuario/{id}")
     public ResponseEntity<ArrayList<Venda>> buscaIdUsuario(@PathVariable Integer id){
         ArrayList<Venda> listaVenda = vendaService.buscaIdUsuarioQuere(id);
-        return ResponseEntity.ok(listaVenda);
+//      return ResponseEntity.ok(listaVenda);
+        return ResponseEntity.status(201).body(listaVenda);
     }
 
 
@@ -79,12 +80,14 @@ public class VendaController {
     }
 
     @PostMapping("vendas/{id_venda}/item")
-    public CarrinhoCompra incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
-        return vendaService.incluirItemNaVenda(itemDto);
+    public ResponseEntity<CarrinhoCompra> incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
+
+
+        CarrinhoCompra carrinho = vendaService.incluirItemNaVenda(itemDto);
+
+        if (carrinho != null) { return ResponseEntity.status(201).body(carrinho);}
+
+        return ResponseEntity.status(412).build();
+
     }
-
-
-
-
-
 }

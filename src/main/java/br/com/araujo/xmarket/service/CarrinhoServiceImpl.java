@@ -59,7 +59,7 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
                 .id(dados.getId())
                 .precoTotal(dados.getPrecoTotal())
                 .quantidade(dados.getQuantidade())
-                .precoUnitario(produto.getPreco())
+                .precoUnitario(produto.getPreco_produto())
                 .venda(venda)
                 .produto(produto)
                 .build();

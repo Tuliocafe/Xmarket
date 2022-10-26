@@ -1,6 +1,7 @@
 var frete = document.getElementById('frete');
 var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
+var venda = localStorage.getItem('venda')
 
 var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
 var rotaVendas = 'http://localhost:8080/vendas/'
@@ -13,6 +14,7 @@ var carrinho  = {listaCarrinho: []}
 var vendaAtualizada
 
 
+setTimeout(sessao, 5000000);
 
 getdados()
 
@@ -21,6 +23,11 @@ var idEstoque = document.getElementById('estoque'+71)
 console.log(idEstoque)
 
 
+function sessao(){
+    localStorage.clear();
+    alert("O usuário está deslogado");
+    window.location.href = "/index"
+}
 
 
 async function calcularTotal(){
@@ -51,8 +58,11 @@ async function getdados(){
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
              somaValores = (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
              somaValorTotal += somaValores
-             carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id ,quantidade: dados.listaItensCarrinho[i].quantidade,
-             venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto, precoTotal: somaValores } )
+              carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id,
+              quantidade: dados.listaItensCarrinho[i].quantidade,
+              venda:dados.id,
+              produto:dados.listaItensCarrinho[i].produto.id_produto,
+              precoTotal: somaValores } )
          }
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
@@ -112,7 +122,6 @@ function deletarItem(idItem){
 
                 fetch(endPoint, init)
 
-        console.log(idVenda.innerHTML)
 
         //vai retornar mensagem de erro ou sucesso janela de sim ou nao ?
         alert("Item deletado com sucesso")

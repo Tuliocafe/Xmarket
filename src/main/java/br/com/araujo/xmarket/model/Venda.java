@@ -1,6 +1,7 @@
 package br.com.araujo.xmarket.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Builder;
 
@@ -38,6 +39,7 @@ public class Venda {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
+//    @JsonIgnore
     private Cliente cliente;
 
 

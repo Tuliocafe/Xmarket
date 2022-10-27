@@ -98,9 +98,9 @@
 <!--                                                                                    <p class="text-capitalize my-1" data-th-text="${carrinhos.desconto}"></p>-->
 <!--                                                                                    <p class="mb-2">CAMISA SOCIAL - XADREZ</p>-->
                                         <p class="mb-2" data-th-text="${carrinho.produto.cor}"></p>
-                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.tamanho}"></p>
+                                        <p class="mb-3"  data-th-text="${carrinho.produto.tamanho}"></p>
                                         <p>Estoque</p>
-                                        <p class="mb-3" data-th-text="${carrinho.produto.quantidade_produto}"></p>
+                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.quantidade_produto}"></p>
 
                                     </div>
                                     <!-- quantity inc dec -->

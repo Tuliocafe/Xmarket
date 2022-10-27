@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static org.bouncycastle.crypto.tls.ConnectionEnd.client;
+
 @Service
 @Primary
 public class ClienteServiceImpl implements IClienteService {
@@ -34,25 +36,23 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Cliente criaNovo(ClienteDTO cliente) {
 
-        if (cliente != null ) {
 
+        if (cliente != null) {
 
             Cliente novoCliente = Cliente.builder()
-
-            .nome(cliente.getNome())
-            .cpf(cliente.getCpf())
-            .sobrenome(cliente.getSobrenome())
-            .dataNascimento(cliente.getDataNascimento())
-            .telefoneUm(cliente.getTelefoneUm())
-            .telefoneDois(cliente.getTelefoneDois())
-            .rg(cliente.getRg())
-            .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
-            .email(cliente.getEmail())
-            .senha(cliente.getSenha())
-            .build();
-            //            .endereco(endereco)
-            //            .status(cliente.setStatus(1))
-            //            .tipoUsuario(cliente.getTipoUsuario())
+                    .nome(cliente.getNome())
+                    .cpf(cliente.getCpf())
+                    .tipoUsuario(TipoUsuario.valueOf("usuario"))
+                    .status(1)
+                    .sobrenome(cliente.getSobrenome())
+                    .dataNascimento(cliente.getDataNascimento())
+                    .telefoneUm(cliente.getTelefoneUm())
+                    .telefoneDois(cliente.getTelefoneDois())
+                    .rg(cliente.getRg())
+                    .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
+                    .email(cliente.getEmail())
+                    .senha(cliente.getSenha())
+                    .build();
 
             clienteDao.save(novoCliente);
             return novoCliente;
@@ -98,11 +98,8 @@ public class ClienteServiceImpl implements IClienteService {
 
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
-//        if (clienteDao.existsById(id) ) ;
 
         if (novoCliente != null) {
-
-            //novoCliente.cloneCliente(cliente);
 
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
@@ -124,7 +121,6 @@ public class ClienteServiceImpl implements IClienteService {
         }
         return null;
     }
-
 
 
     @Override
@@ -150,10 +146,11 @@ public class ClienteServiceImpl implements IClienteService {
             return novoEndereco;
         }
 
-    return null;
+        return null;
 
 
-}
+    }
+
     @Override
     public IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco) {
         return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
@@ -162,14 +159,13 @@ public class ClienteServiceImpl implements IClienteService {
     @Override
     public Cliente logar(LoginDTO loginUsuario) {
 
-       Cliente cliente =  clienteDao.getByEmail(loginUsuario.getEmail());
+        Cliente cliente = clienteDao.getByEmail(loginUsuario.getEmail());
 
-       if (cliente == null)
-       {
-           return null;
-       }
+        if (cliente == null) {
+            return null;
+        }
 
-      if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
+        if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
             return cliente;
         }
 
@@ -189,8 +185,12 @@ public class ClienteServiceImpl implements IClienteService {
 
         Cliente cliente = clienteDao.findById(endereco.getIdUsuario()).orElse(null);
 
-        if (cidade == null) {return null;}
-        if(cliente == null) {return null;}
+        if (cidade == null) {
+            return null;
+        }
+        if (cliente == null) {
+            return null;
+        }
 
 
         Endereco novoEndereco = Endereco.builder()
@@ -205,11 +205,12 @@ public class ClienteServiceImpl implements IClienteService {
                 .cliente(cliente)
                 .build();
 
-       enderecoDAO.save(novoEndereco);
+        enderecoDAO.save(novoEndereco);
 
         return novoEndereco;
 
     }
+
     @Override
     public String toString() {
         return super.toString();

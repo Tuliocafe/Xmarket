@@ -12,5 +12,5 @@ public interface ICarrinhoService {
     public CarrinhoCompra atualizarDados (CarrinhoDTO dados);
     public ArrayList<CarrinhoCompra> buscarTodas();
     public CarrinhoCompra buscarPeloId(Integer id);
-    public void excluirCarrinho(Integer id);
+    public boolean excluirCarrinho(Integer id);
 }

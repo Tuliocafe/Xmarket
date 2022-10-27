@@ -13,25 +13,25 @@ import java.util.ArrayList;
 public class CarrinhoController {
 
     @Autowired
-    private ICarrinhoService service;
+    private ICarrinhoService carrinhoService;
 
     @GetMapping("/carrinhos")
     public ArrayList<CarrinhoCompra> recuperaTodos() {
-        return service.buscarTodas();
+        return carrinhoService.buscarTodas();
     }
 
     @GetMapping("/carrinhos/{id}")
     public ResponseEntity<CarrinhoCompra> buscarPeloId(@PathVariable Integer id){
-    CarrinhoCompra res = service.buscarPeloId(id);
-    if(res !=null){
-        return ResponseEntity.ok(res);
-    }
-    return ResponseEntity.status(404).build();
+        CarrinhoCompra res = carrinhoService.buscarPeloId(id);
+        if(res !=null){
+            return ResponseEntity.ok(res);
+        }
+        return ResponseEntity.status(404).build();
     }
 
     @PutMapping("/carrinhos/{id}")
     public ResponseEntity<CarrinhoCompra> alterarCarrinho(@RequestBody CarrinhoDTO dados){
-        CarrinhoCompra res = service.atualizarDados(dados);
+        CarrinhoCompra res = carrinhoService.atualizarDados(dados);
         if(res != null){
             return ResponseEntity.ok(res);
         }
@@ -40,8 +40,17 @@ public class CarrinhoController {
 
     @DeleteMapping("/carrinhos/{id}")
     public ResponseEntity<CarrinhoCompra> excluirCarrinho(@PathVariable Integer id){
-        service.excluirCarrinho(id);
-        return  ResponseEntity.ok(null);
+
+        boolean respostaDelete =  carrinhoService.excluirCarrinho(id);
+
+        if (respostaDelete)
+        {
+            return  ResponseEntity.status(204).build();
+
+        }
+
+        return  ResponseEntity.status(412).build();
+
     }
 
 

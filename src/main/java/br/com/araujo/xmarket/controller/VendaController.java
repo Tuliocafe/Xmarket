@@ -75,7 +75,6 @@ public class VendaController {
 
     @PostMapping("vendas/{id_venda}/item")
     public ResponseEntity<CarrinhoCompra> incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
-
         CarrinhoCompra carrinho = vendaService.incluirItemNaVenda(itemDto);
 
         if (carrinho != null) { return ResponseEntity.status(201).body(carrinho);}

@@ -1,7 +1,7 @@
 var frete = document.getElementById('frete');
 var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
-
+var logado = localStorage.getItem('logado');
 var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
 var rotaVendas = 'http://localhost:8080/vendas/'
 
@@ -159,6 +159,24 @@ const aumentar = (incdec, valorUnitario) => {
            }
     }
 }
+
+ if (logado) {
+
+     var auxCliente = localStorage.getItem("cliente");
+     console.log(auxCliente);
+     var cliente = JSON.parse(auxCliente);
+        botaoSair.style.display = "flex";
+     }
+     else {
+         botaoSair.style.display = "none";
+  }
+
+  function sairDaPagina(){
+           localStorage.clear();
+           alert("Usuário Deslogado");
+           window.location.href = "/index"
+
+       }
 
 
 

@@ -185,7 +185,7 @@ footer a:hover{
 }
 
 #modal{
-width: 58%;
+width: 62%;
 height: 38%;
 background-color: #fff;
 border: 1px solid black;
@@ -210,7 +210,7 @@ border-radius: 10px;
 
 #modal1 {
 width: 43%;
-height: 45%;
+height: 33%;
 background-color: #fff;
 border: 1px solid black;
 position: absolute;
@@ -220,6 +220,7 @@ z-index: 1031;
 display: none;
 padding: 1%;
 border-radius: 10px;
+Overflow-y: scroll;
 }
 
 #fecharModal1 {
@@ -262,4 +263,50 @@ Overflow-y: scroll;
     border: 1px solid rgb(85,85,85);
     cursor: pointer;
 
+}
+
+#modal3 {
+width: 43%;
+height: 36%;
+background-color: #fff;
+border: 1px solid black;
+position: absolute;
+top: 0; bottom: 0 ; right:0; left: 0 ;
+margin: auto;
+z-index: 1031;
+display: none;
+padding: 1%;
+border-radius: 10px;
+Overflow-y: scroll;
+}
+
+#fecharModal3 {
+    cursor: pointer;
+    color: red;
+    position:absolute;
+    top: 10px;
+    right: 10px;
+}
+
+#modal4 {
+width: 43%;
+height: 80%;
+background-color: #fff;
+border: 1px solid black;
+position: absolute;
+top: 0; bottom: 0 ; right:0; left: 0 ;
+margin: auto;
+z-index: 1031;
+display: none;
+padding: 1%;
+border-radius: 10px;
+Overflow-y: scroll;
+}
+
+#fecharModal4 {
+    cursor: pointer;
+    color: red;
+    position:absolute;
+    top: 10px;
+    right: 10px;
 }

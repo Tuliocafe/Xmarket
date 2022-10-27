@@ -39,7 +39,7 @@ buttonLogin.addEventListener('click', function(){
 
         return response.json();
     }).then(async function(data) {
-                alert('success');
+//                alert('success');
                 localStorage.setItem("logado",true);
                 localStorage.setItem("cliente", JSON.stringify(data));
                 cliente = await data

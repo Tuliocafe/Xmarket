@@ -17,7 +17,7 @@ public interface IProdutoService {
 
     public void excluirProduto(Integer id);
 
-    public Produto atualizaProduto(Produto novo, Integer idAntigo);
+    public Produto atualizaProduto( Integer idAntigo, ProdutoDTO novo);
 
     public ArrayList<IHistoricoPrecoProdutoDTO> buscaHistoricoPorPreco(Integer id);
 

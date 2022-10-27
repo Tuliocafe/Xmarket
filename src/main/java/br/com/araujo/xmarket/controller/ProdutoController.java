@@ -24,6 +24,8 @@ public class ProdutoController {
     @Autowired
     private IProdutoService service;
 
+
+
     @GetMapping("/produtos")
     public ResponseEntity<ArrayList<Produto>> recuperarTodos(){
         ArrayList<Produto> listaProduto = service.recuperarTodos();
@@ -54,6 +56,8 @@ public class ProdutoController {
     return  ResponseEntity.ok(listaHistorico);
     }
 
+
+
     @PostMapping("/produtos")
     public ResponseEntity<Produto> cadastrarNovo(@RequestBody ProdutoDTO novo){
         Produto res = service.cadastrarNovo(novo);
@@ -71,8 +75,8 @@ public class ProdutoController {
     }
 
     @PutMapping("/produtos/{id_produto}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable Integer id_produto, @RequestBody Produto novo){
-        Produto atualizado = service.atualizaProduto(novo, id_produto);
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Integer id_produto, @RequestBody ProdutoDTO novo){
+        Produto atualizado = service.atualizaProduto(id_produto, novo);
         if(atualizado != null) return ResponseEntity.ok(atualizado);
         return ResponseEntity.badRequest().build();
     }

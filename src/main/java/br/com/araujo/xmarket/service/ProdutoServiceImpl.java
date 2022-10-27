@@ -73,12 +73,31 @@ public class ProdutoServiceImpl implements IProdutoService {
     }
 
     @Override
-    public Produto atualizaProduto(Produto novo, Integer idAntigo) {
-        novo.setId_produto(idAntigo);
-        if(novo.getId_produto() != null && novo.getNome_produto() != null && novo.getPreco_produto() != null && novo.getMarca() != null){
-            return ProdutoDao.save(novo);
+    public Produto atualizaProduto( Integer idAntigo, ProdutoDTO produto) {
+//        Produto produto = new Produto(idAntigo, produto);
+        if(produto.getNome() == null && produto.getPreco() == null && produto.getMarca() == null){
+            return null;
         }
-        return null;
+
+        Marca marca = marcaDao.findById(produto.getMarca()).orElse(null);
+
+        Categoria categoria =  categoriaDao.findById(produto.getCategoria()).orElse(null);
+
+
+        Produto novoProduto = Produto.builder()
+                .id_produto(idAntigo)
+                .quantidade_produto(produto.getQuantidade())
+                .preco(produto.getPreco())
+                .imagem_path(produto.getImagem_path())
+                .nome(produto.getNome())
+                .tamanho(produto.getTamanho())
+                .cor(produto.getCor())
+                .marca(marca)
+                .categoria(categoria)
+                .build();
+
+        ProdutoDao.save(novoProduto);
+        return novoProduto;
     }
 
     @Override

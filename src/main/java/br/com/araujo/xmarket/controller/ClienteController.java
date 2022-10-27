@@ -107,7 +107,7 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/login")
-    public ResponseEntity<Cliente> Logar(@RequestBody LoginDTO clienteLogin)  {
+    public ResponseEntity<Cliente> Logar(@RequestBody LoginDTO clienteLogin) throws Exception {
 
         Cliente cliente = clienteServiceImpl.logar(clienteLogin);
 
@@ -124,11 +124,21 @@ public class ClienteController {
     public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer idUsuario, @RequestBody EnderecoSalvarDTO novoEndereco){
         Endereco res = clienteServiceImpl.criaNovoEndereco(novoEndereco);
         if (res != null){
-            return new ResponseEntity<>( res, HttpStatus.CREATED);
-
+            return ResponseEntity.status(202).build();
         }
         return  ResponseEntity.badRequest().build();
     }
+
+
+
+
+//    @GetMapping("/listaClientes")
+//    public ModelAndView clientes(){
+//        ModelAndView mv = new ModelAndView("clientes");
+//        Iterable<Cliente> clienteIt = clienteServiceImpl.buscarTodos();
+//        mv.addObject("clientes", clienteIt);
+//        return mv;
+//    }
 
 
 }

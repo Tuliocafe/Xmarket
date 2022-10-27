@@ -60,15 +60,9 @@ public class VendaController {
         return ResponseEntity.badRequest().build();
     }
 
-//    @PostMapping("/vendas/{id_venda}/fechar_venda")
-//    public ResponseEntity<Venda> fecharVenda(@PathVariable Integer id)
-//    {
-//        Venda res = vendaService.fecharVenda(id);
-//        return ResponseEntity.status(204).body(res);
-//    }
 
     @DeleteMapping("vendas/{id_venda}")
-    public ResponseEntity<?> excluirVenda(@PathVariable Integer id_venda){
+    public ResponseEntity<?> cancelarVenda(@PathVariable Integer id_venda){
 
         boolean res = vendaService.fecharVenda(id_venda);
 
@@ -81,8 +75,12 @@ public class VendaController {
 
     @PostMapping("vendas/{id_venda}/item")
     public ResponseEntity<CarrinhoCompra> incluirItemNaVenda(@RequestBody ItemDTO itemDto) {
+
         CarrinhoCompra carrinho = vendaService.incluirItemNaVenda(itemDto);
-        return ResponseEntity.status(201).body(carrinho);
+
+        if (carrinho != null) { return ResponseEntity.status(201).body(carrinho);}
+
+        return ResponseEntity.status(412).build();
 
     }
 }

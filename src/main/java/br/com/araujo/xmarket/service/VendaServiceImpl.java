@@ -56,6 +56,9 @@ public class VendaServiceImpl implements IVendaService {
 
     @Override
     public Venda atualizarDados(Venda dados) {
+
+        LocalDateTime dataAgora = LocalDateTime.now();
+        dados.setDataVenda(String.valueOf(dataAgora));
         if (dados.getId() != null) {
             return vendaDao.save(dados);
         }
@@ -87,18 +90,24 @@ public class VendaServiceImpl implements IVendaService {
         if (venda.getStatusVendas().getStatus().name().equals("finalizada") ||
                 venda.getStatusVendas().getStatus().name().equals("cancelada")
         ) {
-            throw new RuntimeException("O pedido está fechado");
+            return null;
+        }
+
+        for (int i = 0; i < venda.getListaItensCarrinho().size(); i++) {
+
+            if (itemDto.getIdProduto() == venda.getListaItensCarrinho().get(i).getProduto().getId_produto() )
+            {
+                return null;
+            }
+
         }
 
 
-        Produto produto = produtoDao.findById(itemDto.getIdProduto()).orElseThrow(
-                () -> {
-                    throw new RuntimeException("Esse Produto não existe");
-                });
+        Produto produto = produtoDao.findById(itemDto.getIdProduto()).orElse(null);
 
+        assert produto != null;
         if (produto.getQuantidade_produto() < itemDto.getQuantidade()) {
-            throw new RuntimeException("Quantidade em estoque insuficiente");
-
+            return null;
         }
 
         produto.setQuantidade_produto(produto.getQuantidade_produto() - itemDto.getQuantidade());

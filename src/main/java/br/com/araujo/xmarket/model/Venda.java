@@ -39,7 +39,7 @@ public class Venda {
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
-    @JsonIgnore
+//    @JsonIgnore
     private Cliente cliente;
 
 

@@ -53,16 +53,17 @@ async function getdados(){
 
         dados = await response.json()
 
-
         //cria um JSON dos itens que estao no carrinho e calcula valor total
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
              somaValores = (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
              somaValorTotal += somaValores
-              carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id,
-              quantidade: dados.listaItensCarrinho[i].quantidade,
-              venda:dados.id,
-              produto:dados.listaItensCarrinho[i].produto.id_produto,
-              precoTotal: somaValores } )
+              carrinho.listaCarrinho.push({
+                                        id:dados.listaItensCarrinho[i].id,
+                                        quantidade: dados.listaItensCarrinho[i].quantidade,
+                                        venda:dados.id,
+                                        produto:dados.listaItensCarrinho[i].produto.id_produto,
+                                        precoTotal: somaValores
+                                        } )
          }
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
@@ -79,8 +80,15 @@ async function atualizarVenda(){
                rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
                putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
                 }
-         vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
+         vendaAtualizada = {
+                            id: idVenda.innerHTML,
+                            precoTotal: valorTotal.innerHTML,
+                            cliente:{id:dados.cliente.id},
+                            statusVendas:{id:3}
+                            }
+
          rotaVendas = rotaVendas + dados.id
+         console.log(vendaAtualizada)
          putDados(rotaVendas, vendaAtualizada )
         } catch(e){
             alert("Nao foi Possivel")

@@ -110,6 +110,8 @@ public class VendaServiceImpl implements IVendaService {
             return null;
         }
 
+
+
         produto.setQuantidade_produto(produto.getQuantidade_produto() - itemDto.getQuantidade());
 
         produtoDao.save(produto);

@@ -49,8 +49,12 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
 
         }
 
-        produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade());
-
+        //verificado se o produto ja diminuiu uma quantidade ao incluir o mesmo no carrinho
+        if (dados.getQuantidade() > 1){
+            produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade() + 1);
+        }else {
+            produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade());
+        }
         produtoDao.save(produto);
 
 

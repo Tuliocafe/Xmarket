@@ -14,6 +14,7 @@ var endereco = JSON.parse(auxEndereco);
 var logradouro = document.getElementById('logradouro');
 var logradouro = document.getElementById('logradouro');
 var bairro = document.getElementById('bairro');
+var numero = document.getElementById('numero');
 var cidade = document.getElementById('cidade');
 var cep = document.getElementById('cep');
 var complemento = document.getElementById('complemento');
@@ -34,6 +35,7 @@ if(logradouro.value===""||bairro.value===""||cidade.value===""||cep.value===""||
 
                 "logradouro": logradouro.value,
                 "bairro": bairro.value,
+                "numero": numero.value,
                 "cidade": cidade.value,
                 "cep": cep.value,
                 "complemento": complemento.value,
@@ -53,8 +55,9 @@ if(logradouro.value===""||bairro.value===""||cidade.value===""||cep.value===""||
         fetch(endpoint, init).then(function(response){
            return response.json();
            }).then(function (data)     {
-                   alert("Alteração realizada!")
+
                  })
+                   alert("Alteração realizada!")
                    window.location.href = "/area-cliente/"+cliente.id;
 
                  }

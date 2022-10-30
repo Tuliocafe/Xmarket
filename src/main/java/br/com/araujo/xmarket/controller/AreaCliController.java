@@ -57,36 +57,33 @@ public class AreaCliController {
 
     }
 
-    @GetMapping("adicionar-endereco")
+    @GetMapping("area-cliente/adiciona-endereco")
     public String adicionarnd(){
 
         return "paginas/novoEndereco";
     }
 
-    @GetMapping("/atualizar/{id_usuario}/enderecos/{id_endereco}")
+    @GetMapping("area-cliente/atualizar/{id_usuario}/enderecos/{id_endereco}")
     private String atualizarEndereco(Model m, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco){
         IEnderecoDTO end = clienteService.buscaEnderecoPeloId(idUsuario, idEndereco);
         m.addAttribute("end", end);
         return "paginas/editEndereco";
     }
 
-    //rever a rota de add endereço
-    @PostMapping("/adicionar-endereco/{id}/endereco")
+
+    @PostMapping("area-cliente/adicionar-endereco/{id}/endereco")
     public String endRegister( @PathVariable Integer id,  @ModelAttribute EnderecoSalvarDTO e){
         Endereco res = clienteService.criaNovoEndereco(e);
 
-        return "redirect:/adicionar-endereco";
+        return "redirect:/area-cliente/adiciona-endereco";
     }
 
 
-    @GetMapping("excluir/{id_cliente}/enderecos/{id_endereco}")
+    @GetMapping("area-cliente/excluir/{id_cliente}/enderecos/{id_endereco}")
     private String excluirEnderecoPeloCliente(@PathVariable("id_cliente")Integer idCliente, @PathVariable("id_endereco") Integer idEndereco){
         clienteService.excluirEnderecoPeloCliente( idEndereco);
         return "redirect:/area-cliente/"+ idCliente;
     }
-
-
-
 
 
 

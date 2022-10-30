@@ -1,8 +1,6 @@
 package br.com.araujo.xmarket.dto;
 
 
-import br.com.araujo.xmarket.model.Cidade;
-
 public class EnderecoDTO  implements IEnderecoDTO{
 
     private String id;
@@ -14,11 +12,12 @@ public class EnderecoDTO  implements IEnderecoDTO{
     private String tipo;
     private String cidade;
     private String estado;
+    private String numero;
 
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(String id, String logradouro, String cep, String bairro, String complemento, String referencia, String tipo, String cidade, String estado) {
+    public EnderecoDTO(String id, String logradouro, String cep, String bairro, String complemento, String referencia, String tipo, String cidade, String estado, String numero) {
         this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
@@ -28,9 +27,8 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.tipo = tipo;
         this.cidade = cidade;
         this.estado = estado;
+        this.numero = numero;
     }
-
-
 
     @Override
     public String getId() {
@@ -111,5 +109,14 @@ public class EnderecoDTO  implements IEnderecoDTO{
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

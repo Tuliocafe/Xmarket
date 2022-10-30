@@ -134,6 +134,7 @@ public class ClienteServiceImpl implements IClienteService {
 //        novoEndereco.setCidade(endereco.getCidade());
         novoEndereco.setCliente(novoCliente);
         novoEndereco.setBairro(endereco.getBairro());
+        novoEndereco.setNumero(endereco.getNumero());
         novoEndereco.setCep(endereco.getCep());
         novoEndereco.setTipoEndereco(endereco.getTipo());
         novoEndereco.setComplemento(endereco.getComplemento());
@@ -195,6 +196,7 @@ public class ClienteServiceImpl implements IClienteService {
                 .logradouro(endereco.getLogradouro())
                 .cep(endereco.getCep())
                 .bairro(endereco.getBairro())
+                .numero(endereco.getNumero())
                 .complemento(endereco.getComplemento())
                 .referencia(endereco.getReferencia())
                 .tipoEndereco(endereco.getTipo())

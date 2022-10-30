@@ -73,8 +73,10 @@ btnSalvar.addEventListener('click', function(){
 
         }).then(function (data)     {
               console.log(data);
-                alert("Alteração realizada!")
               })
+                   alert("Alteração realizada!")
+
+                   window.location.href = "/area-cliente/"+cliente.id;
 
               }
           })

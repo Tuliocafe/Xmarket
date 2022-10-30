@@ -82,7 +82,7 @@
         <form  class="mt-5 border p-5 bg-light shadow">
           <h3 class="mb-4 text-secondary">Cadastre seu endereço</h3>
           <div class="col-md-12" >
-          <a th:href="@{/adicionar-endereco}" class="btn btn-md btn-outline-success float-end"> Novo Endereço </a>
+          <a th:href="@{/area-cliente/adiciona-endereco}" class="btn btn-md btn-outline-success float-end"> Novo Endereço </a>
           </div>
         </form>
       </div>
@@ -131,6 +131,7 @@
       <tr>
 
         <th scope="col" class="text-center">Logradouro</th>
+        <th scope="col" class="text-center">Número</th>
         <th scope="col" class="text-center">Bairro</th>
         <th scope="col" class="text-center">Cidade</th>
         <th scope="col" class="text-center">Tipo</th>
@@ -144,12 +145,13 @@
 
         <td class="text-center" th:text="${end.logradouro}"></td>
         <td class="text-center" th:text="${end.bairro}"></td>
+        <td class="text-center" th:text="${end.numero}"></td>
         <td class="text-center" th:text="${end.cidade}"></td>
         <td class="text-center" th:text="${end.tipo}"></td>
 
         <td class="text-center">
-          <a class="btn me-3 btn-sm btn-outline-warning" th:href="@{../atualizar/{id_usuario}/enderecos/{id_endereco}(id_usuario = ${idCliente}, id_endereco = ${end.id})}"> Atualizar </a>
-          <a class="btn btn-sm btn-outline-danger" th:href="@{../excluir/{id_usuario}/enderecos/{id_endereco}(id_usuario = ${idCliente}, id_endereco = ${end.id})}" >Excluir</a>
+          <a class="btn me-3 btn-sm btn-outline-warning" th:href="@{../area-cliente/atualizar/{id_usuario}/enderecos/{id_endereco}(id_usuario = ${idCliente}, id_endereco = ${end.id})}"> Atualizar </a>
+          <a class="btn btn-sm btn-outline-danger" th:href="@{../area-cliente/excluir/{id_usuario}/enderecos/{id_endereco}(id_usuario = ${idCliente}, id_endereco = ${end.id})}" >Excluir</a>
         </td>
 
       </tr>

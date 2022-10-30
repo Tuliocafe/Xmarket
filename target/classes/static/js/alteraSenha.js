@@ -59,8 +59,10 @@ btnSalvar.addEventListener('click', function(){
 
         }).then(function (data)     {
               console.log(data);
-                alert("Senha Alterada!")
+
               })
+              alert("Senha Alterada!")
+              window.location.href = "/area-cliente/"+cliente.id;
 
               }
           })

@@ -13,6 +13,7 @@ var endereco = JSON.parse(auxEndereco);
 
 var logradouro = document.getElementById('logradouro');
 var bairro = document.getElementById('bairro');
+var numero = document.getElementById('numero');
 var cidade = document.getElementById('cidade');
 var complemento = document.getElementById('complemento');
 var referencia = document.getElementById('referencia');
@@ -31,6 +32,7 @@ if(logradouro.value===""||bairro.value===""||cidade.value===null||cep.value===""
 
             "logradouro": logradouro.value,
             "bairro": bairro.value,
+            "numero": numero.value,
             "cidade": cidade.value,
             "cep": cep.value,
             "complemento": complemento.value,
@@ -51,8 +53,9 @@ if(logradouro.value===""||bairro.value===""||cidade.value===null||cep.value===""
         var response = await fetch(endpoint, init)
         console.log(response)
         return response.json();
-        window.location.href = "/area-cliente/"+cliente.id;
         }
+        window.location.href = "/area-cliente/"+cliente.id;
+
           })
 
 function getCidades(){
@@ -73,8 +76,6 @@ function getCidades(){
         option.appendChild(document.createTextNode(`${cidade}`))
         selected.appendChild(option)
         })
-
-
 
     })
 

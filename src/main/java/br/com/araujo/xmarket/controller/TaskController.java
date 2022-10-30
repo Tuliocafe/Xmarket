@@ -61,6 +61,16 @@ public class TaskController {
         return mv;
     }
 
+    @GetMapping("/area_cliente/{id}/vendas")
+    public ModelAndView vendas(@PathVariable Integer id){
+        ModelAndView mv = new ModelAndView( "paginas/venda");
+        Cliente clientes = clienteServiceImpl.buscarPeloId(id);
+        Iterable<Venda> vendas = serviceVenda.buscarTudoPeloIdUsuario(id);
+        mv.addObject("clientes", clientes);
+        mv.addObject("vendas", vendas);
+        return mv;
+    }
+
 
 
     @GetMapping("/carrinho")

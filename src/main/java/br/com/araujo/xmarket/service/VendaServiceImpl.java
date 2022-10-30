@@ -144,6 +144,9 @@ public class VendaServiceImpl implements IVendaService {
     }
 
     @Override
+    public ArrayList<Venda> buscarTudoPeloIdUsuario(Integer id){return vendaDao.buscarTudoPeloIdUsuario(id);}
+
+    @Override
     public boolean fecharVenda(Integer id) {
 
         Venda venda = vendaDao.findById(id).orElse(null);

@@ -58,21 +58,36 @@ async function getdados(){
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
              somaValores = (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
              somaValorTotal += somaValores
-              carrinho.listaCarrinho.push({
+             carrinho.listaCarrinho.push({
                                         id:dados.listaItensCarrinho[i].id,
                                         quantidade: dados.listaItensCarrinho[i].quantidade,
                                         venda:dados.id,
                                         produto:dados.listaItensCarrinho[i].produto.id_produto,
                                         precoTotal: somaValores
                                         } )
+
+
          }
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
         valorTotal1.innerHTML = valorTotal.innerHTML
 
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
+        console.log(dados.statusVendas.id)
+        if(dados.statusVendas.id != 2){
+            console.log("Ta fechada")
+            for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
 
+             document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id).disabled = true;
+//             console.log(document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id));
+             document.getElementById('mais').disabled = true;
+             document.getElementById('menos').disabled = true;
+            }
+            console.log(document.getElementById('botaoRemover' + dados.))
 
+            document.getElementById('finalizar').disabled = true;
+
+            }
 }
 
 
@@ -176,26 +191,19 @@ const aumentar = (incdec, valorUnitario, estoque) => {
     for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
 
            if(incdec == carrinho.listaCarrinho[i].id){
-                    if (quantidade.value >= estoque && estoque != 0)
-                        {
+                    if (quantidade.value >= estoque && estoque != 0){
                         quantidade.value = estoque
                         alert('Limite estoque atingido');
-                        }
-
-                        else if(quantidade.value >= estoque &&  estoque == 0)
-                        {
-                        quantidade.value = 1
-                        alert('Nao temos estoque extra');
-                        }
-                         else {
-                         console.log(dados.listaItensCarrinho[i].produto.quantidade_produto)
-                         console.log("executou ?")
-                         carrinho.listaCarrinho[i].quantidade ++
-                         carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
-                         quantidade.value = parseInt(quantidade.value) + 1;
-                         valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
-                         valorTotal1.innerHTML = valorTotal.innerHTML
-                         }
+                    }else if(quantidade.value >= estoque &&  estoque == 0){
+                    quantidade.value = 1
+                    alert('Nao temos estoque extra');
+                    }else {
+                     carrinho.listaCarrinho[i].quantidade ++
+                     carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
+                     quantidade.value = parseInt(quantidade.value) + 1;
+                     valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
+                     valorTotal1.innerHTML = valorTotal.innerHTML
+                     }
            }
     }
 }

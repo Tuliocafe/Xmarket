@@ -37,12 +37,12 @@ async function getlistaProdutos(){
 
 
 
-        console.log(listaProdutos)
-        console.log(listaProdutos[0].id_produto)
+//        console.log(listaProdutos)
+//        console.log(listaProdutos[0].id_produto)
 
         for (var i = 0; i <  listaProdutos.length; i ++ ){
                 if(listaProdutos[i].quantidade_produto == 0){
-                    console.log(listaProdutos[i])
+                    console.log(listaProdutos[i].id_produto)
                     document.getElementById(listaProdutos[i].id_produto).textContent = ("Sem Estoque");
                     document.getElementById(listaProdutos[i].id_produto).disabled = true;
                     }

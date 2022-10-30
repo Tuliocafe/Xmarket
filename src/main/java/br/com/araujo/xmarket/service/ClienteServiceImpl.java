@@ -38,6 +38,7 @@ public class ClienteServiceImpl implements IClienteService {
 
 
         if (cliente != null) {
+            LocalDateTime dataAgora = LocalDateTime.now();
 
             Cliente novoCliente = Cliente.builder()
                     .nome(cliente.getNome())
@@ -52,6 +53,7 @@ public class ClienteServiceImpl implements IClienteService {
                     .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
                     .email(cliente.getEmail())
                     .senha(cliente.getSenha())
+                    .dataCriacaoUsuario(String.valueOf(dataAgora))
                     .build();
 
             clienteDao.save(novoCliente);

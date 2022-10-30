@@ -80,7 +80,7 @@ async function cadastrarCarrinhio (){
 
             }).then( async function (data) {
                console.log(data);
-                alert('success criacaoVenda');
+//                alert('success criacaoVenda');
                 var venda = await localStorage.setItem("venda", JSON.stringify(data))
                 console.log(venda);
 //                alert(venda.id);

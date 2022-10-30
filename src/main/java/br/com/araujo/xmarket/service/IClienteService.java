@@ -26,7 +26,7 @@ public interface IClienteService {
 
     public Cliente atualizarCliente(Cliente cliente, Integer id);
 
-    public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco);
+    public Endereco atualizarEnderecoDoCliente(IEnderecoDTO endereco, Integer idUsuario, Integer idEndereco);
 
     IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco);
 
@@ -35,6 +35,10 @@ public interface IClienteService {
     public boolean verificaEmail(String email);
 
     public Endereco criaNovoEndereco (EnderecoSalvarDTO endereco);
+
+    public void excluirEnderecoPeloCliente( Integer idEndereco);
+
+    public IClienteDTO buscaDadosCliente(Integer id);
 
 
 

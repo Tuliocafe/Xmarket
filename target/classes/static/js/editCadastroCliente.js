@@ -6,8 +6,6 @@ if (logado) {
 
  }
 
-console.log(cliente.senha);
-
 var id = parseInt(cliente.id);
 var nome = document.getElementById('nome');
 var sobrenome = document.getElementById('sobrenome');
@@ -27,9 +25,11 @@ var btnInscrever = document.getElementById('btnInscrever');
 btnSalvar.addEventListener('click', function(){
     if(senha.value != senhaDois.value){
     alert('Senhas não conferem')
-    alert(cliente.senha)
     return;
     }
+    if(nome.value === ""||sobrenome.value ===""||rg.value ===""||dataNascimento.value === ""||telefoneUm.value ===""||cpf.value===""){
+    alert('Há campo(s) obrigatório(s) não preenchido(s)!')
+    }else{
 
     if(senha.value == ""){
         var cadastro = {
@@ -40,7 +40,7 @@ btnSalvar.addEventListener('click', function(){
             "dataNascimento": dataNascimento.value,
             "telefoneUm": telefoneUm.value,
             "telefoneDois": telefoneDois.value,
-            "email": email.value,
+            "email": cliente.email,
             "cpf": cpf.value,
             "senha": cliente.senha
             };
@@ -65,7 +65,6 @@ btnSalvar.addEventListener('click', function(){
         }
 
         var endpoint = 'http://localhost:8080/clientes/'+id
-        console.log("teste")
 
         fetch(endpoint, init).then(function(response){
 
@@ -74,11 +73,16 @@ btnSalvar.addEventListener('click', function(){
 
         }).then(function (data)     {
               console.log(data);
-                alert("Alteração feita com sucesso!")
+                alert("Alteração realizada!")
               })
 
+              }
           })
 
 
+btnVoltar.addEventListener('click', function(){
+     window.location.href = "/area-cliente/"+cliente.id;
+
+})
 
 

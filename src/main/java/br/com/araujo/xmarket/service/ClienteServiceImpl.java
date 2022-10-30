@@ -3,10 +3,7 @@ package br.com.araujo.xmarket.service;
 import br.com.araujo.xmarket.dao.CidadeDao;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
-import br.com.araujo.xmarket.dto.ClienteDTO;
-import br.com.araujo.xmarket.dto.EnderecoSalvarDTO;
-import br.com.araujo.xmarket.dto.IEnderecoDTO;
-import br.com.araujo.xmarket.dto.LoginDTO;
+import br.com.araujo.xmarket.dto.*;
 import br.com.araujo.xmarket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -128,17 +125,17 @@ public class ClienteServiceImpl implements IClienteService {
 
 
     @Override
-    public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco) {
+    public Endereco atualizarEnderecoDoCliente(IEnderecoDTO endereco, Integer idUsuario, Integer idEndereco) {
 
         Cliente novoCliente = clienteDao.findById(idUsuario).orElse(null);
 
         Endereco novoEndereco = enderecoDAO.findById(idEndereco).orElse(null);
 
-        novoEndereco.setCidade(endereco.getCidade());
+//        novoEndereco.setCidade(endereco.getCidade());
         novoEndereco.setCliente(novoCliente);
         novoEndereco.setBairro(endereco.getBairro());
         novoEndereco.setCep(endereco.getCep());
-        novoEndereco.setTipoEndereco(endereco.getTipoEndereco());
+        novoEndereco.setTipoEndereco(endereco.getTipo());
         novoEndereco.setComplemento(endereco.getComplemento());
         novoEndereco.setLogradouro(endereco.getLogradouro());
         novoEndereco.setReferencia(endereco.getReferencia());
@@ -194,7 +191,7 @@ public class ClienteServiceImpl implements IClienteService {
 
 
         Endereco novoEndereco = Endereco.builder()
-                .id(endereco.getId())
+//                .id(endereco.getId())
                 .logradouro(endereco.getLogradouro())
                 .cep(endereco.getCep())
                 .bairro(endereco.getBairro())
@@ -210,10 +207,25 @@ public class ClienteServiceImpl implements IClienteService {
         return novoEndereco;
 
     }
+
+    @Override
+    public void excluirEnderecoPeloCliente( Integer idEndereco) {
+
+        enderecoDAO.deletandoEndereco(idEndereco);
+
+    }
+
+    @Override
+    public IClienteDTO buscaDadosCliente(Integer id) {
+        return clienteDao.buscaDadosCliente(id);
+    }
+
+
     @Override
     public String toString() {
         return super.toString();
     }
+
 
 
 }

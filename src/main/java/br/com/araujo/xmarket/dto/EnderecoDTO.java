@@ -1,8 +1,11 @@
 package br.com.araujo.xmarket.dto;
 
 
+import br.com.araujo.xmarket.model.Cidade;
+
 public class EnderecoDTO  implements IEnderecoDTO{
 
+    private String id;
     private String logradouro;
     private String cep;
     private String bairro;
@@ -15,7 +18,8 @@ public class EnderecoDTO  implements IEnderecoDTO{
     public EnderecoDTO() {
     }
 
-    public EnderecoDTO(String logradouro, String cep, String bairro, String complemento, String referencia, String tipo, String cidade, String estado) {
+    public EnderecoDTO(String id, String logradouro, String cep, String bairro, String complemento, String referencia, String tipo, String cidade, String estado) {
+        this.id = id;
         this.logradouro = logradouro;
         this.cep = cep;
         this.bairro = bairro;
@@ -26,6 +30,18 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.estado = estado;
     }
 
+
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
     public String getLogradouro() {
         return logradouro;
     }
@@ -34,6 +50,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.logradouro = logradouro;
     }
 
+    @Override
     public String getCep() {
         return cep;
     }
@@ -42,6 +59,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.cep = cep;
     }
 
+    @Override
     public String getBairro() {
         return bairro;
     }
@@ -50,6 +68,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.bairro = bairro;
     }
 
+    @Override
     public String getComplemento() {
         return complemento;
     }
@@ -58,6 +77,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.complemento = complemento;
     }
 
+    @Override
     public String getReferencia() {
         return referencia;
     }
@@ -66,6 +86,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.referencia = referencia;
     }
 
+    @Override
     public String getTipo() {
         return tipo;
     }
@@ -74,6 +95,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.tipo = tipo;
     }
 
+    @Override
     public String getCidade() {
         return cidade;
     }
@@ -82,6 +104,7 @@ public class EnderecoDTO  implements IEnderecoDTO{
         this.cidade = cidade;
     }
 
+    @Override
     public String getEstado() {
         return estado;
     }

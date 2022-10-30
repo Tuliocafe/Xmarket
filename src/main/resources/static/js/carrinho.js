@@ -73,22 +73,15 @@ async function getdados(){
 
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
-        console.log(dados.statusVendas.id)
+
         if(dados.statusVendas.id != 2){
-            console.log("Ta fechada")
-//            for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
-
-//             document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id).disabled = true;
-//             console.log(document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id));
-             document.getElementById('mais').disabled = true;
-             document.getElementById('menos').disabled = true;
-             console.log(document.getElementById('botaoRemover' + dados.))
-
-             document.getElementById('finalizar').disabled = true;
-
+            for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
+             document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id).disabled = true;
+             document.getElementById('mais'+ dados.listaItensCarrinho[i].id).disabled = true;
+             document.getElementById('menos'+ dados.listaItensCarrinho[i].id).disabled = true;
             }
-
-
+             document.getElementById('finalizar').disabled = true;
+            }
    }
 
 

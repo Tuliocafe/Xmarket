@@ -80,6 +80,7 @@
                 <!-- left side div -->
                 <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
                     <div class="card p-4" >
+                        <h4  th:text="'Status: '+${vendas.statusVendas.status}" ></h4>
                         <h2 class="py-4 font-weight-bold" id="quantidadeIten"></h2>
                         <div class="row"  data-th-each="carrinho:${venda.listaItensCarrinho}" >
                             <!-- cart images div -->
@@ -107,7 +108,7 @@
                                     <div class="col-6">
                                         <ul class="pagination justify-content-end set_quantity">
                                             <li class="page-item">
-                                                <button class="page-link" id="menos"
+                                                <button class="page-link" th:id="'menos'+${carrinho.id}"
                                                         th:attr="onclick=${'diminuir('+carrinho.id+','+carrinho.precoUnitario+')'}">
                                                     <i class="fas fa-minus tamanho-botao"></i> </button>
                                             </li>
@@ -115,7 +116,7 @@
                                                                          th:value="${carrinho.quantidade}" th:id="${carrinho.id}" disabled>
                                             </li>
                                             <li class="page-item">
-                                                <button class="page-link " id="mais"
+                                                <button class="page-link " th:id="'mais'+${carrinho.id}"
                                                      th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+', '+carrinho.produto.quantidade_produto+')'}">
                                                         <i class="fas fa-plus tamanho-botao"></i></button>
 

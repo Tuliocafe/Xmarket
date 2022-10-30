@@ -99,7 +99,7 @@ _Acesso ao site_
 
 **UC** - *Sistema XMarket*
 
-<img src="https://d2slcw3kip6qmk.cloudfront.net/marketing/pages/chart/examples/flowchart-templates/system-flowchart.svg">
+<img src="https://user-images.githubusercontent.com/25533217/198898785-535087cd-b7b9-4d80-a908-beffa7c43885.png">
 
 
 ### Mensagens internas

@@ -185,7 +185,7 @@ footer a:hover{
 }
 
 #modal{
-width: 62%;
+width: 58%;
 height: 38%;
 background-color: #fff;
 border: 1px solid black;
@@ -210,7 +210,7 @@ border-radius: 10px;
 
 #modal1 {
 width: 43%;
-height: 33%;
+height: 45%;
 background-color: #fff;
 border: 1px solid black;
 position: absolute;
@@ -220,7 +220,6 @@ z-index: 1031;
 display: none;
 padding: 1%;
 border-radius: 10px;
-Overflow-y: scroll;
 }
 
 #fecharModal1 {

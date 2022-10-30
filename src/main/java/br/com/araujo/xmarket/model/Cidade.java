@@ -57,5 +57,13 @@ public class Cidade {
         this.ibge = ibge;
     }
 
+    public Cidade(Integer id, String nome, Integer ibge, Estado estado) {
+        this.id = id;
+        this.nome = nome;
+        this.ibge = ibge;
+        this.estado = estado;
+    }
 
+    public Cidade() {
+    }
 }

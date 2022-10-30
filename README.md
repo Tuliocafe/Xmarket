@@ -121,7 +121,7 @@ Rotas utilizadas pela aplicação web para executar metodos de **POST** , **GET*
 
 > [Inversão de controle](https://pt.wikipedia.org/wiki/Invers%C3%A3o_de_controle) - Trata-se do redirecionamento do fluxo de execução de código retirando parcialmente o controle sobre ele e delegando-o para um container. 
 
-> [Injeção de dependência] (https://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia) - É um padrão de desenvolvimento com a finalidade de manter baixo o nível de acoplamento entre módulos de um sistema. O Container do SPRING injeta as dependências  (objetos) que sua aplicação necessita.
+> [Injeção de dependência](https://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia) - É um padrão de desenvolvimento com a finalidade de manter baixo o nível de acoplamento entre módulos de um sistema. O Container do SPRING injeta as dependências  (objetos) que sua aplicação necessita.
 
 > [Singleton](https://pt.wikipedia.org/wiki/Singleton) - o container do spring define apenas uma instância do objeto. Exemplos do Spring  @Bean  e @Autowired 
 

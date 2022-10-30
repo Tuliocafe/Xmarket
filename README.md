@@ -13,7 +13,7 @@ Para executar o projeto, utilize as ferramentas descritas na sessão *Ferramenta
 ## Links importantes
 * [Spring Boot Rest API](https://spring.io/projects/spring-boot) -  Spring Boot.
 
-# < XMarket >
+#  XMarket 
 
 ## Introdução
 

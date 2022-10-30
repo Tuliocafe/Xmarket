@@ -1,7 +1,7 @@
 # < XMarket >
 <fig>
 <img src="https://rockcontent.com/br/wp-content/uploads/sites/2/elementor/thumbs/modelo-de-projeto-p2he6clp7uhmwqd16ikv9jgz30a5liixoon908hej0.png" alt="Uma imagem relacionada ao projeto">
-<figcaption>Uma imagem relacionada ao projeto</figcaption>
+<figcaption>Página inicial XMarket</figcaption>
 </fig>
 
 ## Inicialização

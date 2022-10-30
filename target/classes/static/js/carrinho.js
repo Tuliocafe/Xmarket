@@ -3,7 +3,7 @@ var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
 var logado = localStorage.getItem('logado');
 var venda = localStorage.getItem('venda')
-
+var valorTotal1 = document.getElementById("precoTotal1")
 var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
 var rotaVendas = 'http://localhost:8080/vendas/'
 
@@ -67,10 +67,12 @@ async function getdados(){
                                         } )
          }
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
+        valorTotal1.innerHTML = valorTotal.innerHTML
+
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
 
-console.log(dados)
+
 }
 
 
@@ -89,13 +91,15 @@ async function atualizarVenda(){
                             }
 
          rotaVendas = rotaVendas + dados.id
-         console.log(vendaAtualizada)
          putDados(rotaVendas, vendaAtualizada )
+
+         var venda = localStorage.setItem("venda",null)
+         alert("Venda Finalizada com sucesso")
+         window.location.href = "/index"
         } catch(e){
             alert("Nao foi Possivel")
             }
-    var venda = localStorage.setItem("venda",null)
-    window.location.href = "/index"
+
 }
 
 
@@ -156,23 +160,41 @@ const diminuir = (incdec, valorUnitario) => {
                 }
          quantidade.value = parseInt(quantidade.value) - 1;
          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) -  valorUnitario
+         valorTotal1.innerHTML = valorTotal.innerHTML
     }
 }
 
 
-const aumentar = (incdec, valorUnitario) => {
+const aumentar = (incdec, valorUnitario, estoque) => {
+    var estoque = estoque
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
+
+    console.log(estoque)
+    console.log(quantidade.value)
+    console.log(carrinho)
     for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
+
            if(incdec == carrinho.listaCarrinho[i].id){
-                    if (quantidade.value >= dados.listaItensCarrinho[i].produto.quantidade_produto) {
-                        quantidade.value = dados.listaItensCarrinho[i].produto.quantidade_produto
+                    if (quantidade.value >= estoque && estoque != 0)
+                        {
+                        quantidade.value = estoque
                         alert('Limite estoque atingido');
-                         }else{
+                        }
+
+                        else if(quantidade.value >= estoque &&  estoque == 0)
+                        {
+                        quantidade.value = 1
+                        alert('Nao temos estoque extra');
+                        }
+                         else {
+                         console.log(dados.listaItensCarrinho[i].produto.quantidade_produto)
+                         console.log("executou ?")
                          carrinho.listaCarrinho[i].quantidade ++
                          carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
                          quantidade.value = parseInt(quantidade.value) + 1;
                          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
+                         valorTotal1.innerHTML = valorTotal.innerHTML
                          }
            }
     }

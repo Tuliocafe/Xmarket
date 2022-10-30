@@ -79,10 +79,7 @@ async function cadastrarCarrinhio (){
             return response.json();
 
             }).then( async function (data) {
-               console.log(data);
-                alert('success criacaoVenda');
                 var venda = await localStorage.setItem("venda", JSON.stringify(data))
-                console.log(venda);
 //                alert(venda.id);
             })
 }

@@ -99,7 +99,7 @@
 <!--                                                                                    <p class="mb-2">CAMISA SOCIAL - XADREZ</p>-->
                                         <p class="mb-2" data-th-text="${carrinho.produto.cor}"></p>
                                         <p class="mb-3"  data-th-text="${carrinho.produto.tamanho}"></p>
-                                        <p>Estoque</p>
+                                        <p>Estoque extra</p>
                                         <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.quantidade_produto}"></p>
 
                                     </div>
@@ -116,7 +116,7 @@
                                             </li>
                                             <li class="page-item">
                                                 <button class="page-link"
-                                                     th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+')'}">
+                                                     th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+', '+carrinho.produto.quantidade_produto+')'}">
                                                         <i class="fas fa-plus tamanho-botao"></i></button>
 
                                             </li>
@@ -179,7 +179,7 @@
                         <h2 class="product_name mb-5">Valor Final</h2>
                         <div class="price_indiv d-flex justify-content-between">
                             <p>Valor Total</p>
-                            <p>R$<span id="product_total_amt">0.00</span></p>
+                            <p>R$<span id="precoTotal1"></span></p>
                         </div>
                         <div class="price_indiv d-flex justify-content-between">
                             <p>Frete</p>
@@ -207,7 +207,7 @@
                                     <div class="mt-3">
                                         <input type="text" name="" id="codigoDesconto1"
                                                class="form-control font-weight-bold" placeholder="Digite o Cupom">
-                                        <small id="infoDesconto" class="text-dark mt-3">O codigo é xMarket</small>
+<!--                                        <small id="infoDesconto" class="text-dark mt-3">O codigo é xMarket</small>-->
                                     </div>
                                     <button id="botaoDesconto" class="btn btn-primary btn-sm mt-3"
                                             onclick="discount_code()">Aplicar</button>
@@ -221,7 +221,7 @@
                     <div class="mt-3 shadow p-3 bg-white">
                         <div class="pt-4">
                             <h5 class="mb-4">Previsão de entrega</h5>
-                            <p>SEGUNDA-FEIRA - 03/10/2022</p>
+                            <p>SEXTA-FEIRA - 04/11/2022</p>
                         </div>
                     </div>
                 </div>

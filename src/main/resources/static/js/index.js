@@ -200,12 +200,6 @@ if (logado) {
 
 
 
-// } else {
-//
-//     window.location.href = "/index";
-// }
-
-
 
 
 async function sessao(){

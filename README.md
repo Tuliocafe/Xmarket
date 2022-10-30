@@ -60,7 +60,7 @@ Respeitando a proposta, o sistema deverá atender os seguintes requisitos:
 
 
 
-_ Realização da compra de um Produto_  
+_Realização da compra de um Produto_  
 
 **RGN1** -  Somente clientes com cadastro ativo e logado estarão habilitados para realizarem e confirmarem suas compras.
 

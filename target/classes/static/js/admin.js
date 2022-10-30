@@ -3,13 +3,15 @@ var auxCliente = localStorage.getItem("cliente");
 var cliente = JSON.parse(auxCliente);
 var logado = localStorage.getItem('logado');
 
+console.log(logado);
 
-if (logado) {
-    nomeAdmin.innerHTML = cliente.nome;
+if (cliente  == null || cliente.tipoUsuario != 'administrador') {
+     alert("Você não tem permissão para acessar está página.")
+
+                   window.location.href = "/index"
+
              } else {
-                alert("Você não tem permissão para acessar está página.")
-
-               window.location.href = "/index"
+               nomeAdmin.innerHTML = cliente.nome;
              }
 
 

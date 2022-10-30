@@ -32,23 +32,27 @@ fecharModal2.addEventListener('click', function () {
 })
 
 
+var acessarModal3 = document.getElementById('acessarModal3');
+var modal3 = document.getElementById('modal3');
+var fecharModal3 = document.getElementById('fecharModal3');
 
-//var fileUpload  = document.getElementById('fileUpload'),
-//    hiddenField = document.getElementById('hiddenField');
-//
-//function fileChanged() {
-//    function onLoad(e) {
-//        // Adicionando o arquivo em base64 ao hidden field:
-//        hiddenField.innerHTML = e.target.result;
-//    }
-//
-//    if (this.files && this.files[0]) {
-//        var fileReader = new FileReader();
-//        fileReader.onload = onLoad;
-//        // Isso vai transformar o arquivo em uma string base64:
-//        fileReader.readAsDataURL(this.files[0]);
-//    }
-//}
-//
-//document.getElementById('#fileUpload')
-//    .addEventListener('change', fileChanged, false);
+acessarModal3.addEventListener('click', function () {
+    modal3.style.display = 'block';
+})
+
+fecharModal3.addEventListener('click', function () {
+    modal3.style.display = 'none';
+})
+
+var acessarModal4 = document.getElementById('acessarModal4');
+var modal4 = document.getElementById('modal4');
+var fecharModal4 = document.getElementById('fecharModal4');
+
+acessarModal4.addEventListener('click', function () {
+    modal4.style.display = 'block';
+})
+
+fecharModal4.addEventListener('click', function () {
+    modal4.style.display = 'none';
+})
+

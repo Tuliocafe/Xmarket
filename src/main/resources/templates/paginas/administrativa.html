@@ -48,8 +48,20 @@
                             Cadastrar
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal1">Marca</a></li>
-                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal2">Produto</a></li>
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal1">Cadastro de Marca</a></li>
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal2">Cadastro de Produto</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Editar
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal3">Editar uma Marca</a></li>
+                            <li style="cursor: pointer;"><a class="dropdown-item" id="acessarModal4">Editar um Produto</a></li>
                         </ul>
                     </div>
                 </li>
@@ -88,7 +100,7 @@
     </div>
 </nav>
 
-
+<!--Body da página-->
 <section id="collection" class="py-5">
     <div class="container">
         <div class="row g-0 ">
@@ -102,6 +114,8 @@
     </div>
 </section>
 
+
+<!--Modal de Relatorios-->
 <div id="modal">
     <h3 id="fecharModal">X</h3>
     <h1 style="text-align: center;">Relatório de Vendas</h1>
@@ -125,6 +139,7 @@
     </div>
 </div>
 
+<!--Moal de cadastro de marcas-->
 <div id="modal1">
     <h3 id="fecharModal1">X</h3>
     <h1 style="text-align: center;">Cadastro de Marcas</h1>
@@ -142,32 +157,15 @@
                        placeholder="Insira uma descrição para a marca.">
             </div>
 
-
             <div class="col-md-12">
-                <div id="buttonCadastrar" class="btn btn-primary float-end">Cadastrar</div>
+                <div id="buttonCadastrar" class="btn btn-primary float-end" style="margin-left: 5px;">Cadastrar</div>
             </div>
 
         </div>
     </form>
 </div>
 
-<!--    <form th:action="@{marcas}" th:method="post">-->
-<!--        <div class="row">-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Nome da Marca:</label>-->
-<!--                <input type="text" name="nome_marca" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Descrição:</label>-->
-<!--                <input type="text" name="descricao" class="form-control" placeholder="Digite a descrição da marca." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="col-md-12" >-->
-<!--                <button class="btn btn-primary float-end" type="submit">Cadastrar</button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </form>-->
-
-
+<!--Modal de Cadastro de Produtos-->
 <div id="modal2">
     <h3 id="fecharModal2">X</h3>
     <h1 style="text-align: center;">Cadastro de Produtos</h1>
@@ -176,7 +174,7 @@
             <div class="mb-3 col-md-12">
                 <label>Quantidade do Produto:</label>
                 <input id="qtdProduto" type="number" name="quantidade_produto" class="form-control"
-                       placeholder="Insira a quantidade do produto.">
+                       placeholder="Insira a quantidade do produto." onkeypress="return apenasNumero();">
             </div>
 
             <div class="mb-3 col-md-12">
@@ -189,12 +187,11 @@
                 <label>Digite o valor do produto:</label>
                 <span class="input-group-text">R$</span>
             <input id="preco" type="number" name="preco_produto" class="form-control"
-                   placeholder="Digite o valor do produto.">
+                   placeholder="Digite o valor do produto."  onkeypress="return apenasNumero();">
             </div>
 
         <div class="mb-3 col-md-12" >
         <label>Tamaho do Produto:</label>
-<!--        <input id="tamanhoProd" type="text" name="tamanho" class="form-control" placeholder="Insira o tamanho do produto.">-->
             <select class="form-control" id="tamanhoProd">
                 <option value="0" selected disabled>Selecione o Tamanho do Produto:</option>
                 <option value="1">P</option>
@@ -232,51 +229,115 @@
 
         </div>
         </form>
-<!--    <form th:action="@{produtos}" enctype="multipart/form-data" th:method="post">-->
-<!--        <div class="row">-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Quantidade do Produto:</label>-->
-<!--                <input type="number" name="quantidade_produto" class="form-control" placeholder="Digite a quantidade do produto em estoque." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Nome do Produto:</label>-->
-<!--                <input type="text" name="nome" class="form-control" placeholder="Digite o nome do produto que deseja cadastrar." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Digite o valor do produto:</label>-->
-<!--                <span class="input-group-text">R$</span>-->
-<!--                <input type="number" name="preco" step="0.01" min="0.01" class="form-control" placeholder="Digite o valor do produto." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Tamanho do produto:</label>-->
-<!--                <input type="text" name="tamanho" class="form-control" placeholder="Digite o tamanho do produto." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Cor do produto:</label>-->
-<!--                <input type="text" name="cor" class="form-control" placeholder="Digite a cor do produto." REQUIRED>-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label class="input-group-text">Envie a imagem do produto:</label>-->
-<!--                <input type="file" name="imagem_path" class="form-control">-->
-<!--                &lt;!&ndash;                <input type="file" accept="image/png" name="imagem_path" class="form-control" id="fileUpload" REQUIRED>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="hidden" class="form-control" id="hiddenField">&ndash;&gt;-->
-<!--            </div>-->
-<!--            <div class="mb-3 col-md-12" >-->
-<!--                <label>Marca do produto</label>-->
-<!--                <select class="form-control" id="dropDownList">-->
-<!--                    <option value="0">Selecione a Marca</option>-->
-<!--                    <option th:each="marcas : ${marcas}" th:value="${marcas.id_marca}" th:text="${marcas.nome_marca}"></option>-->
-<!--                </select>-->
-<!--            </div>-->
-<!--&lt;!&ndash;            <div class="mb-3 col-md-12" >&ndash;&gt;-->
-<!--&lt;!&ndash;                <label>Categoria do produto:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                <input type="text" name="categoria" class="form-control" placeholder="Digite o nome da marca que deseja cadastrar." REQUIRED>&ndash;&gt;-->
-<!--&lt;!&ndash;            </div>&ndash;&gt;-->
-<!--            <div class="col-md-12" >-->
-<!--                <button class="btn btn-primary float-end" type="submit" >Cadastrar</a></button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </form>-->
+    </div>
+
+<!-- Modal de edição de Marca  -->
+    <div id="modal3">
+        <h3 id="fecharModal3">X</h3>
+        <h1 style="text-align: center;">Modificar uma Marca</h1>
+        <form>
+            <div class="row">
+                <div class="mb-3 col-md-12">
+                    <label>Selecione uma marca:</label>
+                    <select class="form-control" id="dropDownListEditarMarca">
+                        <option value="0" selected disabled>Selecione a Marca</option>
+
+                    </select>
+                </div>
+
+                <div class="mb-3 col-md-12">
+                    <label>Marca</label>
+                    <input id="marcaEditar" type="text" name="nome_marca" class="form-control"
+                           placeholder="Insira o nome da marca.">
+                </div>
+                <div class="mb-3 col-md-12">
+                    <label>Descrição</label>
+                    <input id="descricao1" type="text" name="descricao" class="form-control"
+                           placeholder="Insira uma descrição para a marca.">
+                </div>
+                <div class="col-md-12">
+                    <div id="buttonPutMarca" class="btn btn-primary float-end">Editar</div>
+                    <div id="buttonDeleteMarca" class="btn btn-primary float-end">Deletar</div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<!--Modal de edição de produto-->
+<div id="modal4">
+    <h3 id="fecharModal4">X</h3>
+    <h1 style="text-align: center;">Editar um Produtos</h1>
+    <form>
+        <div class="row">
+
+            <div class="mb-3 col-md-12">
+            <label>Selecione um Produto:</label>
+            <select class="form-control" id="dropDownListEditarProduto">
+                <option value="0" selected disabled>Selecione o Produto</option>
+            </select>
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <label>Produto</label>
+                <input id="produtoEditar" type="text" name="nome_produto" class="form-control"
+                       placeholder="Insira o nome do produto.">
+            </div>
+            <div class="mb-3 col-md-12">
+                <label>Quantidade do Produto:</label>
+                <input id="qtdProduto2" type="number" name="quantidade_produto" class="form-control"
+                       placeholder="Insira a quantidade do produto." onkeypress="return apenasNumero();">
+            </div>
+
+            <div class="mb-3 col-md-12">
+                <label>Digite o valor do produto:</label>
+                <span class="input-group-text">R$</span>
+                <input id="preco2" type="number" name="preco_produto" class="form-control"
+                       placeholder="Digite o valor do produto." onkeypress="return apenasNumero();">
+            </div>
+
+            <div class="mb-3 col-md-12" >
+                <label>Tamaho do Produto:</label>
+                <select class="form-control" id="tamanhoProd2">
+                    <option value="0" selected disabled>Selecione o Tamanho do Produto:</option>
+                    <option value="1">P</option>
+                    <option value="2">M</option>
+                    <option value="3">G</option>"
+                    <option value="4">GG</option>
+                </select>
+
+            </div>
+
+            <div class="mb-3 col-md-12" >
+                <label>Cor do Produto:</label>
+                <input id="corProduto2" type="text" name="cor" class="form-control"
+                       placeholder="Insira a cor do produto.">
+            </div>
+
+            <div class="mb-3 col-md-12" >
+                <label>Insira uma imagem</label>
+                <input id="imagem2" type="file" name="imagem_path" class="form-control">
+                <input id="hiddenField2" type="hidden" name="imagem_path" class="form-control">
+            </div>
+
+            <div class="mb-3 col-md-12" >
+                <label>Selecione uma marca para o produto:</label>
+                <select class="form-control" id="dropDownList2">
+                    <option value="0" selected disabled>Selecione a Marca</option>
+
+                </select>
+            </div>
+
+
+            <div class="col-md-12">
+                <div id="buttonPutProduto" class="btn btn-primary float-end">Editar</div>
+                <div id="buttonDeleteProduto" class="btn btn-primary float-end">Deletar</div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
 </div>
 
 <script src="js/relatorio.js"></script>

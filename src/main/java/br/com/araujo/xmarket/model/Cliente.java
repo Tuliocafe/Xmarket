@@ -7,9 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
+
 
 @Entity
 @Builder
@@ -66,9 +65,5 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("cliente")
     List<Endereco> listaEnderecos;
-
-
-
-
 
 }

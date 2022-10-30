@@ -26,13 +26,59 @@
 </head>
 
 <body class="bg-light" >
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top shadow">
+    <div class="container">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="../index">
+            <img src="../images/shopping-bag-icon.png" alt="site icon">
+            <span  class="text-uppercase fw-lighter ms-2">XMarket</span>
+        </a>
+
+        <div class="order-lg-2 nav-btns">
+        </div>
+
+        <div class="order-lg-2 nav-btns">
+
+            <button id="botaoSair" type="button" class="btn position-relative">
+                <a style="text-decoration: none; color: black">Logout</a>
+            </button>
+
+        </div>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+            <ul class="navbar-nav mx-auto text-center">
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">home</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Nossos produtos</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Promoções</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Redes Sociais</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Sobre Nós</a>
+                </li>
+                <li class="nav-item px-2 py-2 border-0">
+                    <a class="nav-link text-uppercase text-dark" href="../index">popular</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 <div class="container-fluid"  data-th-each="venda:${vendas}" >
     <p id="idVenda" th:text="${venda.id}" style="visibility: hidden;"> </p>
-    <div class="row" >
+    <div class="row" style="margin-top: 5%">
         <div  class=  "col-md-10 col-11 mx-auto" >
             <div class="row mt-5 gx-3">
                 <!-- left side div -->
-                <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow" >
+                <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
                     <div class="card p-4" >
                         <h2 class="py-4 font-weight-bold" id="quantidadeIten"></h2>
                         <div class="row"  data-th-each="carrinho:${venda.listaItensCarrinho}" >
@@ -52,9 +98,9 @@
 <!--                                                                                    <p class="text-capitalize my-1" data-th-text="${carrinhos.desconto}"></p>-->
 <!--                                                                                    <p class="mb-2">CAMISA SOCIAL - XADREZ</p>-->
                                         <p class="mb-2" data-th-text="${carrinho.produto.cor}"></p>
-                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.tamanho}"></p>
+                                        <p class="mb-3"  data-th-text="${carrinho.produto.tamanho}"></p>
                                         <p>Estoque</p>
-                                        <p class="mb-3" data-th-text="${carrinho.produto.quantidade_produto}"></p>
+                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.quantidade_produto}"></p>
 
                                     </div>
                                     <!-- quantity inc dec -->
@@ -66,7 +112,7 @@
                                                     <i class="fas fa-minus tamanho-botao"></i> </button>
                                             </li>
                                             <li class="page-item"><input type="text" name="" class="page-link altera-tamanho"
-                                                                         th:value="${carrinho.quantidade}" th:id="${carrinho.id}">
+                                                                         th:value="${carrinho.quantidade}" th:id="${carrinho.id}" disabled>
                                             </li>
                                             <li class="page-item">
                                                 <button class="page-link"
@@ -137,11 +183,11 @@
                         </div>
                         <div class="price_indiv d-flex justify-content-between">
                             <p>Frete</p>
-                            <p>R$<span id="frete">50.0</span></p>
+                            <p><span id="frete">Grátis</span></p>
                         </div>
                         <hr />
                         <div class="total-amt d-flex justify-content-between font-weight-bold">
-                            <p>Valor Total + Frete</p>
+                            <p>Valor Total</p>
                             <p>R$<span id="precoTotal" ></span></p>
                         </div>
                         <button class="btn btn-primary text-uppercase"
@@ -153,7 +199,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <a class="d-flex justify-content-between" data-toggle="collapse"
-                                   href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                   href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="text-decoration:none; color:black">
                                     Cupom de Desconto
                                     <span><i class="fas fa-chevron-down pt-1"></i></span>
                                 </a>
@@ -187,6 +233,7 @@
 
 
 <script src="/js/carrinho.js"></script>
+<script src="/js/navBarCarrinho.js"></script>
 </body>
 
 </html>

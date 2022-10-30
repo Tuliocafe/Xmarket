@@ -24,6 +24,5 @@ public interface IVendaService {
     ArrayList<Venda> buscaIdUsuarioQuere(Integer id);
 
 
-
-
+    boolean fecharVenda(Integer venda);
 }

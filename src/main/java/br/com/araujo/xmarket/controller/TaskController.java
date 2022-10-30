@@ -48,6 +48,11 @@ public class TaskController {
         return mv;
     }
 
+    @GetMapping("/index1")
+    public String home1() {
+        return "paginas/teste";
+    }
+
     @GetMapping("/area_cliente/{id}")
     public ModelAndView clientes(@PathVariable Integer id){
         ModelAndView mv = new ModelAndView( "paginas/areaCliente");

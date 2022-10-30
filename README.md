@@ -1,6 +1,6 @@
 #  XMarket 
 <fig>
-<img src="https://rockcontent.com/br/wp-content/uploads/sites/2/elementor/thumbs/modelo-de-projeto-p2he6clp7uhmwqd16ikv9jgz30a5liixoon908hej0.png" alt="Uma imagem relacionada ao projeto">
+<img src="https://user-images.githubusercontent.com/25533217/198898706-7ab0d961-585e-4972-a9e0-62238102400a.png" alt="Uma imagem relacionada ao projeto">
 <figcaption>Página inicial XMarket</figcaption>
 </fig>
 

@@ -22,7 +22,7 @@ if(marca.value != ""){
     }
     alert('Marca cadastrada com sucesso');
     } else{
-    alert("Todos os campos são obrigatórios")
+    alert("O campo nome da marca é obrigatorio.");
     }
 
 var endPoint = 'http://localhost:8080/marcas'

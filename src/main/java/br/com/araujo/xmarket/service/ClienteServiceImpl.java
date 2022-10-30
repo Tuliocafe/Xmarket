@@ -34,7 +34,7 @@ public class ClienteServiceImpl implements IClienteService {
     public Cliente criaNovo(ClienteDTO cliente) {
 
         if (cliente != null ) {
-
+            LocalDateTime dataAgora = LocalDateTime.now();
 
             Cliente novoCliente = Cliente.builder()
                     .nome(cliente.getNome())
@@ -46,9 +46,10 @@ public class ClienteServiceImpl implements IClienteService {
                     .telefoneUm(cliente.getTelefoneUm())
                     .telefoneDois(cliente.getTelefoneDois())
                     .rg(cliente.getRg())
-                    .dataCriacaoUsuario(cliente.getDataCriacaoUsuario())
+                    .dataCriacaoUsuario(String.valueOf(dataAgora))
                     .email(cliente.getEmail())
                     .senha(cliente.getSenha())
+
                     .build();
 
             clienteDao.save(novoCliente);

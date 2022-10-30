@@ -53,8 +53,9 @@ if(logradouro.value===""||bairro.value===""||cidade.value===null||cep.value===""
         var response = await fetch(endpoint, init)
         console.log(response)
         return response.json();
-        }
         window.location.href = "/area-cliente/"+cliente.id;
+
+        }
 
           })
 

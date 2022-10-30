@@ -9,7 +9,6 @@ Para executar o projeto, utilize as ferramentas descritas na sessão *Ferramenta
 
 ## Ferramentas
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE para desenvolvimento.
-* [Spring Initializr](https://start.spring.io/) - Gerar arquivos do projeto Spring Boot.
 
 ## Links importantes
 * [Spring Boot Rest API](https://spring.io/projects/spring-boot) -  Spring Boot.

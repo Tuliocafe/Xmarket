@@ -281,6 +281,6 @@ async function verificaCarrinho(){
 
 function btnAreaCliente (){
 
-      window.location.href = "/area_cliente/"+cliente.id
+      window.location.href = '/area-cliente/'+cliente.id
 
 }

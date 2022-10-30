@@ -22,12 +22,16 @@ var btnInscrever = document.getElementById('btnInscrever');
 var resposta
 
 btnInscrever.addEventListener('click', async function(){
-    if(senha.value== ""){
-    alert ("Senha não preenchida!")
-    } else if(senha.value!=senhaDois.value){
-    alert('Senhas não conferem')
-    }
-        else {
+
+    if(nome.value === ""||sobrenome.value ===""||rg.value ===""||dataNascimento.value === ""||senha.value ===""||telefoneUm.value ===""||cpf.value===""){
+        alert('Há campo(s) obrigatório(s) não preenchido(s)!')
+        }else{
+        if(senha.value== ""){
+            alert ("Senha não preenchida!")
+            } else if(senha.value!=senhaDois.value){
+                alert('Senhas não conferem')
+                } else {
+
     var cadastro =  {
                            "nome": nome.value,
                            "sobrenome": sobrenome.value,
@@ -36,7 +40,6 @@ btnInscrever.addEventListener('click', async function(){
                            "telefoneUm": telefoneUm.value,
                            "telefoneDois": telefoneDois.value,
                            "rg": rg.value,
-//                           "dataCriacaoUsuario": "2022-10-17 17:57:03",
                            "senha": senha.value,
                            "email": email.value,
                            "tipoUsuario": "administrador",
@@ -64,5 +67,6 @@ btnInscrever.addEventListener('click', async function(){
                 } else {
                 alert("Código do erro:" + response.status)
                 }
+    }
     }
 })

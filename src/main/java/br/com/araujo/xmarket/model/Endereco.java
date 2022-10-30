@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @Builder
-@Table(name = "Endereco")
+@Table(name = "endereco")
 @NoArgsConstructor
 public class Endereco {
 
@@ -29,6 +29,9 @@ public class Endereco {
 
     @Column(name = "bairro_endereco")
     private String bairro;
+
+    @Column(name = "numero")
+    private String numero;
 
     @Column(name = "complemento_endereco")
     private String complemento;
@@ -121,5 +124,11 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    public String getNumero() {
+        return numero;
+    }
 
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 }

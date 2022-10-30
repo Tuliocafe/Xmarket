@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 @RestController
@@ -16,15 +17,12 @@ public class ClienteController {
     @Autowired
     ClienteServiceImpl clienteServiceImpl;
 
-//    @Autowired
-//    ClienteJPA clienteJPA;
 
     @GetMapping("/clientes")
     public ResponseEntity<?> recuperaTodosClientes() {
-        ArrayList<Cliente>  todosClientes = clienteServiceImpl.buscarTodos();
+        ArrayList<Cliente> todosClientes = clienteServiceImpl.buscarTodos();
 
-        if(todosClientes == null)
-        {
+        if (todosClientes == null) {
             return new ResponseEntity<>(new ApiMessage("Não existe clientes cadastrados"), HttpStatus.NO_CONTENT);
         }
 
@@ -45,9 +43,8 @@ public class ClienteController {
 
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> cadastrarNovo(@RequestBody ClienteDTO cliente) {
-        System.out.println("------------------------------------------------------------" + cliente.getNome());
-        if(clienteServiceImpl.verificaEmail(cliente.getEmail())){
-            return new ResponseEntity( new ApiMessage("Email já existente na base de dados"), HttpStatus.NOT_FOUND);
+        if (clienteServiceImpl.verificaEmail(cliente.getEmail())) {
+            return new ResponseEntity(new ApiMessage("Email já existente na base de dados"), HttpStatus.NOT_FOUND);
         }
 
         Cliente res = clienteServiceImpl.criaNovo(cliente);
@@ -63,11 +60,9 @@ public class ClienteController {
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> AtualizaCliente(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {
         Cliente response = clienteServiceImpl.atualizarCliente(cliente, id);
-
         if (response != null) {
             return ResponseEntity.ok(response);
         }
-
         return ResponseEntity.badRequest().build();
     }
 
@@ -84,7 +79,7 @@ public class ClienteController {
     }
 
     @PutMapping("/clientes/{id_usuario}/enderecos/{id_endereco}")
-    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody Endereco endereco, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
+    public ResponseEntity<Endereco> atualizarEndereco(@RequestBody EnderecoDTO endereco, @PathVariable("id_usuario") Integer idUsuario, @PathVariable("id_endereco") Integer idEndereco) {
 
         Endereco response = clienteServiceImpl.atualizarEnderecoDoCliente(endereco, idUsuario, idEndereco);
 
@@ -116,29 +111,29 @@ public class ClienteController {
         }
 
 //        throw  new Exception("Usuario e senha inválida");
-       return new ResponseEntity( new ApiMessage("Usuario e senha inválida"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new ApiMessage("Usuario e senha inválida"), HttpStatus.BAD_REQUEST);
 
     }
 
     @PostMapping("/clientes/{id_usuario}/enderecos")
-    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer idUsuario, @RequestBody EnderecoSalvarDTO novoEndereco){
+    public ResponseEntity<Endereco> novoEndereco(@PathVariable("id_usuario") Integer id, @RequestBody EnderecoSalvarDTO novoEndereco) {
         Endereco res = clienteServiceImpl.criaNovoEndereco(novoEndereco);
-        if (res != null){
-            return ResponseEntity.status(202).build();
+        if (res != null) {
+            return new ResponseEntity<>(res, HttpStatus.CREATED);
+
         }
-        return  ResponseEntity.badRequest().build();
+        return ResponseEntity.badRequest().build();
     }
 
 
+    @GetMapping("/clientedto/{id}")
+    public ResponseEntity<IClienteDTO> buscaCliente(@PathVariable("id") Integer id){
+        IClienteDTO res = clienteServiceImpl.buscaDadosCliente(id);
+        return ResponseEntity.ok(res);
+        }
 
 
-//    @GetMapping("/listaClientes")
-//    public ModelAndView clientes(){
-//        ModelAndView mv = new ModelAndView("clientes");
-//        Iterable<Cliente> clienteIt = clienteServiceImpl.buscarTodos();
-//        mv.addObject("clientes", clienteIt);
-//        return mv;
-//    }
+
 
 
 }

@@ -20,4 +20,5 @@ public class EnderecoSalvarDTO {
     private String tipo;
     private Integer cidade;
     private Integer idUsuario;
+    private String numero;
 }

@@ -1,14 +1,18 @@
 package br.com.araujo.xmarket.controller;
 
+import br.com.araujo.xmarket.dto.IEnderecoDTO;
 import br.com.araujo.xmarket.model.*;
 import br.com.araujo.xmarket.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -42,6 +46,11 @@ public class TaskController {
         mv.addObject("produtos", produtos);
         mv.addObject("marcas", marcas);
         return mv;
+    }
+
+    @GetMapping("/index1")
+    public String home1() {
+        return "paginas/teste";
     }
 
     @GetMapping("/area_cliente/{id}")
@@ -80,9 +89,9 @@ public class TaskController {
         return "paginas/marca";
     }
 
-    @GetMapping("/cadastro")
+    @GetMapping("/novoCadastro")
     public String cadastroUsuario() {
-        return "paginas/cadastro";
+        return "paginas/novoCadastro";
     }
 
 

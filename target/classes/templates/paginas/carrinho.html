@@ -1,0 +1,239 @@
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+          integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+          integrity="sha512-PgQMlq+nqFLV4ylk1gwUOgm6CtIIXkKwaIHp/PAIWHzig/lKZSEGKEysh0TCVbHJXCLN7WetD8TFecIky75ZfQ=="
+          crossorigin="anonymous" />
+<!--    <link rel="stylesheet" href="./css/style.css"/>-->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+
+    <title>XMarket</title>
+    <style>
+     .altera-tamanho{
+        width: 3rem;
+    }
+    .tamanho-botao{
+        padding: 3px;
+    }
+    </style>
+</head>
+
+<body class="bg-light" >
+<nav class="navbar navbar-expand-lg navbar-light bg-white py-4 fixed-top shadow">
+    <div class="container">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="../index">
+            <img src="../images/shopping-bag-icon.png" alt="site icon">
+            <span  class="text-uppercase fw-lighter ms-2">XMarket</span>
+        </a>
+
+        <div class="order-lg-2 nav-btns">
+        </div>
+
+        <div class="order-lg-2 nav-btns">
+
+            <button id="botaoSair" type="button" class="btn position-relative">
+                <a style="text-decoration: none; color: black">Logout</a>
+            </button>
+
+        </div>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse order-lg-1" id="navMenu">
+            <ul class="navbar-nav mx-auto text-center">
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">home</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Nossos produtos</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Promoções</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Redes Sociais</a>
+                </li>
+                <li class="nav-item px-2 py-2">
+                    <a class="nav-link text-uppercase text-dark" href="../index">Sobre Nós</a>
+                </li>
+                <li class="nav-item px-2 py-2 border-0">
+                    <a class="nav-link text-uppercase text-dark" href="../index">popular</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid"  data-th-each="venda:${vendas}" >
+    <p id="idVenda" th:text="${venda.id}" style="visibility: hidden;"> </p>
+    <div class="row" style="margin-top: 5%">
+        <div  class=  "col-md-10 col-11 mx-auto" >
+            <div class="row mt-5 gx-3">
+                <!-- left side div -->
+                <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart mb-lg-0 mb-5 shadow">
+                    <div class="card p-4" >
+                        <h2 class="py-4 font-weight-bold" id="quantidadeIten"></h2>
+                        <div class="row"  data-th-each="carrinho:${venda.listaItensCarrinho}" >
+                            <!-- cart images div -->
+                            <div
+                                    class="col-md-5 col-11 mx-auto bg-light d-flex justify-content-center align-items-center shadow product_img">
+                                <img th:src="'../'+${carrinho.produto.imagem_path}" class="img-fluid" alt="cart img">
+                            </div>
+                            <!-- cart product details -->
+                            <div class="col-md-7 col-11 mx-auto px-4 mt-2">
+                                <!--                                <div class="col-md-7 col-11 mx-auto px-4 mt-2" >-->
+                                <div class="row">
+                                    <!-- product name  -->
+                                    <div class="col-6 card-title">
+                                        <!--                                            <h1 class="mb-4 product_name">Camisa Social Athletivo Paranaense</h1>-->
+                                        <h1 class="mb-4 product_name" id="produto1" data-th-text="${carrinho.produto.nome_produto}" ></h1>
+<!--                                                                                    <p class="text-capitalize my-1" data-th-text="${carrinhos.desconto}"></p>-->
+<!--                                                                                    <p class="mb-2">CAMISA SOCIAL - XADREZ</p>-->
+                                        <p class="mb-2" data-th-text="${carrinho.produto.cor}"></p>
+                                        <p class="mb-3"  data-th-text="${carrinho.produto.tamanho}"></p>
+                                        <p>Estoque</p>
+                                        <p class="mb-3" th:id="'estoque'+${carrinho.id}" data-th-text="${carrinho.produto.quantidade_produto}"></p>
+
+                                    </div>
+                                    <!-- quantity inc dec -->
+                                    <div class="col-6">
+                                        <ul class="pagination justify-content-end set_quantity">
+                                            <li class="page-item">
+                                                <button class="page-link"
+                                                        th:attr="onclick=${'diminuir('+carrinho.id+','+carrinho.precoUnitario+')'}">
+                                                    <i class="fas fa-minus tamanho-botao"></i> </button>
+                                            </li>
+                                            <li class="page-item"><input type="text" name="" class="page-link altera-tamanho"
+                                                                         th:value="${carrinho.quantidade}" th:id="${carrinho.id}" disabled>
+                                            </li>
+                                            <li class="page-item">
+                                                <button class="page-link"
+                                                     th:attr="onclick=${'aumentar('+carrinho.id+','+carrinho.precoUnitario+')'}">
+                                                        <i class="fas fa-plus tamanho-botao"></i></button>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- //remover move and price -->
+                                <div class="row">
+                                    <div class="col-8 d-flex justify-content-between remove_wish">
+
+<!--                                        <a       onclick='deletarItem()'>-->
+<!--&lt;!&ndash;                                                th:href="deletarItem(${carrinho.id})"&ndash;&gt;-->
+<!--                                         <p>-->
+<!--                                            <i class="fas fa-trash-alt"    ></i>  REMOVER ITEM</p> </a>-->
+
+                                        <p>
+                                        <button class="fas fa-trash-alt"
+                                                th:attr="onclick=${'deletarItem('+carrinho.id+')'}">
+                                              Remover </button> </p>
+
+
+<!--                                        <button onclick="botaoCarrinho()" type="button"  > Remover-->
+<!--                                            <i class="fas fa-trash-alt" ></i>-->
+<!--                                        </button>-->
+
+<!--                            <td class="buttons">-->
+<!--                                        <a th:href="@{carrinhos/14}" th:action="delete"-->
+<!--                                           class="btn btn-danger"><i class="fa fa-trash"></i></a></td>-->
+
+<!--                                        <form  th:action="'../'+@{carrinhos/{id}(id=${carrinho.id})}"  th:method="delete" >-->
+<!--                                            <input type="hidden" name="_method" value="delete" />-->
+<!--                                            <button class="fas fa-trash-alt" type="submit" >DELETAR </button>-->
+
+<!--                                        </form>-->
+
+
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-end price_money">
+                                        <h5>Valor Unitario R$<span th:id="${carrinho.id}" data-th-text="${#numbers.formatDecimal(carrinho.precoUnitario,0,'COMMA', 2, 'POINT')}"></span></h5>
+                                    </div>
+
+                                    <!--                                        <div class="col-4 d-flex justify-content-end price_money">-->
+                                    <!--                                            <h5>Valor Unitario: <span ></span></h5>-->
+                                    <!--                                        </div>-->
+                                    <!--                                        <div class="col-4 d-flex justify-content-end price_money">-->
+                                    <!--&lt;!&ndash;                                            <h3>Valor Total R$<span id="preco" ></span></h3>&ndash;&gt;-->
+                                    <!--                                            <h3>Valor Total R$<span th:id="${carrinhos.id}" data-th-text="${carrinhos.precoTotal}"></span></h3>-->
+                                    <!--                                        </div>-->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <!-- 2nd cart product -->
+                </div>
+                <!-- right side div -->
+                <div class="col-md-12 col-lg-4 col-11 mx-auto mt-lg-0 mt-md-5" >
+                    <div class="right_side p-3 shadow bg-white">
+                        <h2 class="product_name mb-5">Valor Final</h2>
+                        <div class="price_indiv d-flex justify-content-between">
+                            <p>Valor Total</p>
+                            <p>R$<span id="product_total_amt">0.00</span></p>
+                        </div>
+                        <div class="price_indiv d-flex justify-content-between">
+                            <p>Frete</p>
+                            <p><span id="frete">Grátis</span></p>
+                        </div>
+                        <hr />
+                        <div class="total-amt d-flex justify-content-between font-weight-bold">
+                            <p>Valor Total</p>
+                            <p>R$<span id="precoTotal" ></span></p>
+                        </div>
+                        <button class="btn btn-primary text-uppercase"
+                                onclick="atualizarVenda()" >Finalizar a Compra</button>
+
+                    </div>
+
+                    <div class="discount_code mt-3 shadow">
+                        <div class="card">
+                            <div class="card-body">
+                                <a class="d-flex justify-content-between" data-toggle="collapse"
+                                   href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="text-decoration:none; color:black">
+                                    Cupom de Desconto
+                                    <span><i class="fas fa-chevron-down pt-1"></i></span>
+                                </a>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="mt-3">
+                                        <input type="text" name="" id="codigoDesconto1"
+                                               class="form-control font-weight-bold" placeholder="Digite o Cupom">
+                                        <small id="infoDesconto" class="text-dark mt-3">O codigo é xMarket</small>
+                                    </div>
+                                    <button id="botaoDesconto" class="btn btn-primary btn-sm mt-3"
+                                            onclick="discount_code()">Aplicar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="mt-3 shadow p-3 bg-white">
+                        <div class="pt-4">
+                            <h5 class="mb-4">Previsão de entrega</h5>
+                            <p>SEGUNDA-FEIRA - 03/10/2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/js/carrinho.js"></script>
+<script src="/js/navBarCarrinho.js"></script>
+</body>
+
+</html>

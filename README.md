@@ -39,7 +39,7 @@ O sistema é composto por um banco de dados, uma interface web e uma API de cons
 
 
 
-As ferramentas utilizadas para o desenvolvimento incluem ** Java** que é uma linguagem de programação utilizada para o Back-end, para front-end foi utilizado **HTML, **CSS, JavaScript, Bootstrap, Thymeleaf ** . **Mysql** atuando como sistema gerenciador de banco de dados relacional e **Spring Boot** para utilizar o ambiente de desenvolvimento web.
+As ferramentas utilizadas para o desenvolvimento incluem ** Java** que é uma linguagem de programação utilizada para o Back-end, para front-end foi utilizado **HTML**, **CSS**, **JavaScript**, **Bootstrap**, **Thymeleaf** . **Mysql** atuando como sistema gerenciador de banco de dados relacional e **Spring Boot** para utilizar o ambiente de desenvolvimento web.
 
 ### Levantamento de requisitos  
 > Os requisitos foram  validados com o cliente e aprovados.

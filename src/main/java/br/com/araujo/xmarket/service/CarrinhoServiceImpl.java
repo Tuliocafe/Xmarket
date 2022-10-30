@@ -45,12 +45,16 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
         assert produto != null;
         if(produto.getQuantidade_produto() < dados.getQuantidade())
         {
-            throw new RuntimeException("Quantidade em estoque insuficiente");
+            return null;
 
         }
 
-        produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade());
-
+        //verificado se o produto ja diminuiu uma quantidade ao incluir o mesmo no carrinho
+        if (dados.getQuantidade() > 1){
+            produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade() + 1);
+        }else {
+            produto.setQuantidade_produto(produto.getQuantidade_produto() - dados.getQuantidade());
+        }
         produtoDao.save(produto);
 
 
@@ -81,7 +85,31 @@ public class CarrinhoServiceImpl implements ICarrinhoService{
     }
 
     @Override
-    public void excluirCarrinho(Integer id) {
+    public boolean excluirCarrinho(Integer id) {
+
+        CarrinhoCompra carrinhoCompra = carrinhoDao.findById(id).orElse(null);
+
+        if(carrinhoCompra == null) {return false;}
+
+        Integer idProduto = carrinhoCompra.getProduto().getId_produto();
+
+
+
+        Produto produto = produtoDao.findById(idProduto).orElse(null);
+
+        if(produto == null) {return false;}
+
+        Integer quantidadeProdutoCarrinho = carrinhoCompra.getQuantidade();
+
+        Integer quantidadeProduto = produto.getQuantidade_produto();
+
+        produto.setQuantidade_produto(quantidadeProduto + quantidadeProdutoCarrinho);
+
+        produtoDao.save(produto);
+
         carrinhoDao.deleteById(id);
+
+        return true;
+
     }
 }

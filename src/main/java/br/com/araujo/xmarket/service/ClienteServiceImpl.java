@@ -1,37 +1,59 @@
 package br.com.araujo.xmarket.service;
 
+import br.com.araujo.xmarket.dao.CidadeDao;
 import br.com.araujo.xmarket.dao.ClienteDAO;
 import br.com.araujo.xmarket.dao.EnderecoDAO;
-import br.com.araujo.xmarket.dto.IEnderecoDTO;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Endereco;
+import br.com.araujo.xmarket.dto.*;
+import br.com.araujo.xmarket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Objects;
+
+import static org.bouncycastle.crypto.tls.ConnectionEnd.client;
 
 @Service
 @Primary
 public class ClienteServiceImpl implements IClienteService {
 
 
+    @Autowired
+    EnderecoDAO enderecoDAO;
+
+    @Autowired
+    public CidadeDao cidadeDao;
 
     @Autowired
     public ClienteDAO clienteDao;
 
-    @Autowired
-    EnderecoDAO enderecoDAO;
 
     @Override
-    public Cliente criaNovo(Cliente cliente) {
+    public Cliente criaNovo(ClienteDTO cliente) {
+
         if (cliente != null ) {
-            LocalDateTime data = LocalDateTime.now();
-            cliente.setStatus(1);
-            System.out.println(data);
-            cliente.setDataCriacaoUsuario(data.toString());
-            return clienteDao.save(cliente);
+            LocalDateTime dataAgora = LocalDateTime.now();
+
+            Cliente novoCliente = Cliente.builder()
+                    .nome(cliente.getNome())
+                    .cpf(cliente.getCpf())
+                    .tipoUsuario(TipoUsuario.valueOf("usuario"))
+                    .status(1)
+                    .sobrenome(cliente.getSobrenome())
+                    .dataNascimento(cliente.getDataNascimento())
+                    .telefoneUm(cliente.getTelefoneUm())
+                    .telefoneDois(cliente.getTelefoneDois())
+                    .rg(cliente.getRg())
+                    .dataCriacaoUsuario(String.valueOf(dataAgora))
+                    .email(cliente.getEmail())
+                    .senha(cliente.getSenha())
+
+                    .build();
+
+            clienteDao.save(novoCliente);
+            return novoCliente;
         }
         return null;
     }
@@ -41,7 +63,7 @@ public class ClienteServiceImpl implements IClienteService {
         if (cliente.getId() != null && cliente.getNome() != null) {
             return clienteDao.save(cliente);
         }
-        return null;
+        return cliente;
     }
 
     @Override
@@ -74,12 +96,8 @@ public class ClienteServiceImpl implements IClienteService {
 
         Cliente novoCliente = clienteDao.findById(id).orElse(null);
 
-//        if (clienteDao.existsById(id) ) ;
-
 
         if (novoCliente != null) {
-
-            //novoCliente.cloneCliente(cliente);
 
             novoCliente.setNome(cliente.getNome());
             novoCliente.setCpf(cliente.getCpf());
@@ -103,19 +121,19 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
 
-
     @Override
-    public Endereco atualizarEnderecoDoCliente(Endereco endereco, Integer idUsuario, Integer idEndereco) {
+    public Endereco atualizarEnderecoDoCliente(IEnderecoDTO endereco, Integer idUsuario, Integer idEndereco) {
 
         Cliente novoCliente = clienteDao.findById(idUsuario).orElse(null);
 
         Endereco novoEndereco = enderecoDAO.findById(idEndereco).orElse(null);
 
-        novoEndereco.setCidade(endereco.getCidade());
+//        novoEndereco.setCidade(endereco.getCidade());
         novoEndereco.setCliente(novoCliente);
         novoEndereco.setBairro(endereco.getBairro());
+        novoEndereco.setNumero(endereco.getNumero());
         novoEndereco.setCep(endereco.getCep());
-        novoEndereco.setTipoEndereco(endereco.getTipoEndereco());
+        novoEndereco.setTipoEndereco(endereco.getTipo());
         novoEndereco.setComplemento(endereco.getComplemento());
         novoEndereco.setLogradouro(endereco.getLogradouro());
         novoEndereco.setReferencia(endereco.getReferencia());
@@ -127,16 +145,90 @@ public class ClienteServiceImpl implements IClienteService {
             return novoEndereco;
         }
 
-    return null;
+        return null;
 
 
-}
+    }
+
     @Override
     public IEnderecoDTO buscaEnderecoPeloId(Integer idUsuario, Integer idEndereco) {
         return clienteDao.buscaEnderecoPeloId(idUsuario, idEndereco);
     }
 
+    @Override
+    public Cliente logar(LoginDTO loginUsuario) {
 
+        Cliente cliente = clienteDao.getByEmail(loginUsuario.getEmail());
+
+        if (cliente == null) {
+            return null;
+        }
+
+        if (Objects.equals(cliente.getSenha(), loginUsuario.getSenha())) {
+            return cliente;
+        }
+
+        return null;
+    }
+
+
+    @Override
+    public boolean verificaEmail(String email) {
+        return clienteDao.existsByEmail(email);
+    }
+
+    @Override
+    public Endereco criaNovoEndereco(EnderecoSalvarDTO endereco) {
+
+        Cidade cidade = cidadeDao.findById(endereco.getCidade()).orElse(null);
+
+        Cliente cliente = clienteDao.findById(endereco.getIdUsuario()).orElse(null);
+
+        if (cidade == null) {
+            return null;
+        }
+        if (cliente == null) {
+            return null;
+        }
+
+
+        Endereco novoEndereco = Endereco.builder()
+//                .id(endereco.getId())
+                .logradouro(endereco.getLogradouro())
+                .cep(endereco.getCep())
+                .bairro(endereco.getBairro())
+                .numero(endereco.getNumero())
+                .complemento(endereco.getComplemento())
+                .referencia(endereco.getReferencia())
+                .tipoEndereco(endereco.getTipo())
+                .cidade(cidade)
+                .cliente(cliente)
+                .build();
+
+        enderecoDAO.save(novoEndereco);
+
+        return novoEndereco;
+
+    }
+
+    @Override
+    public void excluirEnderecoPeloCliente( Integer idEndereco) {
+
+        enderecoDAO.deletandoEndereco(idEndereco);
+
+    }
+
+    @Override
+    public IClienteDTO buscaDadosCliente(Integer id) {
+        return clienteDao.buscaDadosCliente(id);
+    }
+
+
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 
 
 }

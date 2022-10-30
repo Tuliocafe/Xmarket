@@ -7,10 +7,7 @@ import br.com.araujo.xmarket.dao.VendaDao;
 import br.com.araujo.xmarket.dto.IRelatorioVendaDTO;
 import br.com.araujo.xmarket.dto.ItemDTO;
 import br.com.araujo.xmarket.dto.VendaDTO;
-import br.com.araujo.xmarket.model.CarrinhoCompra;
-import br.com.araujo.xmarket.model.Cliente;
-import br.com.araujo.xmarket.model.Produto;
-import br.com.araujo.xmarket.model.Venda;
+import br.com.araujo.xmarket.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +28,11 @@ public class VendaServiceImpl implements IVendaService {
 
     @Autowired
     public StatusVendasDao statusVendasDao;
+
     @Override
     public Venda criaNova(VendaDTO novaVendaDTO) {
 
-        Cliente cliente =  clienteDao.findById(novaVendaDTO.getIdCliente()).orElseThrow(
+        Cliente cliente = clienteDao.findById(novaVendaDTO.getIdCliente()).orElseThrow(
                 () -> {
                     throw new RuntimeException("Esse usuário não existe");
                 }
@@ -44,7 +42,7 @@ public class VendaServiceImpl implements IVendaService {
 
         Venda novaVenda = Venda.builder()
                 .cliente(cliente)
-                .statusVendas(    statusVendasDao.findById(novaVendaDTO.getStatusVenda()).orElseThrow(
+                .statusVendas(statusVendasDao.findById(novaVendaDTO.getStatusVenda()).orElseThrow(
                         () -> {
                             throw new RuntimeException("Status de venda inexistente");
                         }
@@ -52,13 +50,16 @@ public class VendaServiceImpl implements IVendaService {
                 .dataVenda(dataAgora.toString())
                 .build();
 
-       return vendaDao.save(novaVenda);
+        return vendaDao.save(novaVenda);
 
     }
 
     @Override
     public Venda atualizarDados(Venda dados) {
-        if(dados.getId()!=null ){
+
+        LocalDateTime dataAgora = LocalDateTime.now();
+        dados.setDataVenda(String.valueOf(dataAgora));
+        if (dados.getId() != null) {
             return vendaDao.save(dados);
         }
         return null;
@@ -68,6 +69,7 @@ public class VendaServiceImpl implements IVendaService {
     public ArrayList<Venda> buscarTodas() {
         return (ArrayList<Venda>) vendaDao.findAll();
     }
+
 
     @Override
     public Venda buscarPeloId(Integer id) {
@@ -87,21 +89,28 @@ public class VendaServiceImpl implements IVendaService {
 
         if (venda.getStatusVendas().getStatus().name().equals("finalizada") ||
                 venda.getStatusVendas().getStatus().name().equals("cancelada")
-        ){
-            throw new RuntimeException("O pedido está fechado");
+        ) {
+            return null;
+        }
+
+        for (int i = 0; i < venda.getListaItensCarrinho().size(); i++) {
+
+            if (itemDto.getIdProduto() == venda.getListaItensCarrinho().get(i).getProduto().getId_produto() )
+            {
+                return null;
+            }
+
         }
 
 
-       Produto produto =  produtoDao.findById(itemDto.getIdProduto()).orElseThrow(
-                () -> {
-                    throw new RuntimeException("Esse Produto não existe");
-                });
+        Produto produto = produtoDao.findById(itemDto.getIdProduto()).orElse(null);
 
-        if(produto.getQuantidade_produto() < itemDto.getQuantidade())
-        {
-            throw new RuntimeException("Quantidade em estoque insuficiente");
-
+        assert produto != null;
+        if (produto.getQuantidade_produto() < itemDto.getQuantidade()) {
+            return null;
         }
+
+
 
         produto.setQuantidade_produto(produto.getQuantidade_produto() - itemDto.getQuantidade());
 
@@ -128,4 +137,49 @@ public class VendaServiceImpl implements IVendaService {
     public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2) {
         return vendaDao.findVendaByDate(data1, data2);
     }
+
+    @Override
+    public ArrayList<Venda> buscaIdUsuarioQuere(Integer id) {
+        return vendaDao.buscarPeloIdUsuario(id);
+    }
+
+    @Override
+    public ArrayList<Venda> buscarTudoPeloIdUsuario(Integer id){return vendaDao.buscarTudoPeloIdUsuario(id);}
+
+    @Override
+    public boolean fecharVenda(Integer id) {
+
+        Venda venda = vendaDao.findById(id).orElse(null);
+
+        if (venda.getStatusVendas().getStatus().name().equals("cancelada"))
+            return false;
+
+        assert venda != null;
+
+        for (int i = 0; i < venda.getListaItensCarrinho().size(); i++) {
+
+            Integer quantidadeItemCarrinho = venda.getListaItensCarrinho().get(i).getQuantidade();
+            Integer idProduto = venda.getListaItensCarrinho().get(i).getProduto().getId_produto();
+
+            Produto produto = produtoDao.findById(idProduto).orElse(null);
+            assert produto != null;
+
+            Integer novaQuantidadeProduto = venda.getListaItensCarrinho().get(i).getQuantidade() + produto.getQuantidade_produto();
+
+            produto.setQuantidade_produto(novaQuantidadeProduto);
+
+            produtoDao.save(produto);
+
+        }
+
+        //Muda o status da venda
+        StatusVendas statusVendaCancelada = statusVendasDao.findById(1).orElse(null);
+        venda.setStatusVendas(statusVendaCancelada);
+        vendaDao.save(venda);
+
+
+        return true;
+
+    }
+
 }

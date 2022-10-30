@@ -1,14 +1,12 @@
 var frete = document.getElementById('frete');
 var idVenda = document.getElementById('idVenda');
 var codigoDesconto = document.getElementById('codigoDesconto1');
-
+var logado = localStorage.getItem('logado');
+var venda = localStorage.getItem('venda')
+var valorTotal1 = document.getElementById("precoTotal1")
 var rotaCarrinhos = 'http://localhost:8080/carrinhos/'
 var rotaVendas = 'http://localhost:8080/vendas/'
 
-// var precoUnitario = document.getElementById('precoUnitario');
-// var precoTotalItem = document.getElementById('preco');
-//     precoTotalItem.innerHTML = parseInt(precoUnitario.innerHTML);
-//     product_total_amt.innerHTML = parseInt(precoTotalItem.innerHTML);
 var somaValores = 0
 var dados
 var valorTotal = document.getElementById("precoTotal")
@@ -16,10 +14,21 @@ var quantidadeIten = document.getElementById("quantidadeIten")
 var carrinho  = {listaCarrinho: []}
 var vendaAtualizada
 
-console.log(idVenda.innerHTML)
+
+setTimeout(sessao, 5000000);
 
 getdados()
 
+
+var idEstoque = document.getElementById('estoque'+71)
+console.log(idEstoque)
+
+
+function sessao(){
+    localStorage.clear();
+    alert("O usuário está deslogado");
+    window.location.href = "/index"
+}
 
 
 async function calcularTotal(){
@@ -45,16 +54,36 @@ async function getdados(){
 
         dados = await response.json()
 
+        //cria um JSON dos itens que estao no carrinho e calcula valor total
          for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
              somaValores = (dados.listaItensCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario);
              somaValorTotal += somaValores
-             carrinho.listaCarrinho.push({id:dados.listaItensCarrinho[i].id ,quantidade: dados.listaItensCarrinho[i].quantidade,
-             venda:dados.id, produto:dados.listaItensCarrinho[i].produto.id_produto, precoTotal: somaValores } )
+             carrinho.listaCarrinho.push({
+                                        id:dados.listaItensCarrinho[i].id,
+                                        quantidade: dados.listaItensCarrinho[i].quantidade,
+                                        venda:dados.id,
+                                        produto:dados.listaItensCarrinho[i].produto.id_produto,
+                                        precoTotal: somaValores
+                                        } )
+
+
          }
         valorTotal.innerHTML =  somaValorTotal.toFixed(2)
+        valorTotal1.innerHTML = valorTotal.innerHTML
+
         quantidadeIten.innerHTML = "Carrinho " + dados.listaItensCarrinho.length +" itens"
 
-}
+
+        if(dados.statusVendas.id != 2){
+            for (var i = 0; i <  dados.listaItensCarrinho.length; i ++ ){
+             document.getElementById('botaoRemover' + dados.listaItensCarrinho[i].id).disabled = true;
+             document.getElementById('mais'+ dados.listaItensCarrinho[i].id).disabled = true;
+             document.getElementById('menos'+ dados.listaItensCarrinho[i].id).disabled = true;
+            }
+             document.getElementById('finalizar').disabled = true;
+            }
+   }
+
 
 
 
@@ -63,40 +92,65 @@ async function atualizarVenda(){
          for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
                rotaCarrinhos = rotaCarrinhos + carrinho.listaCarrinho[i].id
                putDados(rotaCarrinhos, carrinho.listaCarrinho[i])
-         }
+                }
+         vendaAtualizada = {
+                            id: idVenda.innerHTML,
+                            precoTotal: valorTotal.innerHTML,
+                            cliente:{id:dados.cliente.id},
+                            statusVendas:{id:3}
+                            }
 
-         vendaAtualizada = {id: idVenda.innerHTML , precoTotal: valorTotal.innerHTML, cliente:{id:dados.cliente.id } , statusVendas:{id:3} }
+         rotaVendas = rotaVendas + dados.id
+         putDados(rotaVendas, vendaAtualizada )
 
+         var venda = localStorage.setItem("venda",null)
+         alert("Venda Finalizada com sucesso")
+         window.location.href = "/index"
+        } catch(e){
+            alert("Nao foi Possivel")
+            }
 
-    rotaVendas = rotaVendas + dados.id
-
-    console.log(rotaVendas)
-    putDados(rotaVendas, vendaAtualizada )
-    } catch(e){
-        alert("Nao foi Possivel")}
 }
 
 
 
 async function putDados(rota, dadosJson){
-var rota
-var dadosJson
-    fetch(rota,{
-    method: 'put',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    body: JSON.stringify(dadosJson),}).then((response) => response.json())
-                   .then((result) => {
-                     console.log('Success:', result);
-                   })
-                   .catch((error) => {
-                     console.error('error:', error);
-                   });
+    var rota
+    var dadosJson
+        fetch(rota,{
+        method: 'put',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(dadosJson),})
+        .then((response) => response.json())
+                       .then((result) => {
+                         console.log('Success:', result);
+                       })
+                       .catch((error) => {
+                         console.error('error:', error);
+                       });
 }
 
 
+function deletarItem(idItem){
+    var Item = document.getElementById(idItem);
+    console.log(Item)
+                var init = {
+                    method: 'DELETE',
+                    headers: { "Content-Type": 'application/json'}
+                }
 
+                var endPoint = 'http://localhost:8080/carrinhos/' +Item.id
+
+                fetch(endPoint, init)
+
+
+        //vai retornar mensagem de erro ou sucesso janela de sim ou nao ?
+        alert("Item deletado com sucesso")
+
+        window.location.href = "../carrinho/" + idVenda.innerHTML
+}
 
 
 
@@ -104,10 +158,9 @@ var dadosJson
 const diminuir = (incdec, valorUnitario) => {
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-//    var precoTotal = document.getElementById(precoTotal);
     if (quantidade.value <= 1) {
         quantidade.value = 1;
-        alert('Não é possível valores negativos');
+        alert('Valor minimo 1');
     } else {
        for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
                   if(incdec == carrinho.listaCarrinho[i].id){
@@ -117,25 +170,56 @@ const diminuir = (incdec, valorUnitario) => {
                 }
          quantidade.value = parseInt(quantidade.value) - 1;
          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) -  valorUnitario
-
+         valorTotal1.innerHTML = valorTotal.innerHTML
     }
 }
 
 
-const aumentar = (incdec, valorUnitario) => {
+const aumentar = (incdec, valorUnitario, estoque) => {
+    var estoque = estoque
     var quantidade = document.getElementById(incdec);
     var valorUnitario = valorUnitario;
-       for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
-                  if(incdec == carrinho.listaCarrinho[i].id){
-                    carrinho.listaCarrinho[i].quantidade ++
-                    carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
-                  }
-                }
 
-          quantidade.value = parseInt(quantidade.value) + 1;
-          valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
+    console.log(estoque)
+    console.log(quantidade.value)
+    console.log(carrinho)
+    for (var i = 0; i <  carrinho.listaCarrinho.length; i ++ ){
 
+           if(incdec == carrinho.listaCarrinho[i].id){
+                    if (quantidade.value >= estoque && estoque != 0){
+                        quantidade.value = estoque
+                        alert('Limite estoque atingido');
+                    }else if(quantidade.value >= estoque &&  estoque == 0){
+                    quantidade.value = 1
+                    alert('Nao temos estoque extra');
+                    }else {
+                     carrinho.listaCarrinho[i].quantidade ++
+                     carrinho.listaCarrinho[i].precoTotal = (carrinho.listaCarrinho[i].quantidade * dados.listaItensCarrinho[i].precoUnitario)
+                     quantidade.value = parseInt(quantidade.value) + 1;
+                     valorTotal.innerHTML = parseInt(valorTotal.innerHTML) +  valorUnitario
+                     valorTotal1.innerHTML = valorTotal.innerHTML
+                     }
+           }
+    }
 }
+
+ if (logado) {
+
+     var auxCliente = localStorage.getItem("cliente");
+     console.log(auxCliente);
+     var cliente = JSON.parse(auxCliente);
+        botaoSair.style.display = "flex";
+     }
+     else {
+         botaoSair.style.display = "none";
+  }
+
+  function sairDaPagina(){
+           localStorage.clear();
+           alert("Usuário Deslogado");
+           window.location.href = "/index"
+
+       }
 
 
 

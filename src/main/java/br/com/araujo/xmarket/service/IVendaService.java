@@ -21,7 +21,10 @@ public interface IVendaService {
     public CarrinhoCompra incluirItemNaVenda( ItemDTO itemDto);
     public List<IRelatorioVendaDTO> buscarPorData(String data1, String data2);
 
+    ArrayList<Venda> buscaIdUsuarioQuere(Integer id);
 
 
+    boolean fecharVenda(Integer venda);
 
+    ArrayList<Venda> buscarTudoPeloIdUsuario(Integer id);
 }

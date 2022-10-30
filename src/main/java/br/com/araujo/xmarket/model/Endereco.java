@@ -1,12 +1,19 @@
 package br.com.araujo.xmarket.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Endereco")
+@AllArgsConstructor
+@Builder
+@Table(name = "endereco")
+@NoArgsConstructor
 public class Endereco {
 
     @Id
@@ -23,6 +30,9 @@ public class Endereco {
     @Column(name = "bairro_endereco")
     private String bairro;
 
+    @Column(name = "numero")
+    private String numero;
+
     @Column(name = "complemento_endereco")
     private String complemento;
 
@@ -30,8 +40,7 @@ public class Endereco {
     private String referencia;
 
     @Column(name = "tipo_endereco")
-    @Enumerated(EnumType.STRING)
-    private TipoEndereco tipoEndereco;
+    private String tipoEndereco;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -39,18 +48,9 @@ public class Endereco {
     private Cliente cliente;
 
 
-
     @ManyToOne
     @JoinColumn(name = "id_cidade")
     private Cidade cidade;
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
-    }
 
     public Integer getId() {
         return id;
@@ -100,11 +100,11 @@ public class Endereco {
         this.referencia = referencia;
     }
 
-    public TipoEndereco getTipoEndereco() {
+    public String getTipoEndereco() {
         return tipoEndereco;
     }
 
-    public void setTipoEndereco(TipoEndereco tipoEndereco) {
+    public void setTipoEndereco(String tipoEndereco) {
         this.tipoEndereco = tipoEndereco;
     }
 
@@ -116,8 +116,19 @@ public class Endereco {
         this.cliente = cliente;
     }
 
+    public Cidade getCidade() {
+        return cidade;
+    }
 
-    //    id_cidade	int
-//    id_usuario	int
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
 }

@@ -25,4 +25,6 @@ public interface IVendaService {
 
 
     boolean fecharVenda(Integer venda);
+
+    ArrayList<Venda> buscarTudoPeloIdUsuario(Integer id);
 }

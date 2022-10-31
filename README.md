@@ -20,7 +20,7 @@ Para executar o projeto, utilize as ferramentas descritas na sessão *Ferramenta
 > A empresa XMarket lançou um novo serviço de vendas online de produtos e deseja gerar relatórios de testes de unidade relacionados a parte de cadastro de Clientes. Os Clientes devem realizar seu cadastro através da aplicação e apenas assim estarão habilitados para realizarem e confirmarem suas compras. O desafio consiste em construir na linguagem Java a parte operacional da aplicação e um Web Service que seja capaz de manipular as informações da classe Cliente. Após isso, a equipe deverá executar, no mínimo, dois testes estruturais demonstrando a estabilidade, segurança e confiabilidade desse cadastro.
 
 Este projeto possui o objetivo principal **Desenvolver um sistema E-commerce**.  
-Com os objetivos gerais de realizar a venda de **Produtos**, cadastrados de usuários e o controle do **estoque**. 
+Com os objetivos gerais de realizar a venda de **Produtos**, cadastro de usuários e o controle do **estoque**. 
 
 ## Análise técnica
 

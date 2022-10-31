@@ -34,7 +34,7 @@ public interface VendaDao extends CrudRepository <Venda, Integer> {
     @Query(value = """
                 select *
                 from venda
-                where id_usuario = :id""", nativeQuery = true)
+                where id_usuario = :id order by id_venda desc""", nativeQuery = true)
     ArrayList<Venda> buscarTudoPeloIdUsuario(@Param("id") Integer id);
 
     @Modifying

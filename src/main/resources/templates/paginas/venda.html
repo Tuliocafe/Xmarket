@@ -15,7 +15,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-4 shadow">
     <div class="container">
-        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="index">
+        <a class="navbar-brand d-flex justify-content-between align-items-center order-lg-0" href="../../../index">
             <img src="../../../images/shopping-bag-icon.png" alt="site icon">
             <span  class="text-uppercase fw-lighter ms-2">XMarket</span>
         </a>
@@ -47,22 +47,22 @@
         <div class="collapse navbar-collapse order-lg-1" id="navMenu">
             <ul class="navbar-nav mx-auto text-center">
                 <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="../index">home</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">home</a>
                 </li>
                 <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="../index">Nossos produtos</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">Nossos produtos</a>
                 </li>
                 <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="../index">Promoções</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">Promoções</a>
                 </li>
                 <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="../index">Redes Sociais</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">Redes Sociais</a>
                 </li>
                 <li class="nav-item px-2 py-2">
-                    <a class="nav-link text-uppercase text-dark" href="../index">Sobre Nós</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">Sobre Nós</a>
                 </li>
                 <li class="nav-item px-2 py-2 border-0">
-                    <a class="nav-link text-uppercase text-dark" href="../index">popular</a>
+                    <a class="nav-link text-uppercase text-dark" href="../../../index">popular</a>
                 </li>
 
             </ul>
@@ -73,59 +73,16 @@
 
 
 <!-- inicio do div de endereço -->
-<div class="container col-md-12">
-    <div class="row ">
-        <div class=" col-md-4  " >
-            <div class="formulario-novo-endereco">
-                <form  class="mt-5 border p-5 bg-light shadow">
-                    <h3 class="mb-4 text-secondary">Cadastre seu endereço</h3>
-                    <div class="col-md-12" >
-                        <a th:href="@{/area-cliente/adiciona-endereco}" class="btn btn-md btn-outline-success float-end"> Novo Endereço </a>
-                    </div>
-                </form>
-            </div>
-        </div>
+
         <!--fim div endereço-->
         <!--inicio do form cliente -->
 
-        <div class=" col-md-4  " >
-            <div class="formulario-altera-cadastro">
-                <form  class="mt-5 border p-5 bg-light shadow">
-                    <h3 class="mb-4 text-secondary">Atualize seu cadastro</h3>
-                    <div class="col-md-12" >
-                        <a th:href="@{../area-cliente/cadastro-cliente/{id}(id = ${idCliente}) }" class="btn btn-md btn-outline-success float-end"> Atualizar  </a>
-                    </div>
-                </form>
-            </div>
-        </div>
 
-        <div class=" col-md-4  " >
-            <div class="formulario-altera-cadastro">
-                <form  class="mt-5 border p-5 bg-light shadow">
-                    <h3 class="mb-4 text-secondary">Vendas</h3>
-                    <div class="col-md-12" >
-                        <a th:href="@{../area-cliente/cadastro-cliente/{id}(id = ${idCliente}) }" class="btn btn-md btn-outline-success float-end"> Entrar  </a>
-                    </div>
-                </form>
-            </div>
-        </div>
 
         <!-- fim do form cliente -->
         <!--inicio do form cliente -->
 
-        <div class=" col-md-4  " >
-            <div class="formulario-altera-senha">
-                <form  class="mt-5 border p-5 bg-light shadow">
-                    <h3 class="mb-4 text-secondary"> Altere sua senha </h3>
-                    <div class="col-md-12" >
-                        <a th:href="@{../area_cliente/{id}/vendas/(id = ${idCliente}) }" class="btn btn-md btn-outline-success float-end"> Alterar</a>
-                    </div>
-                </form>
-            </div>
-        </div>
 
-    </div>
-</div>
 
 
 <!-- fim do form cliente -->
@@ -139,7 +96,7 @@
             <thead class="bg-info text-white shadow" >
             <tr>
 
-                <th scope="col" class="text-center">ID</th>
+                <th scope="col" class="text-center">Codigo Compra</th>
                 <th scope="col" class="text-center">Data da Compra</th>
                 <th scope="col" class="text-center">Valor</th>
                 <th scope="col" class="text-center">Status</th>
@@ -153,7 +110,7 @@
 
             <tr th:each="vendas:${vendas}">
 
-                <td class="text-center" th:text="${vendas.id}"></td>
+                <td class="text-center" th:text="${vendas.cliente.id} +'0' + ${vendas.id}"></td>
                 <td class="text-center" th:text="${vendas.dataVenda}"></td>
                 <td class="text-center" th:text="'R$ '+ ${#numbers.formatDecimal(vendas.precoTotal,0,'COMMA', 2, 'POINT')}"></td>
                 <td class="text-center" th:text="${vendas.statusVendas.status}"></td>
@@ -168,12 +125,17 @@
             </tr>
             </tbody>
         </table>
+        <div class="col-md-12" >
+            <div id="btnVoltar" class="btn btn-outline-primary me-3 float-end" href="" >Voltar</div>
+
+        </div>
     </div>
+
 </div>
 
 
 
-<script src="../../../js/index.js"></script>
+<!--<script src="../../../js/index.js"></script>-->
 <script src="../../../js/areaVenda.js"></script>
 <!-- Boostrap JS-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
